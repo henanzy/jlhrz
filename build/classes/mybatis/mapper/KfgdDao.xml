@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.KfgdDao">
+	<resultMap type="Kfgd" id="kfgd">
+		<id property="id" column="ID" />
+		<result property="gdNum" column="GdNum" />
+		<result property="buildNo" column="BuildNo" />
+		<result property="cellNo" column="CellNo" />
+		<result property="houseNo" column="HouseNo" />
+		<result property="telephone" column="Telephone" />
+		<result property="visCon" column="VisCon" />
+		<result property="xqName" column="XqName" />	
+		<result property="tjName" column="TJ_Name" />
+		<result property="tjTime" column="TJ_Time" />
+		<result property="state" column="State" />
+	</resultMap>
+	     <select id="selGd" resultMap="kfgd">
+	     select * from K_KfGd
+	     </select>                                      
+	
+</mapper>

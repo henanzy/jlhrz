@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.UserDao">
+	<resultMap type="User" id="user">
+		<id property="id" column="ID" />
+		<result property="userName" column="UserName" />
+		<result property="password" column="Password" />
+	</resultMap>
+	
+</mapper>

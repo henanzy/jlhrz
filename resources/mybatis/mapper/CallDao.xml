@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.CallDao">
+	<resultMap type="Call" id="call">
+		<id property="id" column="ID" />
+		<result property="telephone" column="Telephone" />
+		<result property="inOutcall" column="InOutcall" />
+		<result property="time" column="Time" />
+	</resultMap>
+	                                            
+	<select id="selCell" resultMap='call'>
+	select * from T_Call
+	</select>
+</mapper>
