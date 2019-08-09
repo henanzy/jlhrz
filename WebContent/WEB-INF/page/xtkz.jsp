@@ -192,6 +192,7 @@ background-size:100% 100%;
 
 <script type="text/javascript" >
 
+
 function xz(p){
 	
 	$(p).addClass("xuanzhong");
@@ -368,8 +369,8 @@ function showBsb(){
                        />
             </div>
         </div>
-        <div class="layui-form-item model-form-footer" style="margin-left:130px">
-           
+        <div class="layui-form-item model-form-footer" style="margin-left:190px">
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -435,8 +436,8 @@ function showBsb(){
         </div>
 
       
-        <div class="layui-form-item model-form-footer" style="margin-left:130px">
-           
+        <div class="layui-form-item model-form-footer" style="margin-left:190px">
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -485,8 +486,8 @@ function showBsb(){
         </div>
 
       
-        <div class="layui-form-item model-form-footer" style="margin-left:130px">
-           
+        <div class="layui-form-item model-form-footer" style="margin-left:190px">
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -535,8 +536,8 @@ function showBsb(){
         </div>
 
       
-        <div class="layui-form-item model-form-footer" style="margin-left:130px">
-           
+        <div class="layui-form-item model-form-footer" style="margin-left:190px">
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -582,6 +583,10 @@ function showBsb(){
             <label   class="layui-form-label" style="width:150px">启动状态控制</label>
             <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this)"   id="qingd">启动</button>
             <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this)"   id="tingz">停止</button>
+        </div>
+
+        <div class="layui-form-item model-form-footer" style="margin-left:190px">
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -656,28 +661,24 @@ function showBsb(){
 <div class="bg">
      <div style="width:50px;height:60px;  position: relative;left: 3%;top: 3%;" >
 	<select id="hrz" name="hrz">
-	                    <option value="天鹅堡换热站">天鹅堡换热站</option>
-						<option value="舒馨苑换热站">舒馨苑换热站</option>
-						<option value="联通嘉苑换热站">联通嘉苑换热站</option>
-						<option value="金领时代换热站">金领时代换热站</option>
-						<option value="建业壹号城邦换热站">建业壹号城邦换热站</option>
-						<option value="砥柱大厦换热站">砥柱大厦换热站</option>
-						<option value="越海华府换热站">越海华府换热站</option>
-						<option value="枫桥水岸换热站">枫桥水岸换热站</option>
-						<option value="金盾园换热站">金盾园换热站</option>
-						<option value="枢纽局西苑小区">枢纽局西苑小区</option>
-						
+	                    <option value="一委站">一委站</option>
+						<option value="二委站">二委站</option>
+						<option value="教育局站">教育局站</option>	
 	</select>
 	</div>
 	
 	 
 	<div style="width:350px;height:60px;  position: absolute;left: 50%;top: 3%;">
-	<h1 id="title">天鹅堡换热站运行界面</h1>
+	<h1 id="title">一委站运行界面</h1>
 	</div>
 	<div  id="bsfgif" style="position: absolute;left: 17%;top: 85%;">
 	<img src="../images/background/Arrow-Right.gif" width="80" height="80" />
 	</div>
 	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 30%" onclick="showXhb()">
+	
+	</div>
+	
+	<div style="width:4%;height:10%;  position: absolute;left: 17%;top: 7%" onclick="show()">
 	
 	</div>
 	
@@ -783,73 +784,73 @@ function showBsb(){
 	<!--数据  -->
 	
 	<div style="width:270px;height:85px;font-size:15px;  position: absolute;left: 15%;top: 20%;" >
-	一次供水瞬时流量：&nbsp;<span>0.00</span>&nbsp;m³/h<br/>
-	一次供水瞬时热量：&nbsp;<span>0.00</span>&nbsp;GJ/h<br/>
-	一次供水累计流量：&nbsp;<span>84566.6</span>&nbsp;m³<br/>
-	一次供水累计热量：&nbsp;<span>6195.1</span>&nbsp;GJ<br/>
+	一次供水瞬时流量：&nbsp;<span id="ycgsssll"></span>&nbsp;m³/h<br/>
+	一次供水瞬时热量：&nbsp;<span id="ycgsssrl"></span>&nbsp;GJ/h<br/>
+	一次供水累计流量：&nbsp;<span id="ycgsljll"></span>&nbsp;m³<br/>
+	一次供水累计热量：&nbsp;<span id="ycgsljrl"></span>&nbsp;GJ<br/>
 	</div>
 	
 	<div style="width:270px;height:65px;font-size:15px;  position: absolute;left: 60%;top: 20%;" >
-	二次供水瞬时流量：&nbsp;<span>0.00</span>&nbsp;m³/h<br/>	
-	二次供水累计流量：&nbsp;<span>0.00</span>&nbsp;m³<br/>	
+	二次供水瞬时流量：&nbsp;<span id="ecgsssll"></span>&nbsp;m³/h<br/>	
+	二次供水累计流量：&nbsp;<span id="ecgsljll"></span>&nbsp;m³<br/>	
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 29%" >
-	<span style="font-size:15px;">0.0HZ</span>
+	<span style="font-size:15px;" id="xhb1plfk"></span>HZ
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 43%" >
-	<span style="font-size:15px;">0.0HZ</span>
+	<span style="font-size:15px;" id="xhb2plfk"></span>HZ
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 73%" >
-	<span style="font-size:15px;">0.0HZ</span>
+	<span style="font-size:15px;" id="bsb1plfk"></span>HZ
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 84%" >
-	<span style="font-size:15px;">0.0HZ</span>
+	<span style="font-size:15px;" id="bsb2plfk"></span>HZ
 	</div>
 	
 	<div style="width:250px;height:105px;font-size:15px;  position: absolute;left: 15%;top: 45%;" >
-	累计电量：&nbsp;<span>27693.9</span>&nbsp;KWH<br/>
-    A项电压：&nbsp;<span>234.9</span>&nbsp;V<br/>
-	B项电压：&nbsp;<span>230.6</span>&nbsp;V<br/>
-	C项电压：&nbsp;<span>233.6</span>&nbsp;V<br/>
-	A项电流：&nbsp;<span>0.00</span>&nbsp;A<br/>
-	B项电流：&nbsp;<span>0.00</span>&nbsp;A<br/>
-	C项电流：&nbsp;<span>1.20</span>&nbsp;A<br/>
+	累计电量：&nbsp;<span id="dlsjz"></span>&nbsp;KWH<br/>
+    A项电压：&nbsp;<span id="Axdyz"></span>&nbsp;V<br/>
+	B项电压：&nbsp;<span id="Bxdyz"></span>&nbsp;V<br/>
+	C项电压：&nbsp;<span id="Cxdyz"></span>&nbsp;V<br/>
+	A项电流：&nbsp;<span id="Axdlz"></span>&nbsp;A<br/>
+	B项电流：&nbsp;<span id="Bxdlz"></span>&nbsp;A<br/>
+	C项电流：&nbsp;<span id="Cxdlz"></span>&nbsp;A<br/>
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:7%;top: 8%" >
-	<span style="font-size:15px;">24.0℃</span>
+	<span style="font-size:15px;" id="ycgswd"></span>℃
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:11%;top: 8%" >
-	<span style="font-size:15px;">0.0MPa</span>
+	<span style="font-size:15px;" id="ycgsyl"></span>MPa
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:78%;top: 8%" >
-	<span style="font-size:15px;">24.9℃</span>
+	<span style="font-size:15px;" id="ecgswd"></span>℃
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:85%;top: 8%" >
-	<span style="font-size:15px;">0.02MPa</span>
+	<span style="font-size:15px;" id="ecgsyl"></span>MPa
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:7%;top:32%" >
-	<span style="font-size:15px;">25.1℃</span>
+	<span style="font-size:15px;" id="ychswd"></span>℃
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:11%;top: 32%" >
-	<span style="font-size:15px;">0.02MPa</span>
+	<span style="font-size:15px;" id="ychsyl"></span>MPa
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:78%;top: 32%" >
-	<span style="font-size:15px;">24.9℃</span>
+	<span style="font-size:15px;" id="echswd"></span>℃
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:85%;top: 32%" >
-	<span style="font-size:15px;">0.09MPa</span>
+	<span style="font-size:15px;" id="echsyl"></span>MPa
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:67%;top: 32%" >
@@ -857,11 +858,11 @@ function showBsb(){
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left:10%;top: 78%" >
-	<span style="font-size:15px;">0.0m³</span>
+	<span style="font-size:15px;" id="zlszbsl"></span>m³
 	</div>
 	<div style="width:270px;height:65px;font-size:15px;  position: absolute;left: 35%;top: 80%;" >
-	补水瞬时流量：&nbsp;<span>0.00</span>&nbsp;m³/h<br/>	
-	补水累计流量：&nbsp;<span>0.00</span>&nbsp;m³<br/>	
+	补水瞬时流量：&nbsp;<span id="bsssll"></span>&nbsp;m³/h<br/>	
+	补水累计流量：&nbsp;<span id="bsljll"></span>&nbsp;m³<br/>	
 	</div>
 </div>
 </body>
@@ -872,5 +873,53 @@ $("#hrz").change(function(){
 	$("#title").html($("#hrz").val()+"运行界面")
 		
 	});
+	
+$.ajax({
+	url:"<%=basePath%>OpcCon/xtkzSj.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.教育局站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		console.log(map)
+		$("#ycgsssll").html(map.一次供水瞬时流量);
+		$("#ycgsssrl").html(map.一次供水瞬时热量);
+		$("#ycgsljll").html(map.一次供水累计流量);
+		$("#ycgsljrl").html(map.一次供水累计热量);
+		$("#ecgsssll").html(map.二次供水瞬时流量);
+		$("#ecgsljll").html(map.二次供水累计流量);
+		
+		$("#ycgswd").html(map.一次供水温度);
+		$("#ycgsyl").html(map.一次供水压力);
+		$("#ecgswd").html(map.二次供水温度);
+		$("#ecgsyl").html(map.二次供水压力);
+		
+		$("#ychswd").html(map.一次回水温度);
+		$("#ychsyl").html(map.一次回水压力);
+		$("#echswd").html(map.二次回水温度);
+		$("#echsyl").html(map.二次回水压力);
+		
+		$("#Axdlz").html(map.A相电流值);
+		$("#Bxdlz").html(map.B相电流值);
+		$("#Cxdlz").html(map.C相电流值);
+		$("#Axdyz").html(map.A相电压值);
+		$("#Bxdyz").html(map.B相电压值);
+		$("#Cxdyz").html(map.C相电压值);
+		$("#dlsjz").html(map.电量实际值);
+		
+		$("#zlszbsl").html(map.自来水总补水量);
+		$("#bsssll").html(map.补水瞬时流量);
+		$("#bsljll").html(map.补水累计流量);
+		
+		$("#xhb1plfk").html(map.循环泵1频率反馈);
+		$("#xhb2plfk").html(map.循环泵2频率反馈);
+		$("#bsb1plfk").html(map.补水泵1频率反馈);
+		
+		
+	}
+	
+});	
 </script>
 </html>

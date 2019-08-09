@@ -6,11 +6,11 @@ $(document).ready(function() {
 	function jsArrChange(json){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
-			arr1[0] = json[i].一次瞬时供流量;
-			arr1[1] = json[i].一次瞬时供热量;
-			arr1[2] = json[i].一次累计供流量;
-			arr1[3] = json[i].一次累计供热量;
-			arr1[4] = json[i].总电压;
+			arr1[0] = json[i].一次供水瞬时流量;
+			arr1[1] = json[i].一次供水瞬时热量;
+			arr1[2] = json[i].一次供水累计流量;
+			arr1[3] = json[i].一次供水累计热量;
+			arr1[4] = json[i].电量实际值;
 			arr1[5] = json[i].A项电压;
 			arr1[6] = json[i].B项电压;
 			arr1[7] = json[i].C项电压;
@@ -47,13 +47,31 @@ $(document).ready(function() {
 	}*/
 	var chk_value =[];
 	var chk=[];
+	var chkName=[];
 	$("#word_change_btn").click(function(){
+		$.ajax({
+			url:"selHistory.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"hrz":$("#type").val(),
+				"startTime":$("#startTime").val(),
+				"endTime":$("#endTime").val(),
+			},
+			success:function(data){
+				list=data.list;
+			}
+			
+		});	
 		chk_value.length =0;//定义一个数组    
 		chk.length =0;
+		chkName.length=0;
 		$("#head").empty();
 		$("#jkword_body").empty();
 	    $('input[name="box"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
 	    chk_value.push($(this).val());//将选中的值添加到数组chk_value中    
+	    chkName.push($(this).prev().html())
+	    
 	    });
 	    var head = document.getElementById("head");
 		
@@ -61,22 +79,26 @@ $(document).ready(function() {
 			
 			headTr.className = "gradeX odd";
 			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>换热站</th>";
-			for(var j = 0;j < chk_value.length;j ++){
-				chk_value[j] = chk_value[j]+"";
+			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>数据时间</th>";
+			for(var j = 0;j < chkName.length;j ++){
+				chkName[j] = chkName[j]+"";
 
-				headTr.innerHTML += "<th class='table-th-css' style='width:150px'>" + chk_value[j] + "</th>";
+				headTr.innerHTML += "<th class='table-th-css' style='width:150px'>" + chkName[j] + "</th>";
 			}
+			
 			head.appendChild(headTr);
 			$("#change_word").hide();
 			
 			for(var i=0;i<list.length;i++){
 				var arr=[];
 				arr[0]=list[i].hrz;
+				arr[1]=list[i].time;
 				for(var j=0;j<chk_value.length;j++){
 					var str=chk_value[j];
 					
-					arr[j+1]=list[i][str];
+					arr[j+2]=list[i][str];
 				}
+			 
 				chk.push(arr);
 			}
 			
@@ -99,14 +121,11 @@ $(document).ready(function() {
 	
 	//工单搜索
 	$("#jk_search_btn").click(function(){
-		var wordType = $("#type").val();
-		var compareWordList = [];
-		
-		for(var j = 0;j < chk.length;j ++){
+	
 			
-			compareWordTime(wordType,compareWordList,chk,j);
-		};
-		$("#jkword_body").empty();
+			compareWordTime();
+		
+		/*$("#jkword_body").empty();
 		for(var x = 0;x < compareWordList.length;x ++){
 			
 			var newWordElemnet = "";
@@ -131,7 +150,7 @@ $(document).ready(function() {
 			}
 			
 			$("#jkword_body").append(newWordElemnet);
-		}
+		}*/
 	});
 	
 	
@@ -230,26 +249,79 @@ $(document).ready(function() {
 		
 });
 	
-function compareWordTime(wordType,compareWordList,jkwordList,j){
-		if(wordType == "全部"){
-			compareWordList.push(jkwordList[j]);
-		}
-		if(wordType == "一委站"){
-			if(jkwordList[j][0] == "一委站"){
-				compareWordList.push(jkwordList[j]);
-			}
-		}
-		if(wordType == "二委站"){
-			if(jkwordList[j][0] == "二委站"){
-				compareWordList.push(jkwordList[j]);
-			}
+function compareWordTime(){
+	var chk_value =[];
+	var chk=[];
+	var chkName=[];
+	$.ajax({
+		url:"selHistory.action",
+		async:false,
+		dataType:"json",
+		data:{	
+			"hrz":$("#type").val(),
+			"startTime":$("#startTime").val(),
+			"endTime":$("#endTime").val(),
+		},
+		success:function(data){
+			list=data.list;
 		}
 		
-		if(wordType == "教育局站"){
-			if(jkwordList[j][0] == "教育局站"){
-				compareWordList.push(jkwordList[j]);
-			}
+	});	
+	chk_value.length =0;//定义一个数组    
+	chk.length =0;
+	chkName.length=0;
+	$("#head").empty();
+	$("#jkword_body").empty();
+    $('input[name="box"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
+    chk_value.push($(this).val());//将选中的值添加到数组chk_value中    
+    chkName.push($(this).prev().html())
+    
+    });
+    var head = document.getElementById("head");
+	
+		var headTr = document.createElement("tr");
+		
+		headTr.className = "gradeX odd";
+		headTr.innerHTML += "<th class='table-th-css' style='width:150px'>换热站</th>";
+		headTr.innerHTML += "<th class='table-th-css' style='width:150px'>数据时间</th>";
+		for(var j = 0;j < chkName.length;j ++){
+			chkName[j] = chkName[j]+"";
+
+			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>" + chkName[j] + "</th>";
 		}
+		
+		head.appendChild(headTr);
+		$("#change_word").hide();
+		
+		for(var i=0;i<list.length;i++){
+			var arr=[];
+			arr[0]=list[i].hrz;
+			arr[1]=list[i].time;
+			for(var j=0;j<chk_value.length;j++){
+				var str=chk_value[j];
+				
+				arr[j+2]=list[i][str];
+			}
+		 
+			chk.push(arr);
+		}
+		
+		var jkwordTbody = document.getElementById("jkword_body");
+		for(var i = 0;i < chk.length;i ++){
+			var jkwordTr = document.createElement("tr");
+			if(i%2 == 1){
+				jkwordTr.className = "gradeX odd";
+			}else if(i%2 == 0){
+				jkwordTr.className = "gradeX even";
+			}
+			for(var j = 0;j < chk[i].length;j ++){
+				chk[i][j] = chk[i][j]+"";
+
+				jkwordTr.innerHTML += "<td>" + chk[i][j] + "</td>";
+			}
+			jkwordTbody.appendChild(jkwordTr);
+		}
+		
 		
 }	
 	

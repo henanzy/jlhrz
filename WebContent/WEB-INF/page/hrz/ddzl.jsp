@@ -1,12 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -97,18 +91,20 @@
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
 
- <script type="text/javascript" src="../js/sssj.js"></script> 
+
+
 <style>
+		th,td{  
+  
+  white-space: nowrap;
+} 
 	
 	/* 固定表头 */
 	.table-th-css {
 		position: relative !important;
 		top: 0;
 	}
-		th,td{  
-  
-  white-space: nowrap;
-} 
+	
 	/* 搜索DIV */
 	.jk_search{
 		display:block;
@@ -118,7 +114,57 @@
 		margin:0px auto;
 		font-size:12px;
 	}
+	#change_word{
+		display:none;
+		position: fixed;
+		left: 0;
+	    top:0;
+	    right:0;
+	    bottom:0;
+	    z-index: 100; 
+		background-color:rgba(0,0,0,0.6);
+	}
 	
+	/* 新增修改弹出框关闭按钮 */
+	#increase_word .close,
+	#change_word .close{
+		display:block;
+		background-color:rgb(193,213,43);
+		width:24px;
+		height:24px;
+		color: #fff;
+    	border-radius: 13px;
+		position:absolute;
+		top:14px;
+		right:20px;
+		line-height: 24px;
+   		text-align: center;
+   		font-size: 18px;
+	}
+	#increase_word .close::before,
+	#change_word .close::before {
+	    content: "\2716";
+	}
+	
+	/* 新增修改弹出框input */
+	#increase_word .mws-form-row .increase_word_input,
+	#change_word .mws-form-row .change_word_input {
+		width:200px;
+	}
+	
+	/* 新增修改弹出框label */
+	#increase_word .mws-form-row label,
+	#change_word .mws-form-row label{
+		width:150px;
+	}
+	
+	/* 新增修改弹出框确认按钮 */
+	#increase_word #word_increase_btn,
+	#change_word #word_change_btn{
+		position:relative;
+		top:10px;
+		left:47%;
+	}
 	.jk_search p{
 		height:40px;
 	}
@@ -145,7 +191,7 @@
 		border-radius:6px;
 	}
 	
-	#jk_search_btn1{
+	#ddkz_btn{
 		margin-top:8px;
 		margin-left:20px;
 		border:none;
@@ -156,7 +202,6 @@
 		color:#fff;
 		border-radius:6px;
 	}
-	
 	
 	/* thead排序按钮 */
 	.span-up{
@@ -183,32 +228,31 @@
         right: 6px;
     }
     
-   
 	
 </style>
  <script type="text/javascript">
-var xinwordListj = ${xinwordList};
+//var xinwordListj = ${xinwordList};
 </script>
 </head>
 <body>
 
 	<div id="" class="clearfix" style="overflow-x: hidden;">
-	
+
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-table-1">实时数据</span>
+				<span class="mws-i-24 i-table-1">调度参数显示</span>
 			</div>
 			<div class="jk_search">
 				<p>
-					<select>
-						<option value="">全部</option>
+					<select id="type">
+						<option value="全部">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
 						<option value="教育局站">教育局站</option>
 						
 					</select>
-					
+					<input id="ddkz_btn" type="button" value="调度控制" />
 					<input id="jk_search_btn" type="submit" value="搜索" />
 				</p>
 			</div>
@@ -217,25 +261,19 @@ var xinwordListj = ${xinwordList};
 				<table class="mws-table">
 					<thead>
 						<tr>
-						    <th class="table-th-css">换热站名称<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次瞬时供流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次瞬时供热量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次累计供流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次累计供热量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次回水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次回水温度</th>
-							<th class="table-th-css">二次供水瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水累计流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次回水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次回水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次除污器后压力<span class="span-up"></span> <span class="span-down"></span></th>
+						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">阀门开度反馈(%)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">远程就地方式<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">阀门调节方式<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">阀门开度设定(%)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">温度控制方式<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">二次供温检测值<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">定时开关阀门使能<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">一次瞬热检测值(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">一次瞬热计算值(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>														
 						</tr>
 					</thead>
-					<tbody id="jkword_body1">
+					<tbody id="jkword_body">
 						
 						
 					</tbody>
@@ -243,57 +281,88 @@ var xinwordListj = ${xinwordList};
 			</div>
 			
 			
-			<div id="monitword_table_body" class="mws-panel-body"
-				style="overflow: auto !important; height: 300px;">
-				<table class="mws-table">
-					<thead>
-						<tr>
-							<th class="table-th-css">总电量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">A项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">B项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">C项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">A项电流<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">B项电流<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">C项电流<span class="span-up"></span> <span class="span-down"></span></th>
+			
+		</div>
+		
+		
+		 <div id="change_word">
+			<div class="mws-panel grid_4"
+				style="width: 400px; min-width: 450px; margin: 170px 30%;">
+				<div class="mws-panel-header">
+					<span class="mws-i-24 i-pencil">调度控制</span> <span class="close"></span>
+				</div>
+				<div class="mws-panel-body" style="height: 350px;">
+					<form class="mws-form" action="Update.action"  method="post">
+						<div class="mws-form-inline">
+ 							<input type="hidden" class="mws-textinput change_word_input"
+							name="id" id="ID" value="" />
+						
+						
+						<div class="mws-form-row">
+								<label>&emsp;调节阀状态：</label>
+
+								<div class="mws-form-item large">
+								 <input type="text" class="mws-textinput change_word_input" 
+										name="JzqID" readonly="readonly" value="" autofocus="autofocus" />
+								</div>
+						</div>
+						<div class="mws-form-row">
+								<label>&emsp;室外温度补偿使能：</label>
+
+								<div class="mws-form-item large">
+									<select>
+									<option>启用</option>
+									<option>禁止</option>
+									</select>
+								</div>
+						</div>
+						<div class="mws-form-row">
+								<label>&emsp;强制开度使能：</label>
+
+								<div class="mws-form-item large">
+									<select>
+									<option>强制</option>
+									<option>非强制</option>
+									</select>
+								</div>
+						</div>
+						
+						<div class="mws-form-row">
+								<label>&emsp;调节阀定时开关使能：</label>
+
+								<div class="mws-form-item large">
+									<select>
+									<option>启用</option>
+									<option>禁止</option>
+									</select>
+								</div>
+						</div>
+						
+						<div class="mws-form-row">
+								<label>&emsp;换热站名称：</label>
+
+								<div class="mws-form-item large">
+									<input type="text" class="mws-textinput change_word_input" 
+										name="HESName" value="" autofocus="autofocus" />
+								</div>
+						</div>
+						<div class="mws-form-row">
+								<label>&emsp;安装位置：</label>
+
+								<div class="mws-form-item large">
+									<input type="text" class="mws-textinput change_word_input" 
+										name="InstallAd" value="" autofocus="autofocus" />
+								</div>
+						</div>
 							
-							<th class="table-th-css">补泵瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">补泵累计流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">水箱液位<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">自来水总补水量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">室内温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">1#循环泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">2#循环泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">1#补水泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">调节阀开度反馈<span class="span-up"></span> <span class="span-down"></span></th>
-						</tr>
-					</thead>
-					<tbody id="jkword_body2">
-						
-						
-					</tbody>
-				</table>
+						</div>	
+						<input type="submit" id="word_change_btn"
+							class="mws-button black" value="修改" />
+					</form>
+				</div>
 			</div>
 		</div>
-
 	</div>
-<script type="text/javascript">
-var list =[];
-$.ajax({
-	url:"<%=basePath%>OpcCon/xtkzSj.action",
-	async:false,
-	dataType:"json",
-	data:{	
-		"hrz":"吉利.教育局站.读数据.",
-	},
-	success:function(data){
-		var map=data.map;
-		list.push(map);
-		
-		
-	}
-	
-});	
-
-</script>
+ <script type="text/javascript" src="../js/ddkz.js"></script>
 </body>
 </html>

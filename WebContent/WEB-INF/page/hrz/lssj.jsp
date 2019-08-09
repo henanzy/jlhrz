@@ -1,6 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -90,7 +96,25 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
+<script type="text/javascript">
+var list =[];
+$.ajax({
+	url:"<%=basePath%>user/selHistory.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.教育局站.读数据.",
+	},
+	success:function(data){
+		list=data.list;
+		
+		
+		
+	}
+	
+});	
 
+</script>
 <script type="text/javascript" src="../js/lssj.js"></script> 
 
 <style>
@@ -212,9 +236,7 @@
 	}
 	
 </style>
- <script type="text/javascript">
- var list = ${list};
-</script>
+
 </head>
 <body>
 
@@ -229,7 +251,7 @@
 			<div class="jk_search">
 				<p>
 					<select id="type">
-						<option value="全部">全部</option>
+						<option value="">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
 						<option value="教育局站">教育局站</option>
@@ -269,72 +291,72 @@
 					<table>
 					<tr style="height:50px">
 					<th style="width:150px">
-					<label>&emsp;&emsp;一次瞬时供流量</label>
-					<input type="checkbox" name="box" value="一次瞬时供流量"/>
+					<label>&emsp;&emsp;一次供水瞬时流量</label>
+					<input type="checkbox" name="box" value="ycssgll"/>
 					</th>
 					
 					<th style="width:150px">
 					<label>&emsp;&emsp;一次供水压力</label>
-					<input type="checkbox" name="box" value="一次供水压力"/>
+					<input type="checkbox" name="box" value="ycgsyl"/>
 					</th>
 					
 					<th style="width:150px">
-					<label>&emsp;&emsp;补泵瞬时流量</label>
-					<input type="checkbox" name="box" value="补泵瞬时流量"/>
+					<label>&emsp;&emsp;补水瞬时流量</label>
+					<input type="checkbox" name="box" value="bbssll"/>
 					</th>
 					
 					</tr>
 					
 					<tr style="height:50px">
 					<th style="width:150px">
-					<label>&emsp;&emsp;一次瞬时供热量</label>
-					<input type="checkbox" name="box" value="一次瞬时供热量"/>
+					<label>&emsp;&emsp;一次供水瞬时热量</label>
+					<input type="checkbox" name="box" value="ycssgrl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次供水温度</label>
-					<input type="checkbox" name="box" value="一次供水温度"/>
+					<input type="checkbox" name="box" value="ycgswd"/>
 					</th>
 					
 					<th>
-					<label>&emsp;&emsp;补泵累计流量</label>
-					<input type="checkbox" name="box" value="补泵累计流量"/>
+					<label>&emsp;&emsp;补水累计流量</label>
+					<input type="checkbox" name="box" value="bbljll"/>
 					</th>
 					
 					</tr>
 					
 					<tr style="height:50px">
 					<th style="width:150px">
-					<label>&emsp;&emsp;一次累计供流量</label>
-					<input type="checkbox" name="box" value="一次累计供流量"/>
+					<label>&emsp;&emsp;一次供水累计流量</label>
+					<input type="checkbox" name="box" value="ycljgll"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次回水压力</label>
-					<input type="checkbox" name="box" value="一次回水压力"/>
+					<input type="checkbox" name="box" value="ychsyl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;水箱液位</label>
-					<input type="checkbox" name="box" value="水箱液位"/>
+					<input type="checkbox" name="box" value="sxyw"/>
 					</th>
 					
 					</tr>
 					
 					<tr style="height:50px">
 					<th>
-					<label>&emsp;&emsp;一次累计供热量</label>
-					<input type="checkbox" name="box" value="一次累计供热量"/>
+					<label>&emsp;&emsp;一次供水累计热量</label>
+					<input type="checkbox" name="box" value="ycljgrl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次回水温度</label>
-					<input type="checkbox" name="box" value="一次回水温度"/>
+					<input type="checkbox" name="box" value="ychswd"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;自来水总补水量</label>
-					<input type="checkbox" name="box" value="自来水总补水量"/>
+					<input type="checkbox" name="box" value="zlszbsl"/>
 					</th>
 					
 					</tr>
@@ -342,17 +364,17 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;总电量</label>
-					<input type="checkbox" name="box" value="总电量"/>
+					<input type="checkbox" name="box" value="zdl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水瞬时流量</label>
-					<input type="checkbox" name="box" value="二次供水瞬时流量"/>
+					<input type="checkbox" name="box" value="ecgssll"/>
 					</th>
 					
 					<th>
-					<label>&emsp;&emsp;室外温度</label>
-					<input type="checkbox" name="box" value="一次瞬时流量"/>
+					<label>&emsp;&emsp;室内温度</label>
+					<input type="checkbox" name="box" value="snwd"/>
 					</th>
 					
 					</tr>
@@ -362,17 +384,17 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;A项电压</label>
-					<input type="checkbox" name="box" value="A项电压"/>
+					<input type="checkbox" name="box" value="Ady"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水累计流量</label>
-					<input type="checkbox" name="box" value="二次供水累计流量"/>
+					<input type="checkbox" name="box" value="ecgljll"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;1#循环泵频率反馈</label>
-					<input type="checkbox" name="box" value="1#循环泵频率反馈"/>
+					<input type="checkbox" name="box" value="xhb1fk"/>
 					</th>
 					
 					</tr>
@@ -380,17 +402,17 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;B项电压</label>
-					<input type="checkbox" name="box" value="B项电压"/>
+					<input type="checkbox" name="box" value="Bdy"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水压力</label>
-					<input type="checkbox" name="box" value="二次供水压力"/>
+					<input type="checkbox" name="box" value="ecgsyl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;2#循环泵频率反馈</label>
-					<input type="checkbox" name="box" value="2#循环泵频率反馈"/>
+					<input type="checkbox" name="box" value="xhb2fk"/>
 					</th>
 					
 					</tr>
@@ -398,17 +420,17 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;C项电压</label>
-					<input type="checkbox" name="box" value="C项电压"/>
+					<input type="checkbox" name="box" value="Cdy"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水温度</label>
-					<input type="checkbox" name="box" value="二次供水温度"/>
+					<input type="checkbox" name="box" value="ecgswd"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;1#补水泵频率反馈</label>
-					<input type="checkbox" name="box" value="1#补水泵频率反馈"/>
+					<input type="checkbox" name="box" value="bsb1fk"/>
 					</th>
 					
 					</tr>
@@ -416,17 +438,17 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;A项电流</label>
-					<input type="checkbox" name="box" value="A项电流"/>
+					<input type="checkbox" name="box" value="Adl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次回水压力</label>
-					<input type="checkbox" name="box" value="二次回水压力"/>
+					<input type="checkbox" name="box" value="echsyl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;调节阀开度反馈</label>
-					<input type="checkbox" name="box" value="调节阀开度反馈"/>
+					<input type="checkbox" name="box" value="tjfkdfk"/>
 					</th>
 					
 					</tr>
@@ -434,12 +456,12 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;B项电流</label>
-					<input type="checkbox" name="box" value="B项电流"/>
+					<input type="checkbox" name="box" value="Bdl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次回水温度</label>
-					<input type="checkbox" name="box" value="二次回水温度"/>
+					<input type="checkbox" name="box" value="echswd"/>
 					</th>
 					
 					<th>
@@ -451,12 +473,12 @@
 					<tr style="height:50px"> 
 					<th>
 					<label>&emsp;&emsp;C项电流</label>
-					<input type="checkbox" name="box" value="C项电流"/>
+					<input type="checkbox" name="box" value="Cdl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次除污器后压力</label>
-					<input type="checkbox" name="box" value="二次除污器后压力"/>
+					<input type="checkbox" name="box" value="eccwhyl"/>
 					</th>
 					<th>
 					

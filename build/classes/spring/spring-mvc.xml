@@ -6,11 +6,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"   
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
     	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -40,4 +42,21 @@
         <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
         <property name="maxUploadSize" value="6291456"></property>
     </bean>	
+     <task:annotation-driven />
+     <task:scheduler id="myScheduler" pool-size="5"/>  
+     
+     <!-- 多个拦截器，顺序执行 -->
+	<!-- <mvc:view-controller path="/" view-name="home/login"/>
+	<mvc:view-controller path="/404" view-name="common/errorPage/404"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/User/**"/>
+			<mvc:mapping path="/home/**"/>
+			<mvc:mapping path="/xsgl/**"/>
+			<mvc:exclude-mapping path="/User/loginUser"/>
+			<mvc:exclude-mapping path="/home/login"/>
+			
+			<bean class="com.hnzy.hot.filter.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
 </beans>

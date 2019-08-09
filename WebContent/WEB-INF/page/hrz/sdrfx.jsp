@@ -1,12 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -97,18 +91,20 @@
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
 
- <script type="text/javascript" src="../js/sssj.js"></script> 
+ <script type="text/javascript" src="../js/lsbj.js"></script>
+
 <style>
+		th,td{  
+  
+  white-space: nowrap;
+} 
 	
 	/* 固定表头 */
 	.table-th-css {
 		position: relative !important;
 		top: 0;
 	}
-		th,td{  
-  
-  white-space: nowrap;
-} 
+	
 	/* 搜索DIV */
 	.jk_search{
 		display:block;
@@ -134,18 +130,6 @@
 	
 	/* 搜索按钮 */
 	#jk_search_btn{
-		margin-top:8px;
-		margin-left:20px;
-		border:none;
-		background-color:rgb(60,61,61);
-		width:60px;
-		height:24px;
-		margin-right:6px;
-		color:#fff;
-		border-radius:6px;
-	}
-	
-	#jk_search_btn1{
 		margin-top:8px;
 		margin-left:20px;
 		border:none;
@@ -183,26 +167,25 @@
         right: 6px;
     }
     
-   
 	
 </style>
  <script type="text/javascript">
-var xinwordListj = ${xinwordList};
+//var xinwordListj = ${xinwordList};
 </script>
 </head>
 <body>
 
 	<div id="" class="clearfix" style="overflow-x: hidden;">
-	
+
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-table-1">实时数据</span>
+				<span class="mws-i-24 i-table-1">报警信息</span>
 			</div>
 			<div class="jk_search">
 				<p>
-					<select>
-						<option value="">全部</option>
+					<select id="type">
+						<option value="全部">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
 						<option value="教育局站">教育局站</option>
@@ -217,83 +200,27 @@ var xinwordListj = ${xinwordList};
 				<table class="mws-table">
 					<thead>
 						<tr>
-						    <th class="table-th-css">换热站名称<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次瞬时供流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次瞬时供热量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次累计供流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次累计供热量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次回水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次回水温度</th>
-							<th class="table-th-css">二次供水瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水累计流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次供水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次回水压力<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次回水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">二次除污器后压力<span class="span-up"></span> <span class="span-down"></span></th>
-						</tr>
-					</thead>
-					<tbody id="jkword_body1">
-						
-						
-					</tbody>
-				</table>
-			</div>
-			
-			
-			<div id="monitword_table_body" class="mws-panel-body"
-				style="overflow: auto !important; height: 300px;">
-				<table class="mws-table">
-					<thead>
-						<tr>
-							<th class="table-th-css">总电量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">A项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">B项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">C项电压<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">A项电流<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">B项电流<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">C项电流<span class="span-up"></span> <span class="span-down"></span></th>
+						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">用电量(KWh)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">用水量(t)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">用热总流量(t)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">用热总热量(Gj)<span class="span-up"></span> <span class="span-down"></span></th>
 							
-							<th class="table-th-css">补泵瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">补泵累计流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">水箱液位<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">自来水总补水量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">室内温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">1#循环泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">2#循环泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">1#补水泵频率反馈<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">调节阀开度反馈<span class="span-up"></span> <span class="span-down"></span></th>
+							
 						</tr>
 					</thead>
-					<tbody id="jkword_body2">
+					<tbody id="jkword_body">
 						
 						
 					</tbody>
 				</table>
 			</div>
+			
+			
+			
 		</div>
 
 	</div>
-<script type="text/javascript">
-var list =[];
-$.ajax({
-	url:"<%=basePath%>OpcCon/xtkzSj.action",
-	async:false,
-	dataType:"json",
-	data:{	
-		"hrz":"吉利.教育局站.读数据.",
-	},
-	success:function(data){
-		var map=data.map;
-		list.push(map);
-		
-		
-	}
-	
-});	
 
-</script>
 </body>
 </html>

@@ -14,13 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hnzy.datasource.DataSourceContextHolder;
-import com.hnzy.datasource.DataSourceType;
-import com.hnzy.hot.pojo.Call;
 import com.hnzy.hot.pojo.User;
 import com.hnzy.hot.pojo.YhInfo;
 import com.hnzy.hot.service.CellService;
 import com.hnzy.hot.service.KfgdService;
+import com.hnzy.hot.service.OpcService;
 import com.hnzy.hot.service.UserService;
 import com.hnzy.hot.service.YhInfoService;
 import com.hnzy.hot.util.JSONSerializer;
@@ -41,6 +39,10 @@ public class UserController {
 	private UserService userServer;
 	@Autowired
 	private CellService callService;
+	
+	@Autowired
+	OpcService opcService;
+	
 	public List<YhInfo> YhInfoList;
 	//跳转到登录页面
 		@RequestMapping("/toLogin")
@@ -158,40 +160,27 @@ public class UserController {
     		return "hrz/sssj";
     	}
     	
+    	@RequestMapping("selHistory")
+    	@ResponseBody
+    	public JSONObject selHistory(HttpServletRequest request,String startTime,String endTime,String hrz) throws UnsupportedEncodingException{
+    		JSONObject json=new JSONObject();
+    		if(hrz!=null){
+    			 hrz=new String(hrz.getBytes("ISO-8859-1"),"utf-8");
+    		}
+    		List<Map<String, Object>> list =new ArrayList<>();
+    		Map<String, Object> map = new HashMap<>();
+    		map.put("hrz", hrz);
+    		map.put("startTime", startTime);map.put("endTime", endTime);
+    		list= opcService.selHistory(map);
+    		
+    		
+    		json.put("list", list);
+    		return json;
+    		
+    	}
     	@RequestMapping("lssj")
-    	public String lssj(HttpServletRequest request){
+    	public String lssj(){
     		
-    		List<Map<String, String>> list =new ArrayList<>();
-    		Map<String, String> map = new HashMap<>();
-    		Map<String, String> map1 = new HashMap<>();
-    		map.put("hrz", "一委站");
-    		map.put("一次瞬时供流量", "0.0");
-    		map.put("一次瞬时供热量", "0.0");
-    		map.put("一次累计供流量", "84566.55");
-    		map.put("一次累计供热量", "6195.09");
-    		map.put("总电量", "27721.50");
-    		map.put("A项电压", "231.40");
-    		map.put("B项电压", "228.40");
-    		map.put("C项电压", "230.20");
-    		map.put("A项电流", "0.0");
-    		map.put("B项电流", "0.0");
-    		map.put("C项电流", "0.0");
-    		map1.put("hrz", "二委站");
-    		map1.put("一次瞬时供流量", "0.0");
-    		map1.put("一次瞬时供热量", "0.0");
-    		map1.put("一次累计供流量", "84566.55");
-    		map1.put("一次累计供热量", "6195.09");
-    		map1.put("总电量", "27721.50");
-    		map1.put("A项电压", "231.40");
-    		map1.put("B项电压", "228.40");
-    		map1.put("C项电压", "230.20");
-    		map1.put("A项电流", "0.0");
-    		map1.put("B项电流", "0.0");
-    		map1.put("C项电流", "0.0");
-    		list.add(map);
-    		list.add(map1);
-    		
-    		request.setAttribute("list", JSONSerializer.serialize(list));
     		return "hrz/lssj";
     	}
     	//日报表
@@ -698,5 +687,10 @@ public class UserController {
     	@RequestMapping("sbwhjl")
     	public String sbwhjl(){
     		return "weihgl/sbwhjl";
+    	}
+    	
+    	@RequestMapping("ddkz")
+    	public String ddkz(){
+    		return "hrz/ddzl";
     	}
 }

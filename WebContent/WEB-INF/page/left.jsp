@@ -174,6 +174,10 @@ function dbjc(){//
 function gwjg(){// 
 	window.open("<%=basePath%>user/gwjg.action","Conframe");
 }
+
+function ddkz(){// 
+    window.open("<%=basePath%>user/ddkz.action", "Conframe");
+} 
 </script>
 	<style>
         ul.ac_kf li a{
@@ -220,7 +224,8 @@ function gwjg(){//
                           <ul class="ac_kf"> 
                                 <li><a class="first-a" onclick="map()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行总览</a></li>
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
-                    	           <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
+                    	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
+                    	        <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li>
                              	<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能耗分析</a></li>
                              	<!-- <li><a onclick="" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行数据预警</a></li>
  -->
