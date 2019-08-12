@@ -1,67 +1,26 @@
 $(document).ready(function() {
 	
-	var wordExport = document.getElementById("dayin");
-	wordExport.onclick = function(){
-		var aID =  this.parentNode.getAttribute("id");
-		tableToExcel();
-	}
 	
-	//base64转码
-    var base64 = function (s) {
-        return window.btoa(unescape(encodeURIComponent(s)));
-    };
-    //替换table数据和worksheet名字
-    var format = function (s, c) {
-        return s.replace(/{(\w+)}/g,
-            function (m, p) {
-                return c[p];
-            });
-    }
-    function tableToExcel(){
-        //要导出的json数据
-      
-        //列标题
-    	let str = '<tr><th>换热站</th><th>采集时间</th><th>一次累计供热量</th><th>一次累计供流量</th><th>二次累计供热量</th><th>二次累计供流量</th><th>总电量</th><th>水表</th>';
-        
-        for(var i=0;i<chk_value.length;i++){
-        	str+='<td>'+chk_value[i]+'</th>';
-        }
-        str+='</tr>'
-        //循环遍历，每行加入tr标签，每个单元格加td标签
-        for(let i = 0 ; i < chk.length ; i++ ){
-        	
-          str+='<tr>';
-         
-          for(let item in chk[i]){
-              //增加\t为了不让表格显示科学计数法或者其他格式
-        	  
-        		  str+=`<td>${ chk[i][item] + '\t'}</td>`;
-        	  
-        		   
-        	  
-                  
-          }
-          str+='</tr>';
-        	
-        }
-        //Worksheet名
-        let worksheet = 'Sheet1'
-        let uri = 'data:application/vnd.ms-excel;base64,';
-   
-        //下载的表格模板数据
-        let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
-        xmlns:x="urn:schemas-microsoft-com:office:excel" 
-        xmlns="http://www.w3.org/TR/REC-html40">
-        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
-          <x:Name>${worksheet}</x:Name>
-          <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
-          </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
-          </head><body><table>${str}</table></body></html>`;
-        //下载模板
-        window.location.href = uri + base64(template)
-      }
-      //输出base64编码
-      function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+	
+	var wordList = [];
+	function jsArrChange(json){
+		for (var i = 0 ; i < json.length ; i ++) {
+			var arr1 = [];
+			arr1[0] = json[i].一次供水瞬时流量;
+			arr1[1] = json[i].一次供水瞬时热量;
+			arr1[2] = json[i].一次供水累计流量;
+			arr1[3] = json[i].一次供水累计热量;
+			arr1[4] = json[i].电量实际值;
+			arr1[5] = json[i].A项电压;
+			arr1[6] = json[i].B项电压;
+			arr1[7] = json[i].C项电压;
+			arr1[8] = json[i].A项电流;
+			arr1[9] = json[i].B项电流;
+			arr1[10] = json[i].C项电流;
+			wordList.push(arr1);
+		};
+	}
+	jsArrChange(list);
 	
 	$("#jk_search_btn1").click(function(){
 		$("#change_word").show();
@@ -71,35 +30,62 @@ $(document).ready(function() {
 		
 		$("#change_word").hide();
 	});
+	/*var jkwordTbody = document.getElementById("jkword_body");
+	for(var i = 0;i < jkwordList.length;i ++){
+		var jkwordTr = document.createElement("tr");
+		if(i%2 == 1){
+			jkwordTr.className = "gradeX odd";
+		}else if(i%2 == 0){
+			jkwordTr.className = "gradeX even";
+		}
+		for(var j = 0;j < jkwordList[i].length;j ++){
+			jkwordList[i][j] = jkwordList[i][j]+"";
 
+			jkwordTr.innerHTML += "<td>" + jkwordList[i][j] + "</td>";
+		}
+		jkwordTbody.appendChild(jkwordTr);
+	}*/
 	var chk_value =[];
 	var chk=[];
+	var chkName=[];
 	$("#word_change_btn").click(function(){
+		$.ajax({
+			url:"selrbb.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"hrz":$("#type").val(),
+				"startTime":$("#startTime").val(),
+				"endTime":$("#endTime").val(),
+			},
+			success:function(data){
+				list=data.list;
+			}
+			
+		});	
 		chk_value.length =0;//定义一个数组    
 		chk.length =0;
+		chkName.length=0;
 		$("#head").empty();
 		$("#jkword_body").empty();
 	    $('input[name="box"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
 	    chk_value.push($(this).val());//将选中的值添加到数组chk_value中    
+	    chkName.push($(this).prev().html())
+	    
 	    });
 	    var head = document.getElementById("head");
 		
 			var headTr = document.createElement("tr");
 			
 			headTr.className = "gradeX odd";
-			headTr.innerHTML += "<th class='table-th-css'>换热站</th>";
-			headTr.innerHTML += "<th class='table-th-css'>采集时间</th>";
-			headTr.innerHTML += "<th class='table-th-css'>一次累计供热量</th>";
-			headTr.innerHTML += "<th class='table-th-css'>一次累计供流量</th>";
-			headTr.innerHTML += "<th class='table-th-css'>二次累计供热量</th>";
-			headTr.innerHTML += "<th class='table-th-css'>二次累计供流量</th>";
-			headTr.innerHTML += "<th class='table-th-css'>总电量</th>";
-			headTr.innerHTML += "<th class='table-th-css'>水表</th>";
-			for(var j = 0;j < chk_value.length;j ++){
-				chk_value[j] = chk_value[j]+"";
+			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>换热站</th>";
+			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>数据时间</th>";
+			for(var j = 0;j < chkName.length;j ++){
+				chkName[j] = chkName[j]+"";
 
-				headTr.innerHTML += "<th class='table-th-css'>" + chk_value[j] + "</th>";
+				headTr.innerHTML += "<th class='table-th-css' style='width:150px'>" + chkName[j] + "</th>";
 			}
+			
 			head.appendChild(headTr);
 			$("#change_word").hide();
 			
@@ -107,23 +93,12 @@ $(document).ready(function() {
 				var arr=[];
 				arr[0]=list[i].hrz;
 				arr[1]=list[i].time;
-				arr[2]="6195.09";
-				arr[3]="84566.55";
-				arr[4]="0.00";
-				arr[5]="0.00";
-				arr[6]="0.00";
-				arr[7]="0.00";
-				
 				for(var j=0;j<chk_value.length;j++){
 					var str=chk_value[j];
-					if(list[i][str]!=null){
-						arr[j+8]=list[i][str];
-					}else{
-						arr[j+8]="0.00"
-					}
 					
+					arr[j+2]=list[i][str];
 				}
-				
+			 
 				chk.push(arr);
 			}
 			
@@ -136,11 +111,9 @@ $(document).ready(function() {
 					jkwordTr.className = "gradeX even";
 				}
 				for(var j = 0;j < chk[i].length;j ++){
-					if(chk[i][0]==$("#type").val()||$("#type").val()=="全部"){
-						chk[i][j] = chk[i][j]+"";
+					chk[i][j] = chk[i][j]+"";
 
-						jkwordTr.innerHTML += "<td>" + chk[i][j] + "</td>";	
-					}
+					jkwordTr.innerHTML += "<td>" + chk[i][j] + "</td>";
 				}
 				jkwordTbody.appendChild(jkwordTr);
 			}
@@ -148,14 +121,11 @@ $(document).ready(function() {
 	
 	//工单搜索
 	$("#jk_search_btn").click(function(){
-		var wordType = $("#type").val();
-		var compareWordList = [];
-		
-		for(var j = 0;j < chk.length;j ++){
+	
 			
-			compareWordTime(wordType,compareWordList,chk,j);
-		};
-		$("#jkword_body").empty();
+			compareWordTime();
+		
+		/*$("#jkword_body").empty();
 		for(var x = 0;x < compareWordList.length;x ++){
 			
 			var newWordElemnet = "";
@@ -180,7 +150,7 @@ $(document).ready(function() {
 			}
 			
 			$("#jkword_body").append(newWordElemnet);
-		}
+		}*/
 	});
 	
 	
@@ -279,26 +249,79 @@ $(document).ready(function() {
 		
 });
 	
-function compareWordTime(wordType,compareWordList,jkwordList,j){
-		if(wordType == "全部"){
-			compareWordList.push(jkwordList[j]);
-		}
-		if(wordType == "一委站"){
-			if(jkwordList[j][0] == "一委站"){
-				compareWordList.push(jkwordList[j]);
-			}
-		}
-		if(wordType == "二委站"){
-			if(jkwordList[j][0] == "二委站"){
-				compareWordList.push(jkwordList[j]);
-			}
+function compareWordTime(){
+	var chk_value =[];
+	var chk=[];
+	var chkName=[];
+	$.ajax({
+		url:"selrbb.action",
+		async:false,
+		dataType:"json",
+		data:{	
+			"hrz":$("#type").val(),
+			"startTime":$("#startTime").val(),
+			"endTime":$("#endTime").val(),
+		},
+		success:function(data){
+			list=data.list;
 		}
 		
-		if(wordType == "教育局站"){
-			if(jkwordList[j][0] == "教育局站"){
-				compareWordList.push(jkwordList[j]);
-			}
+	});	
+	chk_value.length =0;//定义一个数组    
+	chk.length =0;
+	chkName.length=0;
+	$("#head").empty();
+	$("#jkword_body").empty();
+    $('input[name="box"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数    
+    chk_value.push($(this).val());//将选中的值添加到数组chk_value中    
+    chkName.push($(this).prev().html())
+    
+    });
+    var head = document.getElementById("head");
+	
+		var headTr = document.createElement("tr");
+		
+		headTr.className = "gradeX odd";
+		headTr.innerHTML += "<th class='table-th-css' style='width:150px'>换热站</th>";
+		headTr.innerHTML += "<th class='table-th-css' style='width:150px'>数据时间</th>";
+		for(var j = 0;j < chkName.length;j ++){
+			chkName[j] = chkName[j]+"";
+
+			headTr.innerHTML += "<th class='table-th-css' style='width:150px'>" + chkName[j] + "</th>";
 		}
+		
+		head.appendChild(headTr);
+		$("#change_word").hide();
+		
+		for(var i=0;i<list.length;i++){
+			var arr=[];
+			arr[0]=list[i].hrz;
+			arr[1]=list[i].time;
+			for(var j=0;j<chk_value.length;j++){
+				var str=chk_value[j];
+				
+				arr[j+2]=list[i][str];
+			}
+		 
+			chk.push(arr);
+		}
+		
+		var jkwordTbody = document.getElementById("jkword_body");
+		for(var i = 0;i < chk.length;i ++){
+			var jkwordTr = document.createElement("tr");
+			if(i%2 == 1){
+				jkwordTr.className = "gradeX odd";
+			}else if(i%2 == 0){
+				jkwordTr.className = "gradeX even";
+			}
+			for(var j = 0;j < chk[i].length;j ++){
+				chk[i][j] = chk[i][j]+"";
+
+				jkwordTr.innerHTML += "<td>" + chk[i][j] + "</td>";
+			}
+			jkwordTbody.appendChild(jkwordTr);
+		}
+		
 		
 }	
 	

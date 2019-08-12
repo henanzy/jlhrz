@@ -25,6 +25,30 @@ public class OpcServiceImpl implements OpcService {
 		// TODO Auto-generated method stub
 		return opcDao.selHistory(map);
 	}
+
+	@Override
+	public void insertRbb(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.insertRbb(map);
+	}
+
+	@Override
+	public void insertZybb(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.insertZybb(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selrbb(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.selrbb(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selzybb(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.selzybb(map);
+	}
 	
 	
 	

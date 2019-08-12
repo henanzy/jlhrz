@@ -1,12 +1,18 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>日报表</title>
+<title>Insert title here</title>
 
 
 
@@ -90,30 +96,25 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
+<script type="text/javascript">
+var list =[];
 
+
+</script>
 <script type="text/javascript" src="../js/rbb.js"></script> 
 
 <style>
-		th,td{  
-  
-  white-space: nowrap;
-} 
+	
 	/* 固定表头 */
 	.table-th-css {
 		position: relative !important;
 		top: 0;
 	}
-	#dayin{
-		margin-top:8px;
-		margin-left:20px;
-		border:none;
-		background-color:rgb(60,61,61);
-		width:60px;
-		height:24px;
-		margin-right:6px;
-		color:#fff;
-		border-radius:6px;
-	}
+	th,td{  
+  
+  white-space: nowrap;
+} 
+ 
 	/* 搜索DIV */
 	.jk_search{
 		display:block;
@@ -221,13 +222,11 @@
 	}
 	
 </style>
- <script type="text/javascript">
- var list = ${list};
-</script>
+
 </head>
 <body>
 
-	<div id="" class="clearfix" style="overflow-x: hidden;">
+	<div id="" class="clearfix" >
 	
 		
 		<div class="mws-panel grid_8 "
@@ -238,24 +237,24 @@
 			<div class="jk_search">
 				<p>
 					<select id="type">
-						<option value="全部">全部</option>
+						<option value="">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
 						<option value="教育局站">教育局站</option>
 						
 					</select>
 					
-					<span>开始时间：
+					<span>时间：
 						<input type="date" id="startTime"  style="width:120px" value="" />
 					</span>
+					
 					<input id="jk_search_btn1" type="submit" value="选择列" />
 					<input id="jk_search_btn" type="submit" value="搜索" />
-					<input id="dayin" type="submit" value="打印" />
 				</p>
 			</div>
 			<div id="monitword_table_body" class="mws-panel-body"
 				style="overflow: scroll !important;height: 600px;">
-				<table class="mws-table" style="width:150%;">
+				<table class="mws-table" >
 					<thead id="head">
 						
 					</thead>
@@ -271,69 +270,209 @@
 				<div class="mws-panel-header">
 					<span >选择列</span> <!-- <span class="close"></span> -->
 				</div>
-				<div class="mws-panel-body" style="height: 250px;">
+				<div class="mws-panel-body" style="height: 650px;">
 					<form class="mws-form" action=""  method="post">
 					<table>
 					<tr style="height:50px">
-					
+					<th style="width:150px">
+					<label>&emsp;&emsp;一次供水瞬时流量</label>
+					<input type="checkbox" name="box" value="ycssgll"/>
+					</th>
 					
 					<th style="width:150px">
 					<label>&emsp;&emsp;一次供水压力</label>
-					<input type="checkbox" name="box" value="一次供水压力"/>
+					<input type="checkbox" name="box" value="ycgsyl"/>
 					</th>
 					
-					<th>
-					<label>&emsp;&emsp;水箱液位</label>
-					<input type="checkbox" name="box" value="水箱液位"/>
+					<th style="width:150px">
+					<label>&emsp;&emsp;补水瞬时流量</label>
+					<input type="checkbox" name="box" value="bbssll"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px">
+					<th style="width:150px">
+					<label>&emsp;&emsp;一次供水瞬时热量</label>
+					<input type="checkbox" name="box" value="ycssgrl"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次供水温度</label>
-					<input type="checkbox" name="box" value="一次供水温度"/>
+					<input type="checkbox" name="box" value="ycgswd"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;补水累计流量</label>
+					<input type="checkbox" name="box" value="bbljll"/>
 					</th>
 					
 					</tr>
 					
 					<tr style="height:50px">
-					
-					<th>
-					<label>&emsp;&emsp;二次回水温度</label>
-					<input type="checkbox" name="box" value="二次回水温度"/>
+					<th style="width:150px">
+					<label>&emsp;&emsp;一次供水累计流量</label>
+					<input type="checkbox" name="box" value="ycljgll"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次回水压力</label>
-					<input type="checkbox" name="box" value="一次回水压力"/>
+					<input type="checkbox" name="box" value="ychsyl"/>
 					</th>
 					
+					<th>
+					<label>&emsp;&emsp;水箱液位</label>
+					<input type="checkbox" name="box" value="sxyw"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px">
+					<th>
+					<label>&emsp;&emsp;一次供水累计热量</label>
+					<input type="checkbox" name="box" value="ycljgrl"/>
+					</th>
 					
 					<th>
 					<label>&emsp;&emsp;一次回水温度</label>
-					<input type="checkbox" name="box" value="一次回水温度"/>
+					<input type="checkbox" name="box" value="ychswd"/>
 					</th>
 					
+					<th>
+					<label>&emsp;&emsp;自来水总补水量</label>
+					<input type="checkbox" name="box" value="zlszbsl"/>
+					</th>
 					
 					</tr>
 					
 					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;总电量</label>
+					<input type="checkbox" name="box" value="zdl"/>
+					</th>
 					
+					<th>
+					<label>&emsp;&emsp;二次供水瞬时流量</label>
+					<input type="checkbox" name="box" value="ecgssll"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;室内温度</label>
+					<input type="checkbox" name="box" value="snwd"/>
+					</th>
+					
+					</tr>
+					
+					
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;A项电压</label>
+					<input type="checkbox" name="box" value="Ady"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;二次供水累计流量</label>
+					<input type="checkbox" name="box" value="ecgljll"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;1#循环泵频率反馈</label>
+					<input type="checkbox" name="box" value="xhb1fk"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;B项电压</label>
+					<input type="checkbox" name="box" value="Bdy"/>
+					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水压力</label>
-					<input type="checkbox" name="box" value="二次供水压力"/>
+					<input type="checkbox" name="box" value="ecgsyl"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;2#循环泵频率反馈</label>
+					<input type="checkbox" name="box" value="xhb2fk"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;C项电压</label>
+					<input type="checkbox" name="box" value="Cdy"/>
 					</th>
 					
 					<th>
 					<label>&emsp;&emsp;二次供水温度</label>
-					<input type="checkbox" name="box" value="二次供水温度"/>
+					<input type="checkbox" name="box" value="ecgswd"/>
 					</th>
+					
+					<th>
+					<label>&emsp;&emsp;1#补水泵频率反馈</label>
+					<input type="checkbox" name="box" value="bsb1fk"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;A项电流</label>
+					<input type="checkbox" name="box" value="Adl"/>
+					</th>
+					
 					<th>
 					<label>&emsp;&emsp;二次回水压力</label>
-					<input type="checkbox" name="box" value="二次回水压力"/>
-					</th>					
+					<input type="checkbox" name="box" value="echsyl"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;调节阀开度反馈</label>
+					<input type="checkbox" name="box" value="tjfkdfk"/>
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;B项电流</label>
+					<input type="checkbox" name="box" value="Bdl"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;二次回水温度</label>
+					<input type="checkbox" name="box" value="echswd"/>
+					</th>
+					
+					<th>
+					
+					</th>
+					
+					</tr>
+					
+					<tr style="height:50px"> 
+					<th>
+					<label>&emsp;&emsp;C项电流</label>
+					<input type="checkbox" name="box" value="Cdl"/>
+					</th>
+					
+					<th>
+					<label>&emsp;&emsp;二次除污器后压力</label>
+					<input type="checkbox" name="box" value="eccwhyl"/>
+					</th>
+					<th>
+					
+					</th>
+					
+					
 					</tr>
 					</table>
-										
+					
+						
 						<input type="button" id="word_change_btn"
 							class="mws-button black" value="选择" />
 					</form>

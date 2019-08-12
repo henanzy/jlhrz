@@ -185,12 +185,31 @@ background-size:100% 100%;
   background-color: #333;
   color: #C5D52B;
 }
-
+.layui-input{
+display:inline!important;
+}
 </style>
 
 </head>
 
 <script type="text/javascript" >
+
+function sbkz (name,val){
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbkz.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"name":"吉利."+$("#hrz").val()+"."+name,
+				"val":val,
+			},
+			
+			success:function(data){
+				alert("操作成功")
+			}
+			
+		});	
+}
 
 
 function xz(p){
@@ -239,9 +258,57 @@ function show(){
 	        content: $("#message").html()
 	    });
 	  layui.form.render();
+	  var d=[];
+	  d[0]="吉利.教育局站.读状态.调节阀远程就地";
+	  d[1]="吉利.教育局站.写状态.调节阀定时开关使能";
+	  d[2]="吉利.教育局站.写数据.开启调节阀时间";
+	  d[3]="吉利.教育局站.写数据.关闭调节阀时间";
+	  d[4]="吉利.教育局站.写数据.调节阀最低开度";
+	  d[5]="吉利.教育局站.写数据.阀门开度设定";
+	  d[6]="吉利.教育局站.读数据.调节阀反馈";
+	  d[7]="吉利.教育局站.写状态.调节阀强制";
+	  
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbxs.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"d":d,
+			},
+			traditional: true,
+			success:function(data){
+				var map=data.map;
+				if(map.调节阀远程就地==true){
+					$("#tjfzt").val("远程")
+				}else{
+					$("#tjfzt").val("就地")
+				}
+				
+				if(map.调节阀强制==true){
+					$("#tjfqz").addClass("xuanzhong");
+				}else{
+					$("#tjffqz").addClass("xuanzhong");
+				}
+				
+				if(map.调节阀定时开关使能==true){
+					$("#tjfdsqy").addClass("xuanzhong");
+				}else{
+					$("#tjfdsjy").addClass("xuanzhong");
+				}
+				$("#tjfdskqsj").val(map.开启调节阀时间)
+				$("#tjfdsgbsj").val(map.关闭调节阀时间)
+				$("#tjfzdkd").val(map.调节阀最低开度)
+				$("#tjfkdgd").val(map.阀门开度设定)
+				var kd=map.调节阀反馈+"";
+				$("#tjfkdfk").val(kd.slice(0,2))
+				
+				
+			}
+			
+		});	
 }
 
-function showXhb(){
+function showXhb(flag){
 	layui.form.render();
 	  layer.open({
 		  skin:"alert-skin",
@@ -252,6 +319,58 @@ function showXhb(){
 	        content: $("#xhb").html()
 	    });
 	  layui.form.render();
+	  
+	  $("#xhbbh").val(flag)
+	  var d=[];
+	  d[0]="吉利.教育局站.读状态.循环泵"+flag+"远程就地";
+	  d[1]="吉利.教育局站.写状态.循环泵"+flag+"强制";
+	  d[2]="吉利.教育局站.写状态.循环泵"+flag+"急停";
+	  d[3]="吉利.教育局站.写数据.循环泵"+flag+"频率设定";
+	  d[4]="吉利.教育局站.读数据.循环泵"+flag+"频率反馈";
+	 
+	  
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbxs.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"d":d,
+			},
+			traditional: true,
+			success:function(data){
+				var map=data.map;
+				
+				var str="循环泵"+flag+"远程就地"
+				console.log(map[str])
+				 if(map[str]==true){
+					$("#xhbzt").val("远程")
+				}else{
+					$("#xhbzt").val("就地")
+				}
+				
+				var str1="循环泵"+flag+"强制"
+				
+				 if(map[str1]==true){
+					$("#xhbqz").addClass("xuanzhong");
+				}else{
+					$("#xhbfqz").addClass("xuanzhong");
+				}
+				
+				var str2="循环泵"+flag+"急停"
+				
+				 if(map[str2]==true){
+					$("#xhbjt").addClass("xuanzhong");
+				}else{
+					$("#xhbzc").addClass("xuanzhong");
+				}
+				var str3="循环泵"+flag+"频率设定"
+				$("#xhbplgd").val(map[str3].value)
+				var str4="循环泵"+flag+"频率反馈"
+				$("#xhbplfk").val(map[str4])											
+				
+			}
+			
+		});	
 }
 
 function showXyf(){
@@ -265,6 +384,39 @@ function showXyf(){
 	        content: $("#xyf").html()
 	    });
 	  layui.form.render();
+	  var d=[];
+	  d[0]="吉利.教育局站.读状态.泄压阀远程就地";
+	  d[1]="吉利.教育局站.写状态.泄压阀强制";
+	  d[2]="吉利.教育局站.写数据.泄压压力上限";
+	  d[3]="吉利.教育局站.写数据.泄压压力下限";
+	  
+	  
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbxs.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"d":d,
+			},
+			traditional: true,
+			success:function(data){
+				var map=data.map;
+				if(map.泄压阀远程就地==true){
+					$("#xyfzt").val("远程")
+				}else{
+					$("#xyfzt").val("就地")
+				}
+				
+				if(map.泄压阀强制==true){
+					$("#xyfqz").addClass("xuanzhong");
+				}else{
+					$("#xyffqz").addClass("xuanzhong");
+				}
+				$("#echsxysx").val(map.泄压压力上限)
+				$("#echsxyxx").val(map.泄压压力下限)
+			}
+			
+		});	
 }
 
 function showBsf(){
@@ -278,9 +430,43 @@ function showBsf(){
 	        content: $("#bsf").html()
 	    });
 	  layui.form.render();
+	  
+	  var d=[];
+	  d[0]="吉利.教育局站.读状态.自来水阀远程就地";
+	  d[1]="吉利.教育局站.写状态.自来水阀强制";
+	  /* d[2]="吉利.教育局站.写数据.泄压压力上限";
+	  d[3]="吉利.教育局站.写数据.泄压压力下限"; */
+	  
+	  
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbxs.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"d":d,
+			},
+			traditional: true,
+			success:function(data){
+				var map=data.map;
+				if(map.自来水阀远程就地==true){
+					$("#bsfzt").val("远程")
+				}else{
+					$("#bsfzt").val("就地")
+				}
+				
+				if(map.自来水阀强制==true){
+					$("#bsfqz").addClass("xuanzhong");
+				}else{
+					$("#bsffqz").addClass("xuanzhong");
+				}
+				/* $("#echsxysx").val(map.泄压压力上限)
+				$("#echsxyxx").val(map.泄压压力下限) */
+			}
+			
+		});	
 }
 
-function showBsb(){
+function showBsb(flag){
 	layui.form.render();
 	  layer.open({
 		  skin:"alert-skin",  
@@ -291,6 +477,60 @@ function showBsb(){
 	        content: $("#bsb").html()
 	    });
 	  layui.form.render();
+	  $('#bsbbh').val(flag)
+	  var d=[];
+	  d[0]="吉利.教育局站.读状态.补水泵"+flag+"远程就地";
+	  d[1]="吉利.教育局站.写状态.补水泵"+flag+"强制";
+	  //d[2]="吉利.教育局站.写状态.补水泵"+flag+"急停";
+	  d[2]="吉利.教育局站.写数据.补水泵"+flag+"频率设定";
+	  d[3]="吉利.教育局站.读数据.补水泵"+flag+"频率反馈";
+	 
+	  
+	  $.ajax({
+			url:"<%=basePath%>OpcCon/sbxs.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"d":d,
+			},
+			traditional: true,
+			success:function(data){
+				var map=data.map;
+				
+				var str="补水泵"+flag+"远程就地"
+				console.log(map[str])
+				 if(map[str]==true){
+					$("#bsbzt").val("远程")
+				}else{
+					$("#bsbzt").val("就地")
+				}
+				
+				var str1="补水泵"+flag+"强制"
+				
+				 if(map[str1]==true){
+					$("#bsbqz").addClass("xuanzhong");
+				}else{
+					$("#bsbfqz").addClass("xuanzhong");
+				}
+				
+				/* var str2="补水泵"+flag+"急停"
+				
+				 if(map[str2]==true){
+					$("#xhbjt").addClass("xuanzhong");
+				}else{
+					$("#xhbzc").addClass("xuanzhong");
+				} */
+				var str3="补水泵"+flag+"频率设定"
+				$("#bsbplgd").val(map[str3])
+				var str4="补水泵"+flag+"频率反馈"
+				$("#bsbplfk").val(map[str4])
+				
+				
+				
+				
+			}
+			
+		});	
 }
 
 
@@ -302,7 +542,7 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">调节阀状态</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="远程" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
         </div>
@@ -318,126 +558,118 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">强制开度使能</label>
             <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal"  style="width:77px" type="button" onclick="xz(this)"   id="qingd">强制</button>
-            <button class="layui-btn layui-btn-normal"   type="button" onclick="xz(this)"   id="tingz">非强制</button>
+            <button class="layui-btn layui-btn-normal"  style="width:77px" type="button" onclick="xz(this);sbkz('写状态.调节阀强制','1')"   id="tjfqz">强制</button>
+            <button class="layui-btn layui-btn-normal"   type="button" onclick="xz(this);sbkz('写状态.调节阀强制','0')"   id="tjffqz">非强制</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">调阀定时开关使能</label>
             <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">启用</button>
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="tingz">禁用</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.调节阀定时开关使能','1')"   id="tjfdsqy">启用</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.调节阀定时开关使能','0')"   id="tjfdsjy">禁用</button>
             </div>
         </div>
         
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">定时开启时间</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="6" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="tjfdskqsj"  name="tjfdskqsj"  class="layui-input"  maxlength="12"
                        />
+                <button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.开启调节阀时间',$('#tjfdskqsj').val())" >修改</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">定时关闭时间</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="18" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="tjfdsgbsj"  name="tjfzt"  class="layui-input" maxlength="12"
                        />
+ <button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.关闭调节阀时间',$('#tjfdsgbsj').val())" >修改</button>
             </div>
         </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">调节阀最低开度</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="20" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="tjfzdkd"  name="tjfzt" class="layui-input" maxlength="12"
                        />
+<button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.调节阀最低开度',$('#tjfzdkd').val())" >修改</button>
             </div>
         </div>
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">调节阀开度给定</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="tjfkdgd"  name="tjfzt"  class="layui-input" maxlength="12"
                        />
+<button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.阀门开度设定',$('#tjfkdgd').val())" >修改</button>
             </div>
         </div>
 
       <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">调节阀开度反馈</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="tjfkdfk" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
         </div>
-        <div class="layui-form-item model-form-footer" style="margin-left:190px">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
-        </div>
+
     </form>
 
 </script>
 
 
 <script type="text/html" id="xhb">
-    <form id="pswForm" class="layui-form model-form" action="" method="PUT">
+   <form id="pswForm" class="layui-form model-form" action="" method="PUT">
 
-     
+ <input type="hidden" id="xhbbh"/>
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">远程就地状态</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="就地" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="xhbzt" readonly="readonly" name="xhbzt" id="xhbzt" class="layui-input" maxlength="12"
                        />
             </div>
         </div>
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">控制状态设定</label>
             <div class="layui-input-block">
-             <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">强制</button>
-            <button class="layui-btn layui-btn-normal"  type="button" onclick="xz(this)"   id="tingz">非强制</button>
+             <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'强制','1')"   id="xhbqz">强制</button>
+            <button class="layui-btn layui-btn-normal"  type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'强制','0')"   id="xhbfqz">非强制</button>
             </div>
         </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">急停操作</label>
             <div class="layui-input-block">
-               <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">急停</button>
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="tingz">正常</button>
+               <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'急停','1')"   id="xhbjt">急停</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'急停','0')"   id="xhbzc">正常</button>
             </div>
         </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">频率给定（HZ）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="xhbplgd"  name="tjfzt"  class="layui-input" maxlength="12"
                        />
+<button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.循环泵'+$('#xhbbh').val()+'频率设定',$('#xhbplgd').val())" >修改</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">频率反馈（HZ）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="xhbplfk" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
        </div>
 
-        <div class="layui-form-item" style="width:450px">
-            <label   class="layui-form-label" style="width:150px">二次供压力设定值（Mpa）</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.5" class="layui-input" maxlength="12"
-                       />
-            </div>
-        </div>
+       
          <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">启动状态控制</label>
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">启动</button>
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="tingz">停止</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'启动','1')"   id="qingd">启动</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.循环泵'+$('#xhbbh').val()+'停止','1')"   id="tingz">停止</button>
             </div>
-        </div>
-
-      
-        <div class="layui-form-item model-form-footer" style="margin-left:190px">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
         </div>
     </form>
 
@@ -450,7 +682,7 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">远程就地状态</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="就地" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="xyfzt" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
         </div>
@@ -459,36 +691,36 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">控制状态设定</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
-                       />
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);sbkz('写状态.泄压阀强制','1')"   id="xyfqz">强制</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);sbkz('写状态.泄压阀强制','0')"   id="xyffqz">非强制</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">二次回水泄压上限（Mpa）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="echsxysx" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
+
             </div>
        </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">二次回水泄压下限（Mpa）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.5" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="echsxyxx" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
+
             </div>
         </div>
          <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">启动状态控制</label>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);xyf('k')"   id="qingd">启动</button>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);xyf('g')"   id="tingz">停止</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);xyf('k');sbkz('写状态.泄压阀开启','1')"   id="qingd">启动</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);xyf('g');sbkz('写状态.泄压阀关闭','1')"   id="tingz">停止</button>
         </div>
 
       
-        <div class="layui-form-item model-form-footer" style="margin-left:190px">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
-        </div>
+       
     </form>
 
 </script>
@@ -500,7 +732,7 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">远程就地状态</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="就地" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="bsfzt" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
         </div>
@@ -509,15 +741,15 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">控制状态设定</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
-                       />
+               <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);sbkz('写状态.自来水阀强制','1')"   id="bsfqz">强制</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);sbkz('写状态.自来水阀强制','0')"   id="bsffqz">非强制</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">水阀开关上限（m）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="sfkgsx" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
        </div>
@@ -525,128 +757,73 @@ function showBsb(){
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">水阀开关下限（m）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.5" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="sfkgxx" readonly="readonly" name="tjfzt"  class="layui-input" maxlength="12"
                        />
             </div>
         </div>
          <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">启动状态控制</label>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);bsf('k')"   id="qingd">启动</button>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);bsf('g')"   id="tingz">停止</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);bsf('k');sbkz('写状态.自来水阀开启','1')"   id="qingd">启动</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this);bsf('g');sbkz('写状态.自来水阀关闭','1')"   id="tingz">停止</button>
         </div>
 
       
-        <div class="layui-form-item model-form-footer" style="margin-left:190px">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
-        </div>
+        
     </form>
 
 </script>
 
-<script type="text/html" id="bsf">
-    <form id="pswForm" class="layui-form model-form" action="" method="PUT">
-
-     
-        <div class="layui-form-item" style="width:550px>
-            <label class="layui-form-label" style="width:150px">远程就地状态</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="就地" class="layui-input" maxlength="12"
-                       />
-            </div>
-        </div>
-    
-
-        <div class="layui-form-item" style="width:550px>
-            <label   class="layui-form-label" style="width:150px">控制状态设定</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
-                       />
-            </div>
-        </div>
-
-       <div class="layui-form-item" style="width:550px>
-            <label   class="layui-form-label" style="width:150px">水阀开关上限（m）</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
-                       />
-            </div>
-       </div>
-
-        <div class="layui-form-item" style="width:550px>
-            <label   class="layui-form-label" style="width:150px">水阀开关下限（m）</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.5" class="layui-input" maxlength="12"
-                       />
-            </div>
-        </div>
-         <div class="layui-form-item" style="width:550px>
-            <label   class="layui-form-label" style="width:150px">启动状态控制</label>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this)"   id="qingd">启动</button>
-            <button class="layui-btn layui-btn-normal" type="button" onclick="xz(this)"   id="tingz">停止</button>
-        </div>
-
-        <div class="layui-form-item model-form-footer" style="margin-left:190px">
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="" id="">提交</button>
-        </div>
-    </form>
-
-</script>
 
 <script type="text/html" id="bsb">
     <form id="pswForm" class="layui-form model-form" action="" method="PUT">
 
-     
+     <input type="hidden" id="bsbbh"/>
         <div class="layui-form-item" style="width:450px">
             <label class="layui-form-label" style="width:150px">远程就地状态</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="就地" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="bsbzt" readonly="readonly" name="bsbzt" value="就地" class="layui-input" maxlength="12"
                        />
             </div>
         </div>
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">控制状态设定</label>
             <div class="layui-input-block" >
-                <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">强制</button>
-            <button class="layui-btn layui-btn-normal"  type="button" onclick="xz(this)"   id="tingz">非强制</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.补水泵'+$('#bsbbh').val()+'强制','1')"   id="bsbqz">强制</button>
+            <button class="layui-btn layui-btn-normal"  type="button" onclick="xz(this);sbkz('写状态.补水泵'+$('#bsbbh').val()+'强制','0')"   id="bsbfqz">非强制</button>
             </div>
         </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">急停操作</label>
             <div class="layui-input-block" >
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">急停</button>
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="tingz">正常</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="bsbjt">急停</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="bsbzc">正常</button>
             </div>
         </div>
 
         <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">频率给定（HZ）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:100px" autocomplete="off" id="bsbplgd"  name="tjfzt"  class="layui-input" maxlength="12"
                        />
+<button class="layui-btn layui-btn-normal" type="button" onclick="sbkz('写数据.补水泵'+$('#bsbbh').val()+'频率设定',$('#bsbplgd').val())" >修改</button>
             </div>
         </div>
 
        <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">频率反馈（HZ）</label>
             <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt" readonly="readonly" name="tjfzt" value="0.0" class="layui-input" maxlength="12"
+                <input style="width:200px" autocomplete="off" id="bsbplfk" readonly="readonly"   class="layui-input" maxlength="12"
                        />
             </div>
        </div>
 
-        <div class="layui-form-item" style="width:450px">
-            <label   class="layui-form-label" style="width:150px">二次供压力设定值（Mpa）</label>
-            <div class="layui-input-block">
-                <input style="width:200px" autocomplete="off" id="tjfzt"  name="tjfzt" value="0.5" class="layui-input" maxlength="12"
-                       />
-            </div>
-        </div>
+        
          <div class="layui-form-item" style="width:450px">
             <label   class="layui-form-label" style="width:150px">启动状态控制</label>
             <div class="layui-input-block" >
-                <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="qingd">启动</button>
-            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this)"   id="tingz">停止</button>
+                <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.补水泵'+$('#bsbbh').val()+'启动','1')"   id="bsbqd">启动</button>
+            <button class="layui-btn layui-btn-normal" style="width:77px" type="button" onclick="xz(this);sbkz('写状态.补水泵'+$('#bsbbh').val()+'停止','1')"   id="bsbtz">停止</button>
             </div>
         </div>
 
@@ -655,8 +832,8 @@ function showBsb(){
            
         </div>
     </form>
-
 </script>
+
 <body  style="">
 <div class="bg">
      <div style="width:50px;height:60px;  position: relative;left: 3%;top: 3%;" >
@@ -674,7 +851,7 @@ function showBsb(){
 	<div  id="bsfgif" style="position: absolute;left: 17%;top: 85%;">
 	<img src="../images/background/Arrow-Right.gif" width="80" height="80" />
 	</div>
-	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 30%" onclick="showXhb()">
+	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 30%" onclick="showXhb('1')">
 	
 	</div>
 	
@@ -759,15 +936,15 @@ function showBsb(){
 	<div style="width:12%;height:4%;  position: absolute;left: 35%;top: 45%" >
 	<span style="color:red;font-size:15px;">板式换热器</span>
 	</div>
-	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 45%";" onclick="showXhb()">
+	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 45%";" onclick="showXhb('2')">
 	
 	</div>
 	
-	<div style="width:3%;height:9%; 	 position: absolute;left: 56%;top: 75%;" onclick="showBsb()">
+	<div style="width:3%;height:9%; 	 position: absolute;left: 56%;top: 75%;" onclick="showBsb('1')">
 	
 	</div>
 	
-	<div style="width:3%;height:9%;   position: absolute;left: 56%;top: 87%;" onclick="showBsb()">
+	<div style="width:3%;height:9%;   position: absolute;left: 56%;top: 87%;" onclick="showBsb('2')">
 	
 	</div>
 	

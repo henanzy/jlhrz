@@ -169,13 +169,11 @@ th {
 </head>
 
 <script type="text/javascript">
-	function cstj() {
-		alert("参数修改成功！")
-	}
+	
 </script>
 <body>
 
-	<div id="" class="clearfix" style="overflow-x: hidden;min-width:1350px;height:800px;">
+	<div id="" class="clearfix" style="overflow-x: hidden;min-width:1350px;height:900px;">
 
 
 		<p class="mws-report" href="#"
@@ -185,7 +183,7 @@ th {
 				报警参数设置  &nbsp;<select style="display:inline" class="csinput">
 					<option value="0" selected="selected" >一委站</option>
 					<option value="1">二委站</option>
-					<option value="2">教育局站</option>
+					<option value="吉利.教育局站.读状态." selected="selected">教育局站</option>
 				</select></span>
 				
 		</p>
@@ -212,19 +210,25 @@ th {
 				<tr>
 					<th style="width: 200px; text-align: center;">一次供水压力（MPa）<span
 						class="span-up"></span> <span class="span-down"></span></th>
-					<th class="table-th-css"><input class="csinput" value="1.00"
+					<th class="table-th-css">
+					<input class="csinput"  id="ycgsylbjsx" 
 						width="120px"><span class="span-up"></span> <span
-						class="span-down"></span></th>
-					<th class="table-th-css"><input class="csinput" value="0.00"
+						class="span-down"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('一次供水压力上限','ycgsylbjsx')" /></span></th>
+					<th class="table-th-css">
+					<input class="csinput" id="ycgsylbjxx" 
 						width="120px"><span class="span-up"></span> <span
-						class="span-down"></span></th>
+						class="span-down"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次供水压力下限','ycgsylbjxx')"/></span></th>
 					<th class="table-th-css">二次除污器出口压力（MPa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input class="csinput" value="1.00"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input class="csinput" 
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input class="csinput" value="0.00"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input class="csinput" 
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -232,19 +236,23 @@ th {
 				<tr>
 					<th class="table-th-css">一次供水温度（℃）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="100.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input  class="csinput" id="ycgswdbjsx"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次供水温度上限','ycgswdbjsx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input  class="csinput" id="ycgswdbjxx"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('一次供水温度下限','ycgswdbjxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">水箱液位（m）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="2.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ywsx" class="csinput" id="ywsx"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('液位上限','ywsx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ywxx" class="csinput" d="ywxx"
+						width="120px"><input type="button"  
+						 class="mws-button black" value="修改" onclick="szcs('液位下限','ywxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -252,16 +260,19 @@ th {
 				<tr>
 					<th class="table-th-css">一次回水压力（MPa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="1.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ychsylbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次供水压力上限','ychsylbjsx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ychsylbjxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次供水压力下限','ychsylbjxx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">电压报警界限值（V）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input class="csinput" value="210.00"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input class="csinput" id="dyjbjxz"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('欠压报警界限值','dyjbjxz')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 
@@ -270,16 +281,19 @@ th {
 				<tr>
 					<th class="table-th-css">一次回水温度（℃）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="80.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ychswdbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次回水温度上限','ychswdbjsx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ychswdbjxx"  class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('一次回水温度下限','ychswdbjxx')"  /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">电压报警解除值（V）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="220.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="dyjbjcz" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('电压报警解除值','dyjbjcz')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 
@@ -288,11 +302,13 @@ th {
 				<tr>
 					<th class="table-th-css">二次供水压力（MPa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="1.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ecgsylbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('二次供水压力上限','ecgsylbjsx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ecgsylbjxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次供水压力下限','ecgsylbjxx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 
@@ -301,11 +317,13 @@ th {
 				<tr>
 					<th class="table-th-css">二次供水温度（℃）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="80.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ecgswdbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次供水温度上限','ecgswdbjsx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="ecgswdbjxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('二次供水温度下限','ecgswdbjxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 
@@ -314,31 +332,34 @@ th {
 				<tr>
 					<th class="table-th-css">二次回水压力（MPa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="1.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echsylbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水压力上限','echsylbjsx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echsylbjxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水压力下限','echsylbjxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 
 				</tr>
 
 				<tr>
-					<th class="table-th-css">二次供水温度（℃）<span class="span-up"></span>
+					<th class="table-th-css">二次回水温度（℃）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="80.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echswdbjsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水温度上限','echswdbjsx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echswdbjxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水温度下限','echswdbjxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css"><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css"><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input type="submit" id="cstj"
-						onclick="cstj()" class="mws-button black" value="提交" /></span></th>
+					
 
 
 				</tr>
@@ -369,20 +390,23 @@ th {
 			</thead>
 			<tbody>
 				<tr>
-					<th class="table-th-css">二次供水温度（℃）<span class="span-up"></span>
+					<th class="table-th-css">二次回水温度（℃）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="40.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input class="csinput" id="echswd"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水温度设定值','echswd')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">开启调节阀时间（时）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="6" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input value="6" class="csinput" id="kqtjfsj"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('开启调节阀时间','kqtjfsj')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">泄压阀开启上限（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.70" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input value="0.70" class="csinput" id="xyfkqsx"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('泄压压力上限','xyfkqsx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -390,18 +414,21 @@ th {
 				<tr>
 					<th class="table-th-css">二次供水压力（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.50" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input value="0.50" class="csinput" id="ecgsyl"
+						width="120px"><input type="button"  onclick="szcs('二次供水压力设定值','ecgsyl')"
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">关闭调节阀时间（时）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="18" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input value="18" class="csinput" id="gbtjfsj"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('关闭调节阀时间','gbtjfsj')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">泄压阀关闭下限（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.45" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input value="0.45" class="csinput" id="xyfgbxx"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('泄压压力下限','xyfgbxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -409,18 +436,21 @@ th {
 				<tr>
 					<th class="table-th-css">二次回水压力（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.40" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input  class="csinput" id="echsyl"
+						width="120px"><input type="button"  
+						 class="mws-button black" value="修改" onclick="szcs('二次回水压力设定值','echsyl')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css">补泵工频启动频率（HZ）<span class="span-up"></span>
+					<th class="table-th-css">补泵工频启动频率（HZ）<span class="span-up"></span> 
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="48" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input  class="csinput" id="bbgpqdpl"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('启动工频补水泵频率','bbgpqdpl')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">允许启动补水泵限值（m）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.70" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -428,18 +458,21 @@ th {
 				<tr>
 					<th class="table-th-css">二次回水补水上限（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.45" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echsbssx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水补水压力上限','echsbssx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">补泵工频停止频率（HZ）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="35" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="bbgptzpl" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('停止工频补水泵频率','bbgptzpl')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">水箱最低液位限值（m）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.50" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="sxzdywxz" class="csinput"
+						width="120px"><input type="button"  onclick="szcs('液位下下限','sxzdywxz')"
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -447,18 +480,21 @@ th {
 				<tr>
 					<th class="table-th-css">二次回水补水下限（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.35" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echsbsxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('二次回水补水压力下限','echsbsxx')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">启动工频补水泵时间（s）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="300" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="qdgpbsbsj" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('启动工频补水泵时间','qdgpbsbsj')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">二次回水停机压力（Mpa）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.00" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="echstjyl" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改"  onclick="szcs('二次回水停机压力','echstjyl')"/><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -466,13 +502,15 @@ th {
 				<tr>
 					<th class="table-th-css">水阀开关上限（m）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="1.50" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="sfkqsx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">停止工频补水泵时间（s）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="30" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="tzgpbsbsj" class="csinput"
+						width="120px"><input type="button" onclick="szcs('停止工频补水泵时间','tzgpbsbsj')"
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 
 				</tr>
@@ -480,18 +518,19 @@ th {
 				<tr>
 					<th class="table-th-css">水阀开关下限（m）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="0.70" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="sfgbxx" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">调节阀最低开度（%）<span class="span-up"></span>
 						<span class="span-down"></span></th>
-					<th class="table-th-css"><input value="20" class="csinput"
-						width="120px"><span class="span-up"></span> <span
+					<th class="table-th-css"><input id="tjfzdkd" class="csinput"
+						width="120px"><input type="button" 
+						 class="mws-button black" value="修改" onclick="szcs('调节阀最低开度','tjfzdkd')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css"><span class="span-up"></span> <span
 						class="span-down"></span></th>
-					<th class="table-th-css"><input type="submit" id="cstj"
-						onclick="cstj()" class="mws-button black" value="提交" /></span></th>
+					
 
 				</tr>
 			</tbody>
@@ -499,6 +538,93 @@ th {
 	</div>
 
 
+<script type="text/javascript">
 
+	
+$.ajax({
+	url:"<%=basePath%>OpcCon/csxs.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.教育局站.写数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		
+		$("#ycgsylbjsx").val(map.一次供水压力上限);
+		$("#ycgsylbjxx").val(map.一次供水压力下限);
+		$("#ycgswdbjsx").val(map.一次供水温度上限);
+		$("#ycgswdbjxx").val(map.一次供水温度下限);
+		
+		$("#ychsylbjxx").val(map.一次回水压力下限);
+		$("#ychsylbjsx").val(map.一次供水压力上限);
+		$("#ychswdbjsx").val(map.一次回水温度上限);
+		$("#ychswdbjxx").val(map.一次回水温度下限);
+		
+		
+		$("#ecgsylbjsx").val(map.二次供水压力上限);
+		$("#ecgsylbjxx").val(map.二次供水压力下限);
+		$("#ecgswdbjsx").val(map.二次供水温度上限);
+		$("#ecgswdbjxx").val(map.二次供水温度下限);
+		
+		$("#echsylbjxx").val(map.二次回水压力下限);
+		$("#echsylbjsx").val(map.二次回水压力上限);
+		$("#echswdbjsx").val(map.二次回水温度上限);
+		$("#echswdbjxx").val(map.二次回水温度下限);
+		$("#ywsx").val(map.液位上限);
+		$("#ywxx").val(map.液位下限);
+		$("#dyjbjxz").val(map.欠压报警界限值);
+		$("#dyjbjcz").val(map.电压报警解除值);
+		$("#echswd").val(map.二次回水温度设定值);
+		$("#ecgsyl").val(map.二次供水压力设定值);
+		$("#echsyl").val(map.二次回水压力设定值);
+		$("#echsbssx").val(map.二次回水补水压力上限);
+		$("#echsbsxx").val(map.二次回水补水压力下限);
+		$("#kqtjfsj").val(map.开启调节阀时间);
+		$("#gbtjfsj").val(map.关闭调节阀时间);
+		
+		$("#bbgpqdpl").val(map.启动工频补水泵频率);
+		$("#bbgptzpl").val(map.停止工频补水泵频率);
+		$("#qdgpbsbsj").val(map.启动工频补水泵时间);
+		$("#tzgpbsbsj").val(map.停止工频补水泵时间);
+		$("#xyfkqsx").val(map.泄压压力上限);
+		$("#xyfgbxx").val(map.泄压压力下限);
+		$("#sxzdywxz").val(map.液位下下限);
+		$("#echstjyl").val(map.二次回水停机压力);
+		$("#tjfzdkd").val(map.调节阀最低开度);
+		
+		
+	}
+	
+});	
+
+function szcs(name,id){
+	 
+		 
+		  var val = $("#"+id).val();
+		  console.log(val)
+		
+			$.ajax({
+				url : "<%=basePath%>OpcCon/cssz.action",
+				async : false,
+				dataType : "json",
+				data : {
+					"name" : name,
+					"id" : id,
+					"val":val,
+					"hrz":"吉利.教育局站.写数据."
+				},
+				success : function(data) {
+					
+					
+					var val = eval(data).value;
+					var id = eval(data).id;
+					$("#"+id).val(val);	
+				
+				}
+		}) 
+
+}
+</script>
 </body>
 </html>

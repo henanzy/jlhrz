@@ -98,21 +98,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 <script type="text/javascript">
 var list =[];
-$.ajax({
-	url:"<%=basePath%>user/selHistory.action",
-	async:false,
-	dataType:"json",
-	data:{	
-		"hrz":"吉利.教育局站.读数据.",
-	},
-	success:function(data){
-		list=data.list;
-		
-		
-		
-	}
 	
-});	
 
 </script>
 <script type="text/javascript" src="../js/lssj.js"></script> 

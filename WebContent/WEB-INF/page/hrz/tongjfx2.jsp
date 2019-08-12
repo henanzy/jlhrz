@@ -61,7 +61,8 @@
 
 <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 
-<script src="../js/echarts-3.5.3/highcharts.js"></script>
+
+<script type="text/javascript" src="../js/echarts-3.5.3/highcharts.js"></script>
 
 
 <style>
@@ -203,10 +204,10 @@ select{
 					</div>
 					
 				<div  style="width:15%; height:450px;float:left; " >
-					<select id="wz" onchange="changeValue()">
-					<option value="0" selected="selected" >一委站</option>
-					<option value="1">二委站</option>
-					<option value="2">教育局站</option>
+					<select id="wz" >
+					<option value="0" >一委站</option>
+					<option value="1" >二委站</option>
+					<option value="2" selected="selected">教育局站</option>
 					</select>
 				</div>
 
@@ -214,13 +215,8 @@ select{
 				
 				
 				
-				<input type="checkbox" id="yGyl" checked onclick="checkboxOnclick(this,1)">一次供压力
-				<input type="checkbox" id="yGwd" checked onclick="checkboxOnclick(this,2)">一次回压力
-				<input type="checkbox" id="eGyl" checked onclick="checkboxOnclick(this,3)">二次供压力
-			    <input type="checkbox" id="eGwd" checked onclick="checkboxOnclick(this,4)">二次回压力
- 				<input type="checkbox" id="eGll" checked onclick="checkboxOnclick(this,5)">二次流量
- 				 <input type="checkbox" id="eGrl" checked onclick="checkboxOnclick(this,6)">一次热量
-  				 <input type="checkbox" id="eGsb" checked onclick="checkboxOnclick(this,7)">补水水表
+				
+
 				</div>
 			</div>
 		
@@ -255,679 +251,67 @@ select{
 		</div>
 	</div>
 <script type="text/javascript">
-
-var Nchart = Highcharts.chart('Ncontainer', {
-	title: {
-		 text: '能耗数据' 
-	},
-	subtitle: {
-		text: ''
-	},
-    xAxis: {
-    	 labels: {
-             formatter: function() {
-                 return dateFormat(this.value); // 
-             }
-         }
-
-    },
-	yAxis: {
-		title: {
-			/* text: '就业人数' */
-		},
-    max:1, // 定义Y轴 最大值  
-    min:0, // 定义最小值  
-    minPadding: 0.1,   
-    maxPadding: 0.1,  
-    tickInterval:0.1, // 刻度值  
-	plotLines : [ { //plotLines：标示线
-	value : 0.38, //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
-	width : 2, //标示线的宽度，2px
-	dashStyle : 'solid', //默认值是solid实线，这里定义为虚线
-	color : 'red',//线的颜色，定义为红色
-} ]
-	},
-	legend: {
-		layout: 'vertical',
-		align: 'right',
-		verticalAlign: 'middle'
-	},
-	plotOptions: {
-		series: {
-			label: {
-				connectorAllowed: false
-			},
-			/* pointStart: 2012 */
-		}
-	},
-	series: [],
-	credits: {enabled: false},
-	responsive: {
-		rules: [{
-			condition: {
-				maxWidth: 500
-			},
-			chartOptions: {
-				legend: {
-					layout: 'horizontal',
-					align: 'center',
-					verticalAlign: 'bottom'
-				}
-			}
-		}]
+Highcharts.setOptions({
+	global: {
+		useUTC: false
 	}
 });
-
-
-/* [[2018-01-01,123],[2012-01-17,156],[2012-02-01,177],[2012-02-28,176][2012-03-05,156]] */
-Nchart.addSeries({                        
-	id:1,
-	name: "一委站",
-	data: [[Date.UTC(2018,11,15),0.27],[Date.UTC(2018,11,20),0.27], [Date.UTC(2018,11,27),0.20],  [Date.UTC(2018,12,04),0.21], [Date.UTC(2018,12,11),0.22], [Date.UTC(2018,12,18),0.23],[Date.UTC(2018,12,25),0.25], [Date.UTC(2019,01,01),0.33],[Date.UTC(2019,01,08),0.38], [Date.UTC(2019,01,15),0.25]]
-}, false);
-Nchart.addSeries({                        
-	id:1,
-	name: "二委站",
-	data: [[Date.UTC(2018,11,15),0.25],[Date.UTC(2018,11,20),0.22], [Date.UTC(2018,11,27),0.29],  [Date.UTC(2018,12,04),0.23], [Date.UTC(2018,12,11),0.26], [Date.UTC(2018,12,18),0.22],[Date.UTC(2018,12,25),0.26], [Date.UTC(2019,01,01),0.35],[Date.UTC(2019,01,08),0.30], [Date.UTC(2019,01,15),0.22]]
-}, false);
-
-Nchart.addSeries({                        
-	id:1,
-	name: "教育局站",
-	data: [[Date.UTC(2018,11,15),0.26],[Date.UTC(2018,11,20),0.21], [Date.UTC(2018,11,27),0.23],  [Date.UTC(2018,12,04),0.22], [Date.UTC(2018,12,11),0.29], [Date.UTC(2018,12,18),0.21],[Date.UTC(2018,12,25),0.24], [Date.UTC(2019,01,01),0.32],[Date.UTC(2019,01,08),0.33], [Date.UTC(2019,01,15),0.27]]
-}, false);
-Nchart.redraw();
-
-function dateFormat(time){
-    var now = new Date();
-    now.setTime(time);
-    return now.getFullYear()+"-"+(now.getMonth()+1)+"-"+(now.getDate()); 
+function activeLastPointToolip(chart) {
+	var points = chart.series[0].points;
+	chart.tooltip.refresh(points[points.length -1]);
 }
-
-
 var chart = Highcharts.chart('container', {
+	chart: {
+		type: 'spline',
+		marginRight: 10,
+		events: {
+			load: function () {
+				var series = this.series[0],
+				    series1 = this.series[1],
+					chart = this;
+				activeLastPointToolip(chart);
+				setInterval(function () {
+					var x = (new Date()).getTime(), // 当前时间
+						y = Math.random();          // 随机值
+					series.addPoint([x, y], true, true);
+					series1.addPoint([x, Math.random()+2], true, true);
+					
+					activeLastPointToolip(chart);
+				}, 1000);
+			}
+		}
+	},
 	title: {
-		 text: '实时数据' 
+		text: '动态模拟实时数据'
 	},
-	subtitle: {
-		text: ''
+	xAxis: {
+		type: 'datetime',
+		tickPixelInterval: 150
 	},
-	
 	yAxis: {
 		title: {
-			/* text: '就业人数' */
+			text: null
+		}
+	},
+	tooltip: {
+		formatter: function () {
+			return '<b>' + this.series.name + '</b><br/>' +
+				Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+				Highcharts.numberFormat(this.y, 2);
 		}
 	},
 	legend: {
-		layout: 'vertical',
-		align: 'right',
-		verticalAlign: 'middle'
+		enabled: false
 	},
-	plotOptions: {
-		series: {
-			label: {
-				connectorAllowed: false
-			},
-			pointStart: 2012
-		}
-	},
-	series: [],
-	credits: {enabled: false},
-	responsive: {
-		rules: [{
-			condition: {
-				maxWidth: 500
-			},
-			chartOptions: {
-				legend: {
-					layout: 'horizontal',
-					align: 'center',
-					verticalAlign: 'bottom'
-				}
-			}
-		}]
-	}
+	series: [{
+		name: '随机数据',
+		data: [{x: 1565343293277, y: 0.521429478925473},{x: 1565343293277, y: 0.521429478925473}]
+	},{
+		name: '随机数据',
+		data: [{x: 1565343293277, y: 0.521429478925473},{x: 1565343293277, y: 0.521429478925473}]
+	}]
 });
-
-
-
-function changeValue(){
-	var index=document.getElementById("wz").selectedIndex;//获取当前选择项的索引.
-	var series=chart.series; 
-	
-	while(series.length > 0) {
-        series[0].remove(false);
-    }
-	   chart.redraw();
-	if(index==0){ //一委站
-		 chart.addSeries({                        
-				id:1,
-				name: "一次供压力",
-				data: [0.024036, 0.024615, 0.023458, 0.024543, 0.024398, 0.024398, 0.020255,0.020038,0.020689,0.018446,0.020978,0.020978]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "一次回压力",
-				data:  [0.019097, 0.019314, 0.020761, 0.020689, 0.019821, 0.019531, 0.020255,0.020038,0.019097,0.019531,0.018374,0.020038]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次供压力",
-				data: [0.056785, 0.056207, 0.05599, 0.056858, 0.056134,0.056134,0.055628,0.056134,0.0557,0.056279,0.056496,0.055917]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次回压力",
-				data: [0.054181, 0.052807, 0.054109, 0.053241, 0.055628, 0.053241,0.054109,0.054181,0.055845,0.054543,0.05476,0.056134]
-			}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "一次热量",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "二次流量",
-			data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "补水表",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.redraw();
-	}else if(index==1){//二委站
-		 chart.addSeries({                        
-				id:1,
-				name: "一次供压力",
-				data: [0.024036, 0.024615, 0.023458, 0.024543, 0.024398, 0.024398, 0.020255,0.020038,0.020689,0.018446,0.020978,0.020978]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "一次回压力",
-				data:  [0.019097, 0.019314, 0.020761, 0.020689, 0.019821, 0.019531, 0.020255,0.020038,0.019097,0.019531,0.018374,0.020038]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次供压力",
-				data: [0.056785, 0.056207, 0.05599, 0.056858, 0.056134,0.056134,0.055628,0.056134,0.0557,0.056279,0.056496,0.055917]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次回压力",
-				data: [0.054181, 0.052807, 0.054109, 0.053241, 0.055628, 0.053241,0.054109,0.054181,0.055845,0.054543,0.05476,0.056134]
-			}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "一次热量",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "二次流量",
-			data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "补水表",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.redraw();
-	}else if(index==2){//教育局站
-		 chart.addSeries({                        
-				id:1,
-				name: "一次供压力",
-				data: [0.024036, 0.024615, 0.023458, 0.024543, 0.024398, 0.024398, 0.020255,0.020038,0.020689,0.018446,0.020978,0.020978]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "一次回压力",
-				data:  [0.019097, 0.019314, 0.020761, 0.020689, 0.019821, 0.019531, 0.020255,0.020038,0.019097,0.019531,0.018374,0.020038]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次供压力",
-				data: [0.056785, 0.056207, 0.05599, 0.056858, 0.056134,0.056134,0.055628,0.056134,0.0557,0.056279,0.056496,0.055917]
-			}, false);
-		chart.addSeries({                        
-				id:1,
-				name: "二次回压力",
-				data: [0.054181, 0.052807, 0.054109, 0.053241, 0.055628, 0.053241,0.054109,0.054181,0.055845,0.054543,0.05476,0.056134]
-			}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "一次热量",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "二次流量",
-			data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.addSeries({                        
-			id:1,
-			name: "补水表",
-			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		}, false);
-		chart.redraw();
-	}
-}
-
-/* 实时温度 */
- chart.addSeries({                        
-			id:1,
-			name: "一次供压力",
-			data: [0.024036, 0.024615, 0.023458, 0.024543, 0.024398, 0.024398, 0.020255,0.020038,0.020689,0.018446,0.020978,0.020978]
-		}, false);
-	chart.addSeries({                        
-			id:1,
-			name: "一次回压力",
-			data:  [0.019097, 0.019314, 0.020761, 0.020689, 0.019821, 0.019531, 0.020255,0.020038,0.019097,0.019531,0.018374,0.020038]
-		}, false);
-	chart.addSeries({                        
-			id:1,
-			name: "二次供压力",
-			data: [0.056785, 0.056207, 0.05599, 0.056858, 0.056134,0.056134,0.055628,0.056134,0.0557,0.056279,0.056496,0.055917]
-		}, false);
-	chart.addSeries({                        
-			id:1,
-			name: "二次回压力",
-			data: [0.054181, 0.052807, 0.054109, 0.053241, 0.055628, 0.053241,0.054109,0.054181,0.055845,0.054543,0.05476,0.056134]
-		}, false);
-	chart.addSeries({                        
-		id:1,
-		name: "一次热量",
-		data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	}, false);
-	chart.addSeries({                        
-		id:1,
-		name: "二次流量",
-		data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	}, false);
-	chart.addSeries({                        
-		id:1,
-		name: "补水表",
-		data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	}, false);
-	chart.redraw();
-
-
-
-var Lchart = Highcharts.chart('Lcontainer', {
-	title: {
-		 text: '温度数据' 
-	},
-	subtitle: {
-		text: ''
-	},
-	
-	yAxis: {
-		title: {
-			/* text: '就业人数' */
-		}
-	},
-	xAxis:{ 
-	    labels:{ 
-	        step:2
-	    } 
-	},
-	legend: {
-		layout: 'vertical',
-		align: 'right',
-		verticalAlign: 'middle'
-	},
-	plotOptions: {
-		series: {
-			label: {
-				connectorAllowed: false
-			},
-			pointStart: 0
-		}
-	},
-	series: [],
-	credits: {enabled: false},
-	responsive: {
-		rules: [{
-			condition: {
-				maxWidth: 500
-			},
-			chartOptions: {
-				legend: {
-					layout: 'horizontal',
-					align: 'center',
-					verticalAlign: 'bottom'
-				}
-			}
-		}]
-	}
-});
-
-
-Lchart.addSeries({                        
-	id:1,
-	name: "一次回温度",
-	data: [10.3, 10.1 ,10.8, 10.7, 10.6, 10.7, 10.5, 10.4,10.3,10.2,10.1,10.2]
-}, false);
-Lchart.addSeries({                        
-	id:1,
-	name: "二次回温度",
-	data: [13.1, 13.2, 13.3, 13.4,13.5, 13.6, 13.7,13.8,13.9,14,14.1,14.2]
-}, false);
-Lchart.addSeries({                        
-	id:1,
-	name: "室外温度",
-	data: [3, 1, 2, 3, 2, 1, 1,2,3,1,2,4]
-}, false);
-Lchart.redraw();
-
-
-
-
-
-function changeValueWd(){
-	var index=document.getElementById("wd").selectedIndex;//获取当前选择项的索引.
-	var series=Lchart.series; 
-	
-	while(series.length > 0) {
-        series[0].remove(false);
-    }
-	   Lchart.redraw();
-	if(index==0){ //一委站
-		
-		Lchart.addSeries({                        
-			id:1,
-			name: "一次回温度",
-			data:  [10.3, 10.1 ,10.8, 10.7, 10.6, 10.7, 10.5, 10.4,10.3,10.2,10.1,10.2]
-		}, false);
-	Lchart.addSeries({                        
-			id:1,
-			name: "二次回温度",
-			data: [13.1, 13.2, 13.3, 13.4,13.5, 13.6, 13.7,13.8,13.9,14,14.1,14.2]
-		}, false);
-	Lchart.addSeries({                        
-			id:1,
-			name: "室外温度",
-			data: [3, 1, 2, 3, 2, 1, 1,2,3,1,2,4]
-		}, false);
-	Lchart.redraw();
-	
-	}else if(index==1){ //二委站
-		Lchart.addSeries({                        
-			id:1,
-			name: "一次回温度",
-			data:  [10.3, 10.1 ,10.8, 10.7, 10.6, 10.7, 10.5, 10.4,10.3,10.2,10.1,10.2]
-		}, false);
-	Lchart.addSeries({                        
-			id:1,
-			name: "二次回温度",
-			data: [13.1, 13.2, 13.3, 13.4,13.5, 13.6, 13.7,13.8,13.9,14,14.1,14.2]
-		}, false);
-	Lchart.addSeries({                        
-			id:1,
-			name: "室外温度",
-			data: [3, 1, 2, 3, 2, 1, 1,2,3,1,2,4]
-		}, false);
-	Lchart.redraw();
-			
-			}else if(index==2){ //二委站
-				
-				Lchart.addSeries({                        
-					id:1,
-					name: "一次回温度",
-					data:  [10.3, 10.1 ,10.8, 10.7, 10.6, 10.7, 10.5, 10.4,10.3,10.2,10.1,10.2]
-				}, false);
-			Lchart.addSeries({                        
-					id:1,
-					name: "二次回温度",
-					data: [13.1, 13.2, 13.3, 13.4,13.5, 13.6, 13.7,13.8,13.9,14,14.1,14.2]
-				}, false);
-			Lchart.addSeries({                        
-					id:1,
-					name: "室外温度",
-					data: [3, 1, 2, 3, 2, 1, 1,2,3,1,2,4]
-				}, false);
-			Lchart.redraw();
-			
-			}
-			
-			
-		}
-
 </script>
-<script type="text/javascript">
 
-
-function NcheckboxOnclick(checkbox,a){
-
-	if(a==1){ 
-	 if ( checkbox.checked == true){
-		 Nchart.addSeries({                        
- 			id:1,
- 			name: "一委站",
- 			data:  [[Date.UTC(2018,11,15),0.27],[Date.UTC(2018,11,20),0.27], [Date.UTC(2018,11,27),0.20],  [Date.UTC(2018,12,04),0.21], [Date.UTC(2018,12,11),0.22], [Date.UTC(2018,12,18),0.23],[Date.UTC(2018,12,25),0.25], [Date.UTC(2019,01,01),0.33],[Date.UTC(2019,01,08),0.38], [Date.UTC(2019,01,15),0.25]]
- 		}, false);
-
-         Nchart.redraw();
-	 }else{
-  
-		    for( index in chart.series ){
-	            if(Nchart.series[index].name == "一委站"){
-	                Nchart.series[index].remove()
-	            }
-	        }
-
-	 }
-	}else if(a==2){
-		if ( checkbox.checked == true){
-			 Nchart.addSeries({                        
-	 			id:1,
-	 			name: "二委站",
-	 			data: [[Date.UTC(2018,11,15),0.25],[Date.UTC(2018,11,20),0.22], [Date.UTC(2018,11,27),0.29],  [Date.UTC(2018,12,04),0.23], [Date.UTC(2018,12,11),0.26], [Date.UTC(2018,12,18),0.22],[Date.UTC(2018,12,25),0.26], [Date.UTC(2019,01,01),0.35],[Date.UTC(2019,01,08),0.30], [Date.UTC(2019,01,15),0.22]]
-	 		}, false);
-
-	         Nchart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(Nchart.series[index].name == "二委站"){
-		                Nchart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==3){
-		if ( checkbox.checked == true){
-			 Nchart.addSeries({                        
-	 			id:1,
-	 			name: "教育局站",
-	 			data: [[Date.UTC(2018,11,15),0.26],[Date.UTC(2018,11,20),0.21], [Date.UTC(2018,11,27),0.23],  [Date.UTC(2018,12,04),0.22], [Date.UTC(2018,12,11),0.29], [Date.UTC(2018,12,18),0.21],[Date.UTC(2018,12,25),0.24], [Date.UTC(2019,01,01),0.32],[Date.UTC(2019,01,08),0.33], [Date.UTC(2019,01,15),0.27]]
-	 		}, false);
-
-	         Nchart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(Nchart.series[index].name == "教育局站"){
-		                Nchart.series[index].remove()
-		            }
-		        }
-		 }
-	}
-}
-
-
-
-function checkboxOnclick(checkbox,a){
-
-	if(a==1){ 
-	 if ( checkbox.checked == true){
-		 chart.addSeries({                        
- 			id:1,
- 			name: "一次供压力",
- 			data:[0.024036, 0.024615, 0.023458, 0.024543, 0.024398, 0.024398, 0.020255,0.020038,0.020689,0.018446,0.020978,0.020978]
- 		}, false);
-
-         chart.redraw();
-	 }else{
-  
-		    for( index in chart.series ){
-	            if(chart.series[index].name == "一次供压力"){
-	                chart.series[index].remove()
-	            }
-	        }
-
-	 }
-	}else if(a==2){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "一次回压力",
-	 			data:  [0.019097, 0.019314, 0.020761, 0.020689, 0.019821, 0.019531, 0.020255,0.020038,0.019097,0.019531,0.018374,0.020038]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "一次回压力"){
-		                chart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==3){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "二次供压力",
-	 			data: [0.056785, 0.056207, 0.05599, 0.056858, 0.056134,0.056134,0.055628,0.056134,0.0557,0.056279,0.056496,0.055917]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "二次供压力"){
-		                chart.series[index].remove()
-		            }
-		        }
-			 
-		 }
-	}else if(a==4){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "二次回压力",
-	 			data: [0.054181, 0.052807, 0.054109, 0.053241, 0.055628, 0.053241,0.054109,0.054181,0.055845,0.054543,0.05476,0.056134]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "二次回压力"){
-		                chart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==5){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "一次热量",
-	 			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "一次热量"){
-		                chart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==6){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "二次流量",
-	 			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "二次流量"){
-		                chart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==7){
-		if ( checkbox.checked == true){
-			 chart.addSeries({                        
-	 			id:1,
-	 			name: "补水表",
-	 			data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	 		}, false);
-
-	         chart.redraw();
-		 }else{
-			 for( index in chart.series ){
-		            if(chart.series[index].name == "补水表"){
-		                chart.series[index].remove()
-		            }
-		        }
-		 }
-	}
-}
-
-
-
-function LcheckboxOnclick(checkbox,a){
-
-	if(a==1){
-		if ( checkbox.checked == true){
-			Lchart.addSeries({                        
-	 			id:1,
-	 			name: "一次回温度",
-	 			data:[10.3, 10.1 ,10.8, 10.7, 10.6, 10.7, 10.5, 10.4,10.3,10.2,10.1,10.2]
-	 		}, false);
-
-			Lchart.redraw();
-		 }else{
-			 for( index in Lchart.series ){
-		            if(Lchart.series[index].name == "一次回温度"){
-		            	Lchart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==2){
-		if ( checkbox.checked == true){
-			Lchart.addSeries({                        
-	 			id:1,
-	 			name: "二次回温度",
-	 			data: [13.1, 13.2, 13.3, 13.4,13.5, 13.6, 13.7,13.8,13.9,14,14.1,14.2]
-	 		}, false);
-
-			 Lchart.redraw();
-		 }else{
-			 for( index in Lchart.series ){
-		            if(Lchart.series[index].name == "二次回温度"){
-		            	Lchart.series[index].remove()
-		            }
-		        }
-		 }
-	}else if(a==3){
-		if ( checkbox.checked == true){
-			Lchart.addSeries({                        
-	 			id:1,
-	 			name: "室外温度",
-	 			data:[3, 1, 2, 3, 2, 1, 1,2,3,1,2,4]
-	 		}, false);
-
-			 Lchart.redraw();
-		 }else{
-			 for( index in Lchart.series ){
-		            if(Lchart.series[index].name == "室外温度"){
-		            	Lchart.series[index].remove()
-		            }
-		        }
-		 }
-	}
-}
-</script>
 </body>
 </html>
