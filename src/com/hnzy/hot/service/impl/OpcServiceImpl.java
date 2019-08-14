@@ -49,6 +49,84 @@ public class OpcServiceImpl implements OpcService {
 		// TODO Auto-generated method stub
 		return opcDao.selzybb(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> selQx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.selQx(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getHrzXx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.getHrzXx(map);
+	}
+
+	@Override
+	public void Insert(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.Insert(map);
+	}
+
+	@Override
+	public void Update(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.Update(map);
+	}
+
+	@Override
+	public void Delete(String id) {
+		// TODO Auto-generated method stub
+		opcDao.Delete(id);
+	}
+
+	@Override
+	public void InsertBjxx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.InsertBjxx(map);
+	}
+
+	@Override
+	public void InsertBjdl(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.InsertBjdl(map);
+	}
+
+	@Override
+	public void DeleteBjdl(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.DeleteBjdl(map);
+	}
+
+	@Override
+	public void UpdateBjxx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		opcDao.UpdateBjxx(map);
+	}
+
+	@Override
+	public int pdbj(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.pdbj(map);
+	}
+
+	@Override
+	public List<String> getbjdl(String hrz) {
+		// TODO Auto-generated method stub
+		return opcDao.getbjdl(hrz);
+	}
+
+	@Override
+	public List<Map<String, Object>> getbjxx() {
+		// TODO Auto-generated method stub
+		return opcDao.getbjxx();
+	}
+
+	@Override
+	public List<Map<String, Object>> getlsbjxx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.getlsbjxx(map);
+	}
 	
 	
 	

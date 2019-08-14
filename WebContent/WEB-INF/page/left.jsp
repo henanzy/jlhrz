@@ -178,6 +178,10 @@ function gwjg(){//
 function ddkz(){// 
     window.open("<%=basePath%>user/ddkz.action", "Conframe");
 } 
+
+function hrzxx(){// 
+    window.open("<%=basePath%>OpcCon/hrzxx.action", "Conframe");
+} 
 </script>
 	<style>
         ul.ac_kf li a{
@@ -254,7 +258,7 @@ function ddkz(){//
 
                                 <li><a onclick="zdxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能源设备信息库</a></li>
 
-                    	        <li><a  onclick="gwjg()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;管网结构树形图</a></li>
+                    	        <li><a  onclick="hrzxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;换热站信息</a></li>
                         	   
                              	<li><a onclick="bpxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;备品备件信息库</a></li>
                              

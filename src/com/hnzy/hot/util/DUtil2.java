@@ -1,6 +1,6 @@
 package com.hnzy.hot.util;
 
-public class DUtil {
+public class DUtil2 {
 	public static final String jyjz="吉利.教育局站.读数据.";
 	
 	private static String Axdlz="A相电流值";
@@ -96,7 +96,7 @@ public class DUtil {
 	private static String xhb2ycjd="循环泵2远程就地";
 	private static String ylcxgz="压力超限故障";
 	private static String ylcgqgz="压力传感器故障";
-	private static String ywbj="烟雾报警";
+	private static String ywbj="液位报警";
 	private static String ywbjsx="液位报警上限";
 	private static String ywbjxx="液位报警下限";
 	private static String ycgswdbjsx="一次供水温度报警上限";
@@ -138,14 +138,7 @@ public class DUtil {
 	}
 		
 	public static String[] bjxx(String zm){
-		String[] str=new String[]{zm+btgz,zm+btjcgq,zm+bsb1gz,zm+bsb1wdbjsx,zm+bsb1wdbjxx,zm+bsb2gz,zm+bsb2wdbjsx,
-				zm+bsb2wdbjxx,zm+dbAxbj,zm+dbBxbj,zm+dbCxbj,zm+ecgscwbj,zm+ecgswdbjsx,zm+ecgswdbjxx,zm+ecgsylbjsx,
-				zm+ecgsylbjxx,zm+echswdbjsx,zm+echswdbjxx,zm+echsylbjsx,zm+echsylbjxx,zm+ecgssycgqgz,zm+echssycgqgz,zm+gzzs,
-				zm+lnb1gz,zm+lnb2gz,zm+lnsylbjsx,zm+lnsylbjxx,zm+lnycgqgz,zm+snwdsxbj,zm+snwdxxbj,zm+sxywcgqgz,
-				zm+sxywgd,zm+tjfnjsx,zm+tjfnjxx,zm+wdcxgz,zm+xhb1gz,zm+xhb1wdbjsx,zm+xhb1wdbjxx,zm+xhb2gz,
-				zm+xhb2wdbjsx,zm+xhb2wdbjxx,zm+ylcxgz,zm+ylcgqgz,zm+ywbj,zm+ywbjsx,zm+ywbjxx,zm+ycgswdbjsx,
-				zm+ychssycgqgz,zm+zlsfycjd,zm+zlsylbjsx,zm+zlsylcgqgz,zm+zlsylbjxx,zm+zlsylbjxx,
-				zm+ycgswdbjxx,zm+ycgsylbjsx,zm+ycgsylbjxx,zm+ychswdbjsx,zm+ychswdbjxx,zm+ychsylbjsx,zm+ychsylbjxx,zm+ycgssycgqgz};
+		String[] str=new String[]{zm+ecgswd,zm+ecgsyl,zm+echsyl,zm+echswd,zm+ycgswd,zm+ycgsyl,zm+ychsyl,zm+ychswd};
 		return str;
 	}
 	

@@ -1,14 +1,17 @@
 $(document).ready(function() {
 	
-	var jkwordList = [
-		["一委站","2019-05-04 18:23","温度过高","温度","81","80","警告"],
-		["二委站","2019-05-012 18:23","一次供水压力过高","压力","1.0","1.1","警告"],
-		["一委站","2019-05-04 18:23","温度过高","温度","81","80","警告"],
-		["二委站","2019-05-012 18:23","一次供水压力过高","压力","1.0","1.1","警告"],
-		["一委站","2019-05-04 18:23","温度过高","温度","81","80","警告"],
-		["二委站","2019-05-012 18:23","一次供水压力过高","压力","1.0","1.1","警告"],
-	];
-	
+	var jkwordList = [];
+	function jsArrChange(json){
+		for (var i = 0 ; i < json.length ; i ++) {
+			var arr1 = [];
+			arr1[0] = json[i].hrz;
+			arr1[1] = json[i].bjsj;
+			arr1[2] = json[i].bjlx;
+			arr1[3] = json[i].jcsj;
+			jkwordList.push(arr1);
+		};
+	}
+	jsArrChange(list);
 	
 	
 	var jkwordTbody = document.getElementById("jkword_body");

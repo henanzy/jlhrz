@@ -186,142 +186,79 @@ var ints=self.setInterval("clock()",1000);
 
 function clock()
 {
-	
-	 var local = layui.data('layui');
-	  layer.open({
-	    type: 1
-	    ,title: '实时报警'
-	    ,shade: false
-	 /*    ,offset: ['150px', '200px'] */
-	 	,offset:"rb"
-	    ,id: 'LAY_Notice'//防止重复弹出
-	    ,skin:"alert-skin"
-	    ,area: ['510px', '180px']
-	    ,moveType: 0
-	    ,resize: false
-	    ,content:$("#increase_word").html()
-	  });
-}
+	var list;
 
 
-//新增用户
-function xzyh(flag){
-	if(flag=="1"){
-		layer.msg("用户名已存在");
-	}
-	 layer.open({
-	        type: 1,
-	        title: "新增用户",
-	        area: '400px',
-	        offset: '120px',
-	        content: $("#YhModel").html()
-	    });
-	 $("#addYhForm")[0].reset();
-	    $("#adYhCancel").click(function () {
-	        layer.closeAll();
-	    });
-	    
-	    $("#addYhSubmit").click(function () {
-	    	var username = $('#username').val();
-			var password = $('#password').val();
-			if(username==""||password==""){
-				alert("用户名或密码不为空!");
-				return false;
+
+	 $.ajax({
+			url : "<%=basePath%>OpcCon/getbjxx.action", 
+			async : false,
+			dataType : "json",
+			data : {
+			
+			},
+			success : function(data) {
+				
+				list=data.list;	   
 			}
-				$.ajax({
-					url : "<%=basePath%>user/addYh.action", 
-					async : false,
-					dataType : "json",
-					data : {
-						"username" : username,
-						"password" : password,
-					},
-					success : function(data) {
+
+		}); 
+	 if(list!=null){
+		 var qgxxList=[];
+			function jsArrChange(json){
+				for (var i = 0 ; i < json.length ; i ++) {
+					var arr1 = [];
+					
+					arr1[0] = json[i].hrz;
+					arr1[1] = json[i].bjsj;
+					arr1[2] = json[i].bjlx;
+					qgxxList.push(arr1);
+				};
+			}
+			jsArrChange(list);
+			$("#bjbody").empty();
+			var html = "";
+			for(var i = 0; i < qgxxList.length; i++) {
+				 // 通过间隔分隔数组
+					if(i%2 == 1){
+						html += "<tr class='gradeX odd'>";
+					}else if(i%2 == 0){
+						html += "<tr class='gradeX even'>";
+					}
+					
+
+					for (var j = 0 ; j <qgxxList[i].length ; j ++) {
+						
+	    				
+	                  html += "<td>" + qgxxList[i][j] + "</td>"
+	    				
+					}
+					
+				
+			}
+			bjbody.innerHTML = html;
+		 var local = layui.data('layui');
+		  layer.open({
+		    type: 1
+		    ,title: '实时报警'
+		    ,shade: false
+		 /*    ,offset: ['150px', '200px'] */
+		 	,offset:"rb"
+		    ,id: 'LAY_Notice'//防止重复弹出
+		    ,skin:"alert-skin"
+		    ,area: ['510px', '180px']
+		    ,moveType: 0
+		    ,resize: false
+		    ,content:$("#increase_word").html()
+		  }); 
+	 }
+	 else{
+		 layer.closeAll();
+	 }
 	
-						msg = data.msg
-						if(msg=="1"){
-							setTimeout(function () {
-								layer.msg("添加成功");
-		                    }, 2500);
-							
-						}else{
-								setTimeout(function () {
-									layer.msg("用户名已存在!");
-			                    }, 2000);
-								layer.closeAll();
-								xzyh(1)
-						}
-					}
-
-				});
-	    });
 }
 
-//修改密码
-function xgmm(flag) {
-	if(flag=="1"){
-		layer.msg("原密码输入错误");
-	}
-    layer.open({
-        type: 1,
-        title: "修改密码",
-        area: '400px',
-        offset: '120px',
-        content: $("#pswModel").html()
-    });
-    $("#pswForm")[0].reset();
-    $("#pswCancel").click(function () {
-        layer.closeAll();
-    });
-    
-    $("#pswSubmit").click(function () {
-    	var username = $('#username').val();
-		var oldpassword = $('#oldpassword').val();
-		var newpassword = $('#newpassword').val();
-		if(oldpassword==""||oldpassword==""){
-			alert("密码不能为空!");
-			return false;
-		}
-		var id=$('#id').val();
-			$.ajax({
-				url : "<%=basePath%>user/updapwd.action", 
-				async : false,
-				dataType : "json",
-				data : {
-					"oldpassword" : oldpassword,
-					"newpassword" : newpassword,
-					"username" : username,
-					"id" :id,
-				},
-				success : function(data) {
-					msg = data.msg
-					if(msg=="1"){
-						
-						
-						
-						setTimeout(function () {
-							layer.msg("修改成功");
-	                    }, 2500);
-						
-					}else{
-						
-							
-							setTimeout(function () {
-								layer.msg("原密码输入错误");
-		                    }, 2500);
-							
-							layer.closeAll();
-							xgmm("1");
-						
-					}
-				}
 
-			});
-    });
-    
-    
-    
-}
 </script> 
 
 <!-- 选项卡 -->
@@ -708,28 +645,13 @@ function sbwhjl(){//
 						<table class="mws-table1" >
 					<thead>
 						<tr>
-							<th class="table-th-css">报警日期</th>
-							<th class="table-th-css">报警时间</th>
-							<th class="table-th-css">报警组名</th>
-							<th class="table-th-css">报警类型</th>
-							<th class="table-th-css">变量描述</th>
+						    <th class="table-th-css" style="text-align:center !important">换热站</th>
+							<th class="table-th-css" style="text-align:center !important">报警时间</th>							
+							<th class="table-th-css" style="text-align:center !important">报警类型</th>							
 						</tr>
 					</thead>
 					<tbody id="bjbody">
-						<tr class='gradeX odd'>
-						<td>2019/05/22</td>
-						<td>12:22:46</td>
-						<td>胜利小区</td>
-						<td>温度过低</td>
-						<td>二次回水温度</td>
-						</tr>
-				        <tr class='gradeX even'>
-				        <td>2019/05/22</td>
-						<td>12:22:46</td>
-						<td>胜利小区</td>
-						<td>温度过低</td>
-						<td>二次回水温度</td>
-				        </tr>
+						
 					</tbody>
 						</table>
 					</form>

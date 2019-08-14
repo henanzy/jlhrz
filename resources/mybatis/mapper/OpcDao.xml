@@ -80,4 +80,81 @@
 			and hrz =#{hrz}
 		</if>
 	</select>
+	
+	<select id="selQx" resultMap="Map">
+		select * from ( select top 20 * from history a where 1=1 
+		<if test="hrz!=null and hrz!=''">
+			and a.hrz =#{hrz}
+		</if>
+		 order by a.time desc) s 
+		
+		order by  s.time asc
+	</select>
+	
+	<select id="getHrzXx" resultMap="Map">
+		select * from hrzXx
+	
+	</select>
+	
+	<insert id="Insert" >
+		insert into hrzXx
+		(hrz,gsdd,zlmc,grqy,Kxs,shejimj,shijimj,dz,bgsj,rbdz,lxr,rblx)
+		values(#{hrz},#{gsdd},#{zlmc},#{grqy},#{Kxs},#{shejimj},#{shijimj},#{dz},#{bgsj},#{rbdz},#{lxr},#{rblx})
+	</insert>
+	
+	<update id="Update">
+		update hrzXx set
+		gsdd=#{gsdd},zlmc=#{zlmc},grqy=#{grqy},Kxs=#{Kxs},shejimj=#{shejimj},shijimj=#{shijimj} ,dz=#{dz},
+		bgsj=#{bgsj},rbdz=#{rbdz},lxr=#{lxr},rblx=#{rblx}
+		where id=#{id}
+	</update>
+	
+	<delete id="Delete" >
+		delete from hrzXx
+		where
+		id=#{id}
+	</delete>
+	
+	<insert id="InsertBjxx" >
+		insert into bjxx
+		(bjsj,bjlx,hrz)
+		values(#{bjsj},#{bjlx},#{hrz})
+	</insert>
+	
+	<insert id="InsertBjdl" >
+		insert into bjdl
+		(bjlx,hrz)
+		values(#{bjlx},#{hrz})
+	</insert>
+	
+	<delete id="DeleteBjdl" >
+		delete from bjdl
+		where
+		hrz=#{hrz} and bjlx=#{bjlx}
+	</delete>
+	
+	<update id="UpdateBjxx" >
+		update bjxx set jcsj=#{jcsj} where hrz=#{hrz} and bjlx=#{bjlx} and jcsj is null;
+	</update>
+	
+	<select id="pdbj" resultType="java.lang.Integer">
+		select count(*) from bjxx where hrz=#{hrz} and bjlx=#{bjlx} and jcsj is null;	
+	</select>
+	
+	<select id="getbjdl" resultType="java.lang.String">
+		select bjlx from bjdl 	where hrz=#{hrz}
+	</select>
+	
+	<select id="getbjxx" resultMap="Map">
+		select * from bjxx where  jcsj is null;	
+	</select>
+	
+	<select id="getlsbjxx" resultMap="Map">
+		select * from bjxx where  jcsj is not null;	
+		
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+		order by bjsj desc
+	</select>
 </mapper>

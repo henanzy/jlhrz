@@ -63,7 +63,7 @@
 
 
 <script type="text/javascript" src="../js/echarts-3.5.3/highcharts.js"></script>
-
+<script type="text/javascript" src="../js/tjfx.js"></script> 
 
 <style>
 
@@ -180,15 +180,13 @@ select{
 				</div>
 				
 		
-				<div class="mws-panel-body">
+				<div class="mws-panel-body" style="width:96%;min-width: 550px; height:500px" >
 					<div class="mws-panel-content">
 					<div id="Ncontainer" ></div>
-				<input type="checkbox" id="yGyl" checked onclick="NcheckboxOnclick(this,1)">一委站
-				<input type="checkbox" id="yGwd" checked onclick="NcheckboxOnclick(this,2)">二委站
-				<input type="checkbox" id="yHyl" checked onclick="NcheckboxOnclick(this,3)">教育局站
+			
 					</div>
 				</div>
-			</div>
+		</div>
 		
 			<div class="mws-panel grid_8"
 				style="width:96%;min-width: 550px;">
@@ -204,10 +202,10 @@ select{
 					</div>
 					
 				<div  style="width:15%; height:450px;float:left; " >
-					<select id="wz" >
-					<option value="0" >一委站</option>
-					<option value="1" >二委站</option>
-					<option value="2" selected="selected">教育局站</option>
+					<select id="sssj" >
+					<option value="吉利.一委站.读数据.">一委站</option>
+					<option value="吉利.二委站.读数据.">二委站</option>
+					<option value="吉利.教育局站.读数据." selected="selected">教育局站</option>
 					</select>
 				</div>
 
@@ -233,11 +231,7 @@ select{
 				   </div>
 				   
 				   <div  style="width:15%; height:380px;float:left; " >
-					<select id="wd" onchange="changeValueWd()">
-					<option value="0" selected="selected" >一委站</option>
-					<option value="1">二委站</option>
-					<option value="2">教育局站</option>
-					</select>
+					
 				   </div>
 				
 				    <input type="checkbox" id="LyHyl" checked onclick="LcheckboxOnclick(this,1)">一次回温度
@@ -260,57 +254,218 @@ function activeLastPointToolip(chart) {
 	var points = chart.series[0].points;
 	chart.tooltip.refresh(points[points.length -1]);
 }
-var chart = Highcharts.chart('container', {
-	chart: {
-		type: 'spline',
-		marginRight: 10,
-		events: {
-			load: function () {
-				var series = this.series[0],
-				    series1 = this.series[1],
-					chart = this;
-				activeLastPointToolip(chart);
-				setInterval(function () {
-					var x = (new Date()).getTime(), // 当前时间
-						y = Math.random();          // 随机值
-					series.addPoint([x, y], true, true);
-					series1.addPoint([x, Math.random()+2], true, true);
-					
-					activeLastPointToolip(chart);
-				}, 1000);
-			}
+
+function FormatDate() {
+	var date = new Date();
+	return date.getFullYear() + "-" + (date.getMonth() + 1) + "-"
+			+ date.getDate() + " " + date.getHours() + ":"
+			+ date.getMinutes() + ":" + date.getSeconds();
+}
+function csh (){
+	var opt = {
+	        chart: {
+	            type: 'spline',// 指定图表的类型，默认是折线图（line）,
+	            events: {
+	    				load: function () {
+	    					$.ajax({
+	    						url : getRootPath()+"/OpcCon/qxsj.action", 
+	    						async : false,
+	    						dataType : "json",
+	    						data : {
+	    							"hrz":$("#sssj").val(),
+	    						},
+	    						success : function(data) {
+	    							
+	    							map=data.map;
+	    						}
+	    					});
+	    					var series0 = this.series[0],
+	    					/*  series1 = this.series[1],
+	    					 series2 = this.series[2],
+	    					 series3 = this.series[3],
+	    					 series4 = this.series[4],
+	    					 series5 = this.series[5],
+	    					 series6 = this.series[6],
+	    					 series7 = this.series[7], */
+	    						chart = this;
+	    					console.log("111");
+	    					activeLastPointToolip(chart);
+	    					setInterval(function () {
+	    						var x =FormatDate() // 当前时间
+	    							          // 随机值
+	    						series0.addPoint([x, map.一次回水压力], true, true);
+	    						/* series1.addPoint([x, map.一次回水温度], true, true);
+	    						series2.addPoint([x, map.一次供水压力], true, true);
+	    						series3.addPoint([x, map.一次供水温度], true, true);
+	    						series4.addPoint([x, map.二次供水压力], true, true);
+	    						series5.addPoint([x, map.二次供水温度], true, true);
+	    						series6.addPoint([x, map.二次回水压力], true, true);
+	    						series7.addPoint([x, map.二次回水温度], true, true); */
+	    						
+	    						activeLastPointToolip(chart);
+	    					}, 5000);
+	    				}
+	    			},
+	        },
+	        title:{
+	        	text:null
+	        },
+	        
+	        tooltip: {
+				crosshairs: [{
+					width: 1,
+					color:'#aaaaaa'
+				}],
+				shared: true
+			},
+	        xAxis: {  // x 轴分类
+		       
+	        },
+	        yAxis: {
+	            title: {
+	                text: null
+	                // y 轴标题
+	            }
+	        }
+	    };
+	
+	$.ajax({
+		url : getRootPath()+"/OpcCon/selQx.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			"hrz":$("#hrz").val(),
+		},
+		success : function(data) {
+			
+			dataList=data.list;
 		}
-	},
-	title: {
-		text: '动态模拟实时数据'
-	},
-	xAxis: {
-		type: 'datetime',
-		tickPixelInterval: 150
-	},
-	yAxis: {
-		title: {
-			text: null
-		}
-	},
-	tooltip: {
-		formatter: function () {
-			return '<b>' + this.series.name + '</b><br/>' +
-				Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-				Highcharts.numberFormat(this.y, 2);
-		}
-	},
-	legend: {
-		enabled: false
-	},
-	series: [{
-		name: '随机数据',
-		data: [{x: 1565343293277, y: 0.521429478925473},{x: 1565343293277, y: 0.521429478925473}]
-	},{
-		name: '随机数据',
-		data: [{x: 1565343293277, y: 0.521429478925473},{x: 1565343293277, y: 0.521429478925473}]
-	}]
-});
+	});
+	 var ychsyl = [];
+	 var ycgsyl = [];
+	 var ychswd = [];
+	 var ycgswd = [];
+	 var ecgsyl = [];
+	 var ecgswd = [];
+	 var echsyl = [];
+	 var echswd = [];
+	 var time = [];
+	 for (var i = 0 ; i < dataList.length ; i ++) {
+			var arr = [];
+			/*arr1[0] = json[i].id;*/
+			ychsyl.push(parseFloat(dataList[i].ychsyl));
+			ycgsyl.push(parseFloat(dataList[i].ycgsyl));
+			ychswd.push(parseFloat(dataList[i].ychswd));
+			ycgswd.push(parseFloat(dataList[i].ycgswd));
+			ecgsyl.push(parseFloat(dataList[i].ecgsyl));
+			ecgswd.push(parseFloat(dataList[i].ecgswd));
+			echsyl.push(parseFloat(dataList[i].echsyl));
+			echswd.push(parseFloat(dataList[i].echswd));
+			
+			time.push(dataList[i].time);
+			
+		};
+	var data = {name:$("#hrz").val(),ychsyl:ychsyl,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd};
+	
+	opt.xAxis = {
+			title: {
+				text: '时间'
+			},
+			categories: time,
+			tickInterval: 10,
+			labels: {
+			   
+			  }
+		};
+	opt.series = [];
+	
+	opt.series.push({
+				 name:"一次回水压力",
+				 data:data.ychsyl,
+				 tooltip : {
+						valueSuffix : 'Mpa'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 });
+	/*  opt.series.push({
+		 name:"一次回水温度",
+		 data:data.ychswd,
+		 tooltip : {
+				valueSuffix : 'Mpa'
+			}	,marker: {
+
+	             enabled: false,
+	         },		 
+	 });
+	opt.series.push({                       
+				 name:"一次供水压力",
+				 data:data.ycgsyl,
+				 tooltip : {
+						valueSuffix : 'Mpa'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 });
+	  opt.series.push({                       
+			 name:"一次供水温度",
+			 data:data.ycgswd,
+			 tooltip : {
+					valueSuffix : 'Mpa'
+				}	,marker: {
+
+		             enabled: false,
+		         },		 
+		 });
+	opt.series.push({
+				 name:"二次供水压力",
+				 data:data.ecgsyl,
+				 tooltip : {
+						valueSuffix : 'Mpa'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 });
+			 
+	opt.series.push({
+				 name:"二次供水温度",
+				 data:data.ecgswd,
+				 tooltip : {
+						valueSuffix : '℃'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 });
+
+	opt.series.push({
+				 name:"二次回水压力",
+				 data:data.echsyl,
+				 tooltip : {
+						valueSuffix : 'Mpa'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 });
+			 
+	opt.series.push({
+				 name:"二次回水温度",
+				 data:data.echswd,
+				 tooltip : {
+						valueSuffix : '℃'
+					}	,marker: {
+
+			             enabled: false,
+			         },		 
+			 }); */
+	// 图表初始化函数
+	var chart = Highcharts.chart("container", opt);
+}
+csh();
 </script>
 
 </body>

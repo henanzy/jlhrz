@@ -1,6 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -170,7 +176,19 @@
 	
 </style>
  <script type="text/javascript">
-//var xinwordListj = ${xinwordList};
+ $.ajax({
+		url : "<%=basePath%>OpcCon/getlsbjxx.action", 
+		async : false,
+		dataType : "json",
+		data : {
+		
+		},
+		success : function(data) {
+			
+			list=data.list;	   
+		}
+
+	});
 </script>
 </head>
 <body>
@@ -202,11 +220,9 @@
 						<tr>
 						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">报警时间<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">报警名称<span class="span-up"></span> <span class="span-down"></span></th>
+							
 							<th class="table-th-css">报警类型<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">报警值<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">报警限值<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">事件类型<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">报警解除时间<span class="span-up"></span> <span class="span-down"></span></th>
 							
 						</tr>
 					</thead>

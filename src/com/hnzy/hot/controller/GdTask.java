@@ -1,15 +1,22 @@
 package com.hnzy.hot.controller;
+import static org.hamcrest.CoreMatchers.instanceOf;
+
+import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.print.DocFlavor.STRING;
+
+import org.aspectj.weaver.ast.Var;
 import org.jinterop.dcom.common.JIException;
 import org.openscada.opc.dcom.da.impl.OPCServer;
 import org.openscada.opc.lib.common.AlreadyConnectedException;
@@ -27,6 +34,8 @@ import org.springframework.stereotype.Component;
 import com.hnzy.hot.service.OpcService;
 import com.hnzy.hot.util.DUtil;
 import com.hnzy.hot.util.OPCConfiguration;
+
+import net.sf.json.JSONObject;
 
 
 @Component 
@@ -331,6 +340,157 @@ public class GdTask{
         					   
         					   opcService.insertZybb(insMap);
     }  
+	
+	@Scheduled(cron="*/5 * * * * ?")
+	public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+		
+       ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
+       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
+           String hrz="吉利.教育局站.读数据.";
+	       String[] d=DUtil.bjxx("吉利.教育局站.读状态.");
+	     
+	      
+	       Map<String, Item> map = null;
+            	     Group group = null;
+            				try {
+								server.connect ();
+            					 group = server.addGroup ( "groupyx" );
+            					 group.setActive ( true );
+				                map = group.addItems(d);
+							} catch (IllegalArgumentException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (UnknownHostException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (JIException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (AlreadyConnectedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+            				
+        					for (Entry<String, Item> temp : map.entrySet()) {
+        						try {
+        							Thread.sleep(10);
+        						} catch (InterruptedException e) {
+        							// TODO Auto-generated catch block
+        							e.printStackTrace();
+        						}
+        					
+								try {
+									String id= temp.getValue().getId();
+	        						Object value = temp.getValue().read(true).getValue().getObject();
+	        						System.out.println("------------value----------"+value);
+									 String[] a=id.split("读状态.");
+						            	String key=a[1];
+						            	if(key.contains("#")){
+						            		key=key.replace("#", "");
+						            	}
+						            		try {
+												Thread.sleep(10);
+											} catch (InterruptedException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}						           						            	
+						            	String val =String.valueOf(value);
+						            	
+						            	if(val.equals("true")){
+						            		Map<String, Object> pdMap = new HashMap<>();
+						            		pdMap.put("hrz", "教育局站");
+						            		pdMap.put("bjlx", key);
+						            		int count = opcService.pdbj(pdMap);
+						            		if(count==0){
+						            			Map<String, Object> insMap = new HashMap<>();
+						            			insMap.put("hrz", "教育局站");
+						            			insMap.put("bjlx", key);
+						            			opcService.InsertBjdl(insMap);
+						            			Date t=temp.getValue().read(true).getTimestamp().getTime();
+								                String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ").format(t.getTime());
+								                insMap.put("bjsj", time);
+								                opcService.InsertBjxx(insMap);
+						            		}
+						            		
+						            	}
+						                 
+						                  //dmap.put(key);
+								} catch (JIException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+        						
+        					}
+        					   server.dispose();        			                 			        				          
+        					}
+	
+	@Scheduled(cron="*/5 * * * * ?")
+	public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+		
+       ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
+       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
+          
+        					   
+        					
+        			          List<String> list =opcService.getbjdl("教育局站");
+        			          String[] kStrings = new String[list.size()];
+        			          for (int i = 0; i < list.size(); i++) {
+        			        	  kStrings[i]="吉利.教育局站.读状态."+list.get(i);
+								
+							}
+        			          
+        			          Group group1 = null;
+        			          Map<String, Item> map1 = null;
+        			          
+        			         server.connect ();
+         					 group1 = server.addGroup ( "groupyx" );
+         					 group1.setActive ( true );
+				             map1 = group1.addItems(kStrings);
+				             
+				             for (Entry<String, Item> temp : map1.entrySet()) {
+	        						try {
+	        							Thread.sleep(10);
+	        						} catch (InterruptedException e) {
+	        							// TODO Auto-generated catch block
+	        							e.printStackTrace();
+	        						}
+	        					
+									try {
+										String id= temp.getValue().getId();
+		        						Object value = temp.getValue().read(true).getValue().getObject();
+		        						System.out.println("------------value----------"+value);
+										 String[] a=id.split("读状态.");
+							            	String key=a[1];
+							            	if(key.contains("#")){
+							            		key=key.replace("#", "");
+							            	}
+							            		try {
+													Thread.sleep(10);
+												} catch (InterruptedException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}						           						            	
+							            	String val =String.valueOf(value);
+							            	if(val.equals("false")){
+							            		Map<String, Object> updateMap = new HashMap<>();
+							            		
+							            		Date t=temp.getValue().read(true).getTimestamp().getTime();
+								                String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ").format(t.getTime());
+								                updateMap.put("jcsj", time);
+								                updateMap.put("hrz", "教育局站");
+								                updateMap.put("bjlx", key);
+							            		opcService.UpdateBjxx(updateMap);
+							            		opcService.DeleteBjdl(updateMap);
+							            	}
+							                 
+							                  //dmap.put(key);
+									} catch (JIException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+	        						
+	        					}server.dispose();
+        					}
 	
 	 public boolean isNumeric(String value){
          Pattern pattern = Pattern.compile("-?[0-9]+.*[0-9]*");
