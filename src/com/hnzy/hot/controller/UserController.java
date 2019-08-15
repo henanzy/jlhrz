@@ -352,4 +352,9 @@ public class UserController {
     	public String ddkz(){
     		return "hrz/ddzl";
     	}
+    	
+    	@RequestMapping("ryjk")
+    	public String ryjk(){
+    		return "xxgl/ryjk";
+    	}
 }

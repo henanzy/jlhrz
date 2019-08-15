@@ -43,4 +43,6 @@ public interface OpcDao {
 	public List<Map<String, Object>>getbjxx ();
 	
 	public List<Map<String, Object>>getlsbjxx (Map<String, Object> map);
+	
+	public List<Map<String, Object>>dbjc (Map<String, Object> map);
 }

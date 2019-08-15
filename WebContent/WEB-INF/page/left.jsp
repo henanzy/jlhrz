@@ -182,6 +182,10 @@ function ddkz(){//
 function hrzxx(){// 
     window.open("<%=basePath%>OpcCon/hrzxx.action", "Conframe");
 } 
+
+function ryjk(){// 
+	window.open("<%=basePath%>user/ryjk.action","Conframe");
+} 
 </script>
 	<style>
         ul.ac_kf li a{
@@ -229,6 +233,7 @@ function hrzxx(){//
                                 <li><a class="first-a" onclick="map()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行总览</a></li>
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
                     	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
+                    	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热源监控</a></li>
                     	        <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li>
                              	<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能耗分析</a></li>
                              	<!-- <li><a onclick="" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行数据预警</a></li>

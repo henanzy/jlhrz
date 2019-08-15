@@ -245,14 +245,38 @@ select{
 		</div>
 	</div>
 <script type="text/javascript">
+
 Highcharts.setOptions({
 	global: {
 		useUTC: false
 	}
 });
 function activeLastPointToolip(chart) {
-	var points = chart.series[0].points;
-	chart.tooltip.refresh(points[points.length -1]);
+	
+	var points0 = chart.series[0].points;
+	console.log(points0[points0.length -1]);
+	chart.tooltip.refresh(points0[points0.length -1]);
+	
+	var points1 = chart.series[1].points;
+	chart.tooltip.refresh(points1[points1.length -1]);
+	
+	var points2 = chart.series[2].points;
+	chart.tooltip.refresh(points2[points2.length -1]);
+	
+	var points3 = chart.series[3].points;
+	chart.tooltip.refresh(points3[points3.length -1]);
+	
+	var points4 = chart.series[4].points;
+	chart.tooltip.refresh(points4[points4.length -1]);
+	
+	var points5 = chart.series[5].points;
+	chart.tooltip.refresh(points5[points5.length -1]);
+	
+	var points6 = chart.series[6].points;
+	chart.tooltip.refresh(points6[points6.length -1]);
+	
+	var points7 = chart.series[7].points;
+	chart.tooltip.refresh(points7[points7.length -1]);
 }
 
 function FormatDate() {
@@ -280,29 +304,29 @@ function csh (){
 	    						}
 	    					});
 	    					var series0 = this.series[0],
-	    					/*  series1 = this.series[1],
+	    					 series1 = this.series[1],
 	    					 series2 = this.series[2],
 	    					 series3 = this.series[3],
 	    					 series4 = this.series[4],
 	    					 series5 = this.series[5],
 	    					 series6 = this.series[6],
-	    					 series7 = this.series[7], */
-	    						chart = this;
-	    					console.log("111");
-	    					activeLastPointToolip(chart);
+	    					 series7 = this.series[7], 
+	    					 chart = this;
+	    					
+	    					activeLastPointToolip(chart); 
 	    					setInterval(function () {
 	    						var x =FormatDate() // 当前时间
 	    							          // 随机值
 	    						series0.addPoint([x, map.一次回水压力], true, true);
-	    						/* series1.addPoint([x, map.一次回水温度], true, true);
+	    						series1.addPoint([x, map.一次回水温度], true, true);
 	    						series2.addPoint([x, map.一次供水压力], true, true);
 	    						series3.addPoint([x, map.一次供水温度], true, true);
 	    						series4.addPoint([x, map.二次供水压力], true, true);
 	    						series5.addPoint([x, map.二次供水温度], true, true);
 	    						series6.addPoint([x, map.二次回水压力], true, true);
-	    						series7.addPoint([x, map.二次回水温度], true, true); */
+	    						series7.addPoint([x, map.二次回水温度], true, true); 
 	    						
-	    						activeLastPointToolip(chart);
+	    						 activeLastPointToolip(chart);
 	    					}, 5000);
 	    				}
 	    			},
@@ -389,7 +413,7 @@ function csh (){
 			             enabled: false,
 			         },		 
 			 });
-	/*  opt.series.push({
+	  opt.series.push({
 		 name:"一次回水温度",
 		 data:data.ychswd,
 		 tooltip : {
@@ -461,7 +485,7 @@ function csh (){
 
 			             enabled: false,
 			         },		 
-			 }); */
+			 }); 
 	// 图表初始化函数
 	var chart = Highcharts.chart("container", opt);
 }

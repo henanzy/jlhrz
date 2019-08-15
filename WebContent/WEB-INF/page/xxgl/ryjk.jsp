@@ -7,11 +7,15 @@
 			+ path + "/";
 	
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>设备管理</title>
+<title>Insert title here</title>
+
+
+
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="../css/reset.css"
 	media="screen" />
@@ -71,15 +75,7 @@
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../plugins/flot/excanvas.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
-
 <script type="text/javascript" src="../plugins/flot/jquery.flot.min.js"></script>
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
-<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
 <script type="text/javascript"
 	src="../plugins/flot/jquery.flot.pie.min.js"></script>
 <script type="text/javascript"
@@ -101,55 +97,43 @@
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
 
-
-<script type="text/javascript" src="../js/dbjc.js"></script>
-
-
-
+ <script type="text/javascript" src="../js/ryjk.js"></script> 
 <style>
-
+	
 	/* 固定表头 */
 	.table-th-css {
 		position: relative !important;
 		top: 0;
 	}
-	
-	
-	
+		th,td{  
+  
+  white-space: nowrap;
+} 
 	/* 搜索DIV */
-	.search{
+	.jk_search{
 		display:block;
 		width:99.8%;
-		height:70px;
+		height:40px;
 		background-color:#ccc;
 		margin:0px auto;
 		font-size:12px;
 	}
 	
-	.search p{
-		height:30px;
+	.jk_search p{
+		height:40px;
 	}
 	
-	.search p select{
+	.jk_search p select{
 		width:120px;
 		height:24px;
 		border:none;
 		border-radius:6px;
+		margin-left:20px;
 		padding-left:6px;
 	}
 	
-	.search p span{
-		color:#333;
-		font-size:14px;
-		margin-left:20px; 
-	}
-	.search span input{
-		width:62px;
-	} 
 	/* 搜索按钮 */
-	#search_btn,
-	#dayin,
-	#search_status_btn{
+	#jk_search_btn{
 		margin-top:8px;
 		margin-left:20px;
 		border:none;
@@ -158,24 +142,32 @@
 		height:24px;
 		margin-right:6px;
 		color:#fff;
-		border-radius:4px;
+		border-radius:6px;
 	}
-	
-	/* 封盘按钮 */
-	#operation_one_btn,
-	#operation_all_btn{
+	#dayin{
 		margin-top:8px;
 		margin-left:20px;
 		border:none;
 		background-color:rgb(60,61,61);
-		width:100px;
+		width:60px;
 		height:24px;
 		margin-right:6px;
 		color:#fff;
-		border-radius:4px;
+		border-radius:6px;
 	}
 	
-
+	#jk_search_btn1{
+		margin-top:8px;
+		margin-left:20px;
+		border:none;
+		background-color:rgb(60,61,61);
+		width:60px;
+		height:24px;
+		margin-right:6px;
+		color:#fff;
+		border-radius:6px;
+	}
+	
 	
 	/* thead排序按钮 */
 	.span-up{
@@ -201,158 +193,79 @@
         top: 20px;
         right: 6px;
     }
-	
-	nav li,
-	select{
-		width:50px;
-		height:24px;
-		line-height:24px;
-		border-radius:4px;
-		background-color:rgba(43,45,49,0.8);
-		color:#fff;
-		cursor:pointer;
-		text-align:center;
-	}
-	#curpage{
-		width:120px;
-	}
-	
-	/* td悬停样式 */
-	.blue {
-		background: #ccc;
-	}
-	
-	th,td{  
-  
-  white-space: nowrap;
-} 
-
-	@media screen and (max-width:950px){
-		.search{
-			height:140px;
-		}
-		.search p{
-			height:60px;
-		}
-	}
-	
-	
+    
+   
 	
 </style>
- 
 
 </head>
 <body>
 
-	<div id="increasedis" class="clearfix" style="overflow-x: hidden;height:1000px;">
-		
+	<div id="" class="clearfix" style="overflow-x: hidden;">
+	
 		<div class="mws-panel grid_8 "
-			style="width: 98%; padding-left: 12px; margin: 0px 0px 10px 0px; min-width:650px">
+			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
-				<span style="display:inline" class="mws-i-24 i-table-1">大表集抄</span>&nbsp; &nbsp; &nbsp;<span id="xqspan" style="display:inline" ></span>
+				<span class="mws-i-24 i-table-1">热源监控</span>
 			</div>
-			<p>
-			<div class="search">
-			<p>
-				<span style="font-size:14px;margin-left:20px;">换热站：
-					<select id="hrz" style="size:15px">
-                       	<option value="">全部</option>
-                       	<option value="教育局站">教育局站</option>
-                       	<option value="一委站">一委站</option>
-                       	<option value="二委站">二委站</option>
-                    </select>
-                     </span>
-                  <input type="date" id="startTime"  style="width:140px" value="" />-
-                  <input type="date" id="endTime" style="width:140px" value="" />
-					<input id="search_btn" type="submit" style="size: 10px" value="搜索" />
+			<div class="jk_search">
+				<p>
+					<select>
+						<option value="">全部</option>
+						<option value="吉利.一委站.读数据.">一委站</option>
+						<option value="吉利.二委站.读数据.">二委站</option>
+						<option value="吉利.教育局站.读数据.">教育局站</option>
+						
+					</select>
+					
+					<input id="jk_search_btn" type="submit" value="搜索" />
 					<input id="dayin" type="submit" value="导出" />
 				</p>
 			</div>
-			<div id="xincreate_table_body" class="mws-panel-body"
-
-				style="overflow:scroll !important; height: 590px;">
-				<table class="mws-table" style="width:150%;">
-
+			<div id="monitword_table_body" class="mws-panel-body"
+				style="overflow: auto !important; height: 700px;">
+				<table class="mws-table">
 					<thead>
 						<tr>
-						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">联系人<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">归属大队<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">热表地址<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">采集时间<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水累计热量<span class="span-up"></span> <span class="span-down"></span></th>
+						    <th class="table-th-css">换热站名称<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">一次供水瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">一次供水瞬时热量<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">一次供水累计流量<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次供水瞬时流量<span class="span-up"></span> <span class="span-down"></span></th>							
-							<th class="table-th-css">一次供水温度<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">一次回水温度<span class="span-up"></span> <span class="span-down"></span></th>														
-							<th class="table-th-css">热表类型<span class="span-up"></span> <span class="span-down"></span></th>
-							
+							<th class="table-th-css">一次供水累计热量<span class="span-up"></span> <span class="span-down"></span></th>							
+							<th class="table-th-css">一次供水温度<span class="span-up"></span> <span class="span-down"></span></th>						
+							<th class="table-th-css">一次回水温度<span class="span-up"></span> <span class="span-down"></span></th>							
 						</tr>
 					</thead>
-					<tbody id="xinword_body">
+					<tbody id="jkword_body">
 						
-				
+						
 					</tbody>
 				</table>
 			</div>
-		</div>
-		
-		
-		<nav style="width:100%;">
-            <ul style="width:500px;display:flex;justify-content:space-between;margin:0 auto;" >
-            	
-                <li id="first">首页</li>
-                <li id="last">上一页</li>
-                <li id="next">下一页</li>
-                <li id="end">尾页</li>   
-                <li id="curpage">当前第<span id="currentNum" ></span>页 /共<span id='pages'></span>页</li>
-                <li>共<span id="num"></span></li>
-                
-                    <select name="" id="select" >
-                        <option value="10">10</option>
-                        <option value="15"  selected = "selected">15</option>
-                        <option value="20" >20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                    </select>
-                     
-            </ul>
-         </nav>
-		
-
-		
-		
-		
-	</div>
-	 <script type="text/javascript">
- var time = new Date();
-         var day = ("0" + time.getDate()).slice(-2);
-         var month = ("0" + (time.getMonth() + 1)).slice(-2);
-         var today = time.getFullYear() + "-" + (month) + "-" + (day);
-         $('#endTime').val(today);
-
-                 
-                 var month1 = ("0" + (time.getMonth() )).slice(-2);
-                 var today1 = time.getFullYear() + "-" + (month1) + "-" + (day);
-                 $('#startTime').val(today1);
-                 
- $.ajax({
-		url : "<%=basePath%>OpcCon/dbjc.action", 
-		async : false,
-		dataType : "json",
-		data : {
-		"hrz":$('#hrz').val(),
-		"startTime":$('#startTime').val(),
-		"endTime":$('#endTime').val()
-		},
-		success : function(data) {
 			
-			list=data.list;	   
-		}
+			
+			
+		</div>
 
-	});
-</script>
+	</div>
+<script type="text/javascript">
+var list =[];
+$.ajax({
+	url:"<%=basePath%>OpcCon/ryjk.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.教育局站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		list.push(map);
+		
+		
+	}
 	
+});	
+
+</script>
 </body>
 </html>

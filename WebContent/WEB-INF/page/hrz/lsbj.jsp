@@ -135,6 +135,7 @@
 	}
 	
 	/* 搜索按钮 */
+	#dayin,
 	#jk_search_btn{
 		margin-top:8px;
 		margin-left:20px;
@@ -175,21 +176,7 @@
     
 	
 </style>
- <script type="text/javascript">
- $.ajax({
-		url : "<%=basePath%>OpcCon/getlsbjxx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-		
-		},
-		success : function(data) {
-			
-			list=data.list;	   
-		}
 
-	});
-</script>
 </head>
 <body>
 
@@ -202,19 +189,21 @@
 			</div>
 			<div class="jk_search">
 				<p>
-					<select id="type">
-						<option value="全部">全部</option>
+					<select id="hrz">
+						<option value="">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
 						<option value="教育局站">教育局站</option>
 						
 					</select>
-					
+			    <input type="date" id="startTime"  style="width:140px" value="" />-
+                <input type="date" id="endTime" style="width:140px" value="" />
 					<input id="jk_search_btn" type="submit" value="搜索" />
+					<input id="dayin" type="submit" value="导出" />
 				</p>
 			</div>
 			<div id="monitword_table_body" class="mws-panel-body"
-				style="overflow: auto !important; height: 300px;">
+				style="overflow: auto !important; height: 700px;">
 				<table class="mws-table">
 					<thead>
 						<tr>
@@ -238,6 +227,33 @@
 		</div>
 
 	</div>
+ <script type="text/javascript">
+ var time = new Date();
+         var day = ("0" + time.getDate()).slice(-2);
+         var month = ("0" + (time.getMonth() + 1)).slice(-2);
+         var today = time.getFullYear() + "-" + (month) + "-" + (day);
+         $('#endTime').val(today);
 
+                 
+                 var month1 = ("0" + (time.getMonth() )).slice(-2);
+                 var today1 = time.getFullYear() + "-" + (month1) + "-" + (day);
+                 $('#startTime').val(today1);
+                 
+ $.ajax({
+		url : "<%=basePath%>OpcCon/getlsbjxx.action", 
+		async : false,
+		dataType : "json",
+		data : {
+		"hrz":$('#hrz').val(),
+		"startTime":$('#startTime').val(),
+		"endTime":$('#endTime').val()
+		},
+		success : function(data) {
+			
+			list=data.list;	   
+		}
+
+	});
+</script>
 </body>
 </html>

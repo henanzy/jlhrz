@@ -150,11 +150,32 @@
 	</select>
 	
 	<select id="getlsbjxx" resultMap="Map">
-		select * from bjxx where  jcsj is not null;	
+		select * from bjxx where  jcsj is not null
 		
 		<if test="hrz!=null and hrz!=''">
 			and hrz =#{hrz}
 		</if>
+		<if test="startTime!=null and startTime!=''">
+			and bjsj &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and bjsj &lt;=#{endTime}
+		</if>
 		order by bjsj desc
 	</select>
+	<select id="dbjc" resultMap="Map">
+		select h.ycssgrl ,h.ycssgll,h.ycgswd,h.ychswd,h.ycljgrl,h.ycljgll,h.time,x.gsdd,x.lxr,x.rbdz,x.rblx,x.hrz from rbb h,hrzXx x where h.hrz=x.hrz
+		
+		<if test="hrz!=null and hrz!=''">
+			and h. hrz =#{hrz}
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			and h.time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and h.time &lt;=#{endTime}
+		</if>
+		order by h.time desc
+	</select>
+	
 </mapper>

@@ -1,6 +1,15 @@
+function getRootPath(){      
+	var curWwwPath=window.document.location.href;      
+    var pathName=window.document.location.pathname;      
+    var pos=curWwwPath.indexOf(pathName); 
+    var localhostPaht=curWwwPath.substring(0,pos);      
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);      
+    return(localhostPaht+projectName);  
+} 
 $(document).ready(function() {
 	
 	var jkwordList = [];
+	
 	function jsArrChange(json){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
@@ -12,7 +21,44 @@ $(document).ready(function() {
 		};
 	}
 	jsArrChange(list);
-	
+	function tableToExcel(){
+        //要导出的json数据
+      
+        //列标题
+    	let str = '<tr><th>换热站</th>'+
+    	'<th>报警时间</th><th>报警类型</th><th>报警解除时间</th>';    	    	    	
+        str+='</tr>'
+        //循环遍历，每行加入tr标签，每个单元格加td标签
+        for(let i = 0 ; i < jkwordList.length ; i++ ){	        	
+          str+='<tr>';	         
+          for(let item in jkwordList[i]){
+              //增加\t为了不让表格显示科学计数法或者其他格式	        	  
+        		  str+=`<td>${ jkwordList[i][item] + '\t'}</td>`;   
+          }
+          str+='</tr>';	        	
+        }
+        //Worksheet名
+        let worksheet = 'Sheet1'
+        let uri = 'data:application/vnd.ms-excel;base64,';
+   
+        //下载的表格模板数据
+        let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+        xmlns:x="urn:schemas-microsoft-com:office:excel" 
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+          <x:Name>${worksheet}</x:Name>
+          <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+          </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+          </head><body><table>${str}</table></body></html>`;
+        //下载模板
+        window.location.href = uri + base64(template)
+      }
+	function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+	var wordExport = document.getElementById("dayin");
+	wordExport.onclick = function(){
+		var aID =  this.parentNode.getAttribute("id");
+		tableToExcel();
+	}
 	
 	var jkwordTbody = document.getElementById("jkword_body");
 	for(var i = 0;i < jkwordList.length;i ++){
@@ -38,13 +84,13 @@ $(document).ready(function() {
 	
 	//工单搜索
 	$("#jk_search_btn").click(function(){
-		var wordType = $("#type").val();
+		
 		var compareWordList = [];
 		
-		for(var j = 0;j < jkwordList.length;j ++){
+		
 			
-			compareWordTime(wordType,compareWordList,jkwordList,j);
-		};
+			compareWordTime(compareWordList);
+		
 		$("#jkword_body").empty();
 		for(var x = 0;x < compareWordList.length;x ++){
 			
@@ -183,27 +229,35 @@ $(document).ready(function() {
 		
 });
 	
-function compareWordTime(wordType,compareWordList,jkwordList,j){
-		if(wordType == "全部"){
-			compareWordList.push(jkwordList[j]);
-		}
-		if(wordType == "一委站"){
-			if(jkwordList[j][0] == "一委站"){
-				compareWordList.push(jkwordList[j]);
+function compareWordTime(compareWordList){
+	
+	
+	var list
+	compareWordList.length=0;
+	 $.ajax({
+			url : getRootPath()+"/OpcCon/getlsbjxx.action", 
+			async : false,
+			dataType : "json",
+			data : {
+			"hrz":$('#hrz').val(),
+			"startTime":$('#startTime').val(),
+			"endTime":$('#endTime').val()
+			},
+			success : function(data) {
+				
+				list=data.list;	   
 			}
-		}
-		if(wordType == "二委站"){
-			if(jkwordList[j][0] == "二委站"){
-				compareWordList.push(jkwordList[j]);
-			}
-		}
-		
-		if(wordType == "教育局站"){
-			if(jkwordList[j][0] == "教育局站"){
-				compareWordList.push(jkwordList[j]);
-			}
-		}
-		
+
+		});
+	
+	for (var i = 0 ; i < list.length ; i ++) {
+		var arr1 = [];
+		arr1[0] = list[i].hrz;
+		arr1[1] = list[i].bjsj;
+		arr1[2] = list[i].bjlx;
+		arr1[3] = list[i].jcsj;
+		compareWordList.push(arr1);
+	};
 }	
 	
 

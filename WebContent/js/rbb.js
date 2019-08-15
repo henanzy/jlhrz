@@ -1,26 +1,53 @@
 $(document).ready(function() {
-	
-	
-	
-	var wordList = [];
-	function jsArrChange(json){
-		for (var i = 0 ; i < json.length ; i ++) {
-			var arr1 = [];
-			arr1[0] = json[i].一次供水瞬时流量;
-			arr1[1] = json[i].一次供水瞬时热量;
-			arr1[2] = json[i].一次供水累计流量;
-			arr1[3] = json[i].一次供水累计热量;
-			arr1[4] = json[i].电量实际值;
-			arr1[5] = json[i].A项电压;
-			arr1[6] = json[i].B项电压;
-			arr1[7] = json[i].C项电压;
-			arr1[8] = json[i].A项电流;
-			arr1[9] = json[i].B项电流;
-			arr1[10] = json[i].C项电流;
-			wordList.push(arr1);
-		};
+	function tableToExcel(){
+        //要导出的json数据
+      
+        //列标题
+    	let str = '<tr><th>换热站</th><th>数据时间</th>';
+        
+        for(var i=0;i<chkName.length;i++){
+        	str+='<td>'+chkName[i]+'</th>';
+        }
+        str+='</tr>'
+        //循环遍历，每行加入tr标签，每个单元格加td标签
+        for(let i = 0 ; i < chk.length ; i++ ){
+        	
+          str+='<tr>';
+         
+          for(let item in chk[i]){
+              //增加\t为了不让表格显示科学计数法或者其他格式
+        	  
+        		  str+=`<td>${ chk[i][item] + '\t'}</td>`;
+        	  
+        		   
+        	  
+                  
+          }
+          str+='</tr>';
+        	
+        }
+        //Worksheet名
+        let worksheet = 'Sheet1'
+        let uri = 'data:application/vnd.ms-excel;base64,';
+   
+        //下载的表格模板数据
+        let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+        xmlns:x="urn:schemas-microsoft-com:office:excel" 
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+          <x:Name>${worksheet}</x:Name>
+          <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+          </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+          </head><body><table>${str}</table></body></html>`;
+        //下载模板
+        window.location.href = uri + base64(template)
+      }
+	function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+	var wordExport = document.getElementById("dayin");
+	wordExport.onclick = function(){
+		var aID =  this.parentNode.getAttribute("id");
+		tableToExcel();
 	}
-	jsArrChange(list);
 	
 	$("#jk_search_btn1").click(function(){
 		$("#change_word").show();

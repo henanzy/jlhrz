@@ -1,9 +1,14 @@
-
+function getRootPath(){      
+	var curWwwPath=window.document.location.href;      
+    var pathName=window.document.location.pathname;      
+    var pos=curWwwPath.indexOf(pathName); 
+    var localhostPaht=curWwwPath.substring(0,pos);      
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);      
+    return(localhostPaht+projectName);  
+} 
 $(document).ready(function() {
 	//表头固定
-	var myDate = new Date()
-	myDate.toLocaleString();
-	$('#tjTime').val(myDate.toLocaleString()); 
+	
 		var xincreatetableCont = $('#xincreate_table_body table tr th'); //获取th
 		var xincreatetableScroll = $('#xincreate_table_body'); //获取滚动条同级
 		xincreatetableScroll.on('scroll', scrollHandlexincreate);
@@ -26,95 +31,68 @@ $(document).ready(function() {
 			}
 		}
 		
+		 function tableToExcel(){
+		        //要导出的json数据
+		      
+		        //列标题
+		    	let str = '<tr><th>换热站</th><th>联系人</th><th>归属大队</th><th>热表地址</th>'+
+		    	'<th>采集时间</th><th>一次供水累积热量</th><th>一次供水瞬时热量</th><th>一次供水累计流量</th><th>一次供水瞬时流量</th>'+
+		    	'<th>一次供水温度</th><th>一次回水温度</th><th>热表类型</th>';
+		    	
+		    	
+		        str+='</tr>'
+		        //循环遍历，每行加入tr标签，每个单元格加td标签
+		        for(let i = 0 ; i < xinwordList.length ; i++ ){	        	
+		          str+='<tr>';	         
+		          for(let item in xinwordList[i]){
+		              //增加\t为了不让表格显示科学计数法或者其他格式	        	  
+		        		  str+=`<td>${ xinwordList[i][item] + '\t'}</td>`;   
+		          }
+		          str+='</tr>';	        	
+		        }
+		        //Worksheet名
+		        let worksheet = 'Sheet1'
+		        let uri = 'data:application/vnd.ms-excel;base64,';
+		   
+		        //下载的表格模板数据
+		        let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+		        xmlns:x="urn:schemas-microsoft-com:office:excel" 
+		        xmlns="http://www.w3.org/TR/REC-html40">
+		        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+		          <x:Name>${worksheet}</x:Name>
+		          <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+		          </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+		          </head><body><table>${str}</table></body></html>`;
+		        //下载模板
+		        window.location.href = uri + base64(template)
+		      }
+			function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+			var wordExport = document.getElementById("dayin");
+			wordExport.onclick = function(){
+				var aID =  this.parentNode.getAttribute("id");
+				tableToExcel();
+			}
+		var xinwordList = [];
 		
-		var xinwordList = [["魏红星","远襄一中","37515443","3043","4410","38990.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["杨亚平","宁陵一高","37515443","3043","5512","4890.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["张丽","河南大学","37515443","3043","4252","3564.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["田春华","同济医院","37515443","3043","3554","3124.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["刘文川","丹尼斯","37515443","3043","8241","7564.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["马璇","大卫城","37515443","3043","4415","4321.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["李旺","英才小学","37515443","3043","1324","1254.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["李欣","英玉中学","37515443","3043","1345","1123.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["刘望","财经大学","37515443","3043","1524","1352.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["张莉莉","职业中学","37515443","3043","1524","1352.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["王鑫","经贸大学","37515443","3043","1524","1352.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["陈晨晨","育人中学","37515443","3043","1524","1352.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		                   ["刘望","育才中学","37515443","3043","1524","1352.23","0","24.2","23.9","0.1","23.8","流量","正常","77920","荷德鲁美特"],
-		];
-		
-		/*function jsArrChange(json){
+		function jsArrChange(json){
 			for (var i = 0 ; i < json.length ; i ++) {
 				var arr1 = [];
-				arr1[0] = json[i].id;
-				arr1[1] = json[i].yhbh;
-				arr1[2] = json[i].yhxm;
-				arr1[3] = json[i].fpdz;
-				arr1[4] = json[i].ldh;
-				arr1[5] = json[i].dyh;
-				arr1[6] = json[i].hh;
-				arr1[7] = json[i].sdwd;
-				arr1[8] = json[i].snwd;
-				if(json[i].ms=="01"){
-					arr1[9]="制热"
-				}else{
-					arr1[9]="制冷"
-				}
-				
-				arr1[10] = json[i].yydl;
-				arr1[11] = json[i].syje;
-				if(json[i].dw=="03"){
-					arr1[12]="高档"
-				}
-				if(json[i].dw=="02"){
-					arr1[12]="中档"
-				}
-				if(json[i].dw=="01"){
-					arr1[12]="低档"
-				}
-				if(json[i].dw=="00"){
-					arr1[12]="停止"
-				}
-				arr1[13] = json[i].gdtime;
-				arr1[14] = json[i].zdtime;
-				arr1[15] = json[i].ddtime;
-				arr1[16] = json[i].dgdtime;
-				arr1[17] = json[i].dzdtime;
-				arr1[18] = json[i].dddtime;
-				
-				arr1[19] = json[i].time;
-				arr1[20] = json[i].mj;
-				arr1[21] = json[i].lxdh;
-				if(json[i].jf=="01"){
-					arr1[22]="允许计费"
-				}
-				if(json[i].jf=="00"){
-					arr1[22]="禁止计费"
-				}
-				if(json[i].kg=="01"){
-					arr1[23]="自动运行"
-				}
-				if(json[i].kg=="00"){
-					arr1[23]="强制关闭"
-				}
-				if(json[i].bj=="00"){
-					arr1[24]="正常"
-				}
-				if(json[i].bj=="01"){
-					arr1[24]="开盖"
-				}
-				if(json[i].bj=="03"){
-					arr1[24]="盗热嫌疑"
-				}
-				if(json[i].bj=="04"){
-					arr1[24]="通讯异常"
-				}
-				arr1[25] = json[i].bz;
-				arr1[26] = json[i].xqm;
-				arr1[27] = json[i].jj;
+				arr1[0] = json[i].hrz;
+				arr1[1] = json[i].lxr;
+				arr1[2] = json[i].gsdd;
+				arr1[3] = json[i].rbdz;
+				arr1[4] = json[i].time;
+				arr1[5] = json[i].ycljgrl;
+				arr1[6] = json[i].ycssgrl;
+				arr1[7] = json[i].ycljgll;
+				arr1[8] = json[i].ycssgll;
+				arr1[9] = json[i].ycgswd;
+				arr1[10] = json[i].ychswd;
+				arr1[11] = json[i].rblx;
 				xinwordList.push(arr1);
 			};
 		}
-		jsArrChange(YhList);*/
+		jsArrChange(list);
 		
 		var opt = [];
 		//表格写入函数
@@ -128,42 +106,17 @@ $(document).ready(function() {
 			
 		});
 		
-		//小区楼栋选择
-		$("#xq").change(function(){
-			ldselect(xinwordList);
-		});
-		$("#ldh").change(function(){
-			dyselect(xinwordList);
-		});
-		$("#ldh").click(function(){
-			var xq = $('#xq  option:selected').val();
-			if(xq == ""){
-				alert("请先选择小区名称");
-			}
-		});
-		$("#dyh").click(function(){
-			var xq = $('#xq  option:selected').val();
-			var ld = $('#ldh  option:selected').val();
-			if(xq == ""){
-				alert("请先选择小区名称");
-				return;
-			}
-			if(ld == ""){
-				alert("请先选择楼栋号");
-			}
-		});
+		
+		
 
 		
 		//工单搜索
 		$("#search_btn").click(function(){
-			var xq = $('#xq').val();
-			var ld = $('#ldh').val();
-			var dy = $('#dyh').val();
-			var hh = $('#hh').val();
-			var compareWordList = [];
-			$('#xqspan').html(xq);
 			
-				compareWord(xq,ld,dy,hh,xinwordList,compareWordList);
+			var compareWordList = [];
+			
+			
+				compareWord(compareWordList);
 			
 			$("#xinword_body").empty();
 
@@ -238,144 +191,9 @@ $(document).ready(function() {
 
 	}
 		
-		
-//		查询状态
-		$("#search_status_btn").click(function(){
-			var arr = [];
-			var kg = $('#kg').val();
-			var jf = $('#jf').val();
-			var jj = $('#jj').val();
-			var checkBox=  $("input[type='checkbox']:checked");
-			if(checkBox.length == 0){
-				alert("请勾选信息");
-				return;
-			}
-			checkBox.each(function(i, n){
-				var tdarr = [];
-				var td =  $(this).parent().parent().children();
-				for(var i = 1; i < td.length-1; i ++){
-					tdarr.push(td[i].innerHTML);
-				}
-				arr.push(tdarr);
-			});
 
-			$.ajax({
-			type:"POST",
-			url : "CxState.action",
-			async : false,
-			dataType : "json",
-			 traditional: true,
-			data : {
-				"arr" : arr,
-				"kg" : kg,
-				"jf" : jf,
-				"jj" : jj,
-			},
-			success : function(data) {
-				
-				var msg = data.js
-				if(msg==0){
-					alert("查询成功");
-				}else{
-					alert("查询失败");
-				}
-				cb()
-			}
 
-			})
 
-		});
-		
-//		单一风盘操作
-		$("#operation_one_btn").click(function(){
-			
-			var kg = $('#kg  option:selected').val();
-			var jf = $('#jf  option:selected').val();
-			var jj = $('#jj  option:selected').val();
-			
-			var arr = [];
-			var checkBox=  $("input[type='checkbox']:checked");
-			if(checkBox.length == 0){
-				alert("请勾选信息");
-				return;
-			}
-			checkBox.each(function(i, n){
-				var tdarr = [];
-				var td =  $(this).parent().parent().children();
-				for(var i = 1; i < td.length; i ++){
-					tdarr.push(td[i].innerHTML);
-				}
-				arr.push(tdarr);
-			});
-			$.ajax({
-				type:"POST",
-				url : "DCxZx.action",
-				async : false,
-				dataType : "json",
-				 traditional: true,
-				data : {
-					"arr" : arr,
-					"kg" : kg,
-					"jf" : jf,
-					"jj" : jj,
-				},
-				success : function(data) {
-					var msg = data.js
-					if(msg==0){
-						alert("查询成功");
-					}else{
-						alert("查询失败");
-					}
-					cb()
-				 }
-
-				})
-		});
-		
-//		某户所以风盘操作
-		$("#operation_all_btn").click(function(){
-			var kg = $('#kg  option:selected').val();
-			var jf = $('#jf  option:selected').val();
-			var jj = $('#jj  option:selected').val();
-			var arr = [];
-			var checkBox=  $("input[type='checkbox']:checked");
-			if(checkBox.length != 1){
-				alert("只能勾选一组信息");
-				return;
-			}
-			checkBox.each(function(i, n){
-				var tdarr = [];
-				var td =  $(this).parent().parent().children();
-				for(var i = 1; i < td.length; i ++){
-					tdarr.push(td[i].innerHTML);
-				}
-				arr.push(tdarr);
-			});
-			$.ajax({
-				type:"POST",
-				url : "QyFp.action",
-				async : false,
-				dataType : "json",
-				 traditional: true,
-				data : {
-					"arr" : arr,
-					"kg" : kg,
-					"jf" : jf,
-					"jj" : jj,
-				},
-				success : function(data) {
-					var msg = data.js
-					if(msg==0){
-						alert("查询成功");
-					}else{
-						alert("查询失败");
-					}
-					cb()
-				}
-
-				})
-		});
-		
 		
 		//排序
 		var tableObject = $('#xincreate_table_body table'); //获取id为xincreate_table_body的table对象
@@ -606,98 +424,41 @@ function getTime() {
 
 
 
-function compareWord(xq,ld,dy,hh,wordList,compareWordList){
-	var json;
+function compareWord(compareWordList){
+	var json
 	compareWordList.length=0;
-	
-	$.ajax({
-		url : "dataSbgl.action", 
-		async : false,
-		dataType : "json",
-		data : {
-			"xqm":xq,
-			"ldh":ld,
-			"dyh":dy,
-			"hh":hh,
-		},
-		success : function(data) {
-		 json=data.YhList;
-	
-		}
-		
-	
-	});
+	 $.ajax({
+			url : getRootPath()+"/OpcCon/dbjc.action", 
+			async : false,
+			dataType : "json",
+			data : {
+			"hrz":$('#hrz').val(),
+			"startTime":$('#startTime').val(),
+			"endTime":$('#endTime').val()
+			},
+			success : function(data) {
+				
+				json=data.list;	   
+			}
 
+		});
+	
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
-		arr1[0] = json[i].id;
-		arr1[1] = json[i].yhbh;
-		arr1[2] = json[i].yhxm;
-		arr1[3] = json[i].fpdz;
-		arr1[4] = json[i].ldh;
-		arr1[5] = json[i].dyh;
-		arr1[6] = json[i].hh;
-		arr1[7] = json[i].sdwd;
-		arr1[8] = json[i].snwd;
-		if(json[i].ms=="01"){
-			arr1[9]="制热"
-		}else{
-			arr1[9]="制冷"
-		}					
-		arr1[10] = json[i].yydl;
-		arr1[11] = json[i].syje;
-		if(json[i].dw=="03"){
-			arr1[12]="高档"
-		}
-		if(json[i].dw=="02"){
-			arr1[12]="中档"
-		}
-		if(json[i].dw=="01"){
-			arr1[12]="低档"
-		}
-		if(json[i].dw=="00"){
-			arr1[12]="停止"
-		}
-		arr1[13] = json[i].gdtime;
-		arr1[14] = json[i].zdtime;
-		arr1[15] = json[i].ddtime;
-		arr1[16] = json[i].dgdtime;
-		arr1[17] = json[i].dzdtime;
-		arr1[18] = json[i].dddtime;
-		
-		arr1[19] = json[i].time;
-		arr1[20] = json[i].mj;
-		arr1[21] = json[i].lxdh;
-		if(json[i].jf=="01"){
-			arr1[22]="允许计费"
-		}
-		if(json[i].jf=="00"){
-			arr1[22]="禁止计费"
-		}
-		if(json[i].kg=="01"){
-			arr1[23]="自动运行"
-		}
-		if(json[i].kg=="00"){
-			arr1[23]="强制关闭"
-		}
-		if(json[i].bj=="00"){
-			arr1[24]="正常"
-		}
-		if(json[i].bj=="01"){
-			arr1[24]="开盖"
-		}
-		if(json[i].bj=="03"){
-			arr1[24]="盗热嫌疑"
-		}
-		if(json[i].bj=="04"){
-			arr1[24]="通讯异常"
-		}
-		arr1[25] = json[i].bz;
-		arr1[26] = json[i].xqm;
-		arr1[27] = json[i].jj;
+		arr1[0] = json[i].hrz;
+		arr1[1] = json[i].lxr;
+		arr1[2] = json[i].gsdd;
+		arr1[3] = json[i].rbdz;
+		arr1[4] = json[i].time;
+		arr1[5] = json[i].ycljgrl;
+		arr1[6] = json[i].ycssgrl;
+		arr1[7] = json[i].ycljgll;
+		arr1[8] = json[i].ycssgll;
+		arr1[9] = json[i].ycgswd;
+		arr1[10] = json[i].ychswd;
+		arr1[11] = json[i].rblx;
 		compareWordList.push(arr1);
 	};
-	//console.log(compareWordList.length)
 }	
 
 //表格写入函数

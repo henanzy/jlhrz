@@ -127,6 +127,12 @@ public class OpcServiceImpl implements OpcService {
 		// TODO Auto-generated method stub
 		return opcDao.getlsbjxx(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> dbjc(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opcDao.dbjc(map);
+	}
 	
 	
 	

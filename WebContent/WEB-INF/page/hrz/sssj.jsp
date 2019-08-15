@@ -131,7 +131,17 @@
 		margin-left:20px;
 		padding-left:6px;
 	}
-	
+	#dayin{
+		margin-top:8px;
+		margin-left:20px;
+		border:none;
+		background-color:rgb(60,61,61);
+		width:60px;
+		height:24px;
+		margin-right:6px;
+		color:#fff;
+		border-radius:6px;
+	}
 	/* 搜索按钮 */
 	#jk_search_btn{
 		margin-top:8px;
@@ -186,9 +196,7 @@
    
 	
 </style>
- <script type="text/javascript">
-var xinwordListj = ${xinwordList};
-</script>
+
 </head>
 <body>
 
@@ -210,6 +218,7 @@ var xinwordListj = ${xinwordList};
 					</select>
 					
 					<input id="jk_search_btn" type="submit" value="搜索" />
+					<input id="dayin" type="submit" value="导出" />
 				</p>
 			</div>
 			<div id="monitword_table_body" class="mws-panel-body"

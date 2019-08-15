@@ -153,4 +153,9 @@ public class DUtil {
 		String[] str=new String[]{zm+ecgswd,zm+ecgsyl,zm+echsyl};
 			return str;
 		}
+	
+	public static String[] ryjk(String zm){
+		  String[] str=new String[]{zm+ycgswd,zm+ychswd,zm+ycgsssll,zm+ycgsssrl,zm+ycgsljll,zm+ycgsljrl};
+			return str;
+		}
 }

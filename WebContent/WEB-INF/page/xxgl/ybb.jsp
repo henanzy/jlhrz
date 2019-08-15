@@ -114,7 +114,17 @@ var list =[];
   
   white-space: nowrap;
 } 
- 
+ #dayin{
+		margin-top:8px;
+		margin-left:20px;
+		border:none;
+		background-color:rgb(60,61,61);
+		width:60px;
+		height:24px;
+		margin-right:6px;
+		color:#fff;
+		border-radius:6px;
+	}
 	/* 搜索DIV */
 	.jk_search{
 		display:block;
@@ -252,6 +262,7 @@ var list =[];
 					</span>
 					<input id="jk_search_btn1" type="submit" value="选择列" />
 					<input id="jk_search_btn" type="submit" value="搜索" />
+					<input id="dayin" type="submit" value="导出" />
 				</p>
 			</div>
 			<div id="monitword_table_body" class="mws-panel-body"
