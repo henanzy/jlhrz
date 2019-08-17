@@ -8,7 +8,86 @@ function getRootPath(){
 } 
 
 $(function () {
-
+	var zgwd=[];
+	var zdwd=[];
+	var pjwd=[];
+	var Tqoptions = {
+	        chart: {
+	            type: 'line'// 指定图表的类型，默认是折线图（line）
+	        },
+	        title:{
+	        	text:null
+	        },
+	        tooltip: {
+				crosshairs: [{
+					width: 1,
+					color:'#aaaaaa'
+				}],
+				shared: true
+			},
+	        xAxis: {  // x 轴分类
+		       
+	        },
+	        yAxis: {
+	            title: {
+	                text: null
+	                // y 轴标题
+	            }
+	        }
+	    };
+	$.ajax({
+	    type: 'GET',
+	    url: 'https://www.tianqiapi.com/api/',
+	    data: 'version=v1&city=洛阳',
+	    dataType: 'JSON',
+	    error: function () {
+	        alert('网络错误');
+	    },
+	    success: function (res) {
+	        var data=res.data;
+	        console.log(data)
+	        for (var i = 0 ; i < data.length ; i ++) {
+	        	zgwd.push(parseFloat(data[i].tem1.replace("℃","")));
+	        	zdwd.push(parseFloat(data[i].tem2.replace("℃","")));
+	        	pjwd.push(parseFloat(data[i].tem.replace("℃","")));
+	        	Tqoptions.xAxis = {
+	        			title: {
+	        				text: '时间'
+	        			},
+	        			categories: time,
+	        			
+	        			labels: {
+	        			   /* formatter:function(){
+	        			     return this.value.substring(0,10);
+	        			    }*/
+	        			  }
+	        		};
+	        	Tqoptions.series = [];
+	        	Tqoptions.series.push({
+	        		 name:"最高温度",
+	        		 data:zgwd,
+	        		 tooltip : {
+	        				valueSuffix : '℃'
+	        			}	,		 
+	        	 });
+	        	 Tqoptions.series.push({
+	        		 name:"最低温度",
+	        		 data:zdwd,
+	        		 tooltip : {
+	        				valueSuffix : '℃'
+	        			}	,	 
+	        	 });
+	        	 Tqoptions.series.push({
+	        		 name:"当前温度",
+	        		 data:pjwd,
+	        		 tooltip : {
+	        				valueSuffix : '℃'
+	        			}	,	 
+	        	 });
+	        	 Highcharts.chart("Tqcontainer", Tqoptions);
+	        }
+	    }
+	});
 
 	
 	var options = {
@@ -58,6 +137,7 @@ $(function () {
 	 var ecgswd = [];
 	 var echsyl = [];
 	 var echswd = [];
+	 var snwd = [];
 	 var time = [];
 	 for (var i = 0 ; i < dataList.length ; i ++) {
 			var arr = [];
@@ -70,11 +150,12 @@ $(function () {
 			ecgswd.push(parseFloat(dataList[i].ecgswd));
 			echsyl.push(parseFloat(dataList[i].echsyl));
 			echswd.push(parseFloat(dataList[i].echswd));
+			snwd.push(parseFloat(dataList[i].snwd));
 			
 			time.push(dataList[i].time);
 			
 		};
-	var data = {name:$("#hrz").val(),ychsyl:ychsyl,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd};
+	var data = {name:$("#hrz").val(),ychsyl:ychsyl,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd,snwd:snwd};
 //	 allwd(options,xqdata,'mws-dashboard-chart-1')
 	onewd(options,data,'Ncontainer',time)
 
@@ -95,7 +176,16 @@ function onewd(options,xqdata,con,time){
 			  }
 		};
 	options.series = [];
-	
+	 options.series.push({
+		 name:"室内温度",
+		 data:xqdata.snwd,
+		 tooltip : {
+				valueSuffix : '℃'
+			}	,marker: {
+
+	             enabled: false,
+	         },		 
+	 });
 			 options.series.push({
 				 name:"一次回水压力",
 				 data:xqdata.ychsyl,
@@ -106,6 +196,7 @@ function onewd(options,xqdata,con,time){
 			             enabled: false,
 			         },		 
 			 });
+			 
 			 options.series.push({
 				 name:"一次回水温度",
 				 data:xqdata.ychswd,

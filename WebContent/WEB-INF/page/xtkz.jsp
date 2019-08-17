@@ -248,6 +248,7 @@ function xyf(flag){
 }
 
 function show(){
+	var hrz=$("#hrz").val();
 	layui.form.render();
 	  layer.open({
 	      skin:"alert-skin",  
@@ -259,14 +260,14 @@ function show(){
 	    });
 	  layui.form.render();
 	  var d=[];
-	  d[0]="吉利.教育局站.读状态.调节阀远程就地";
-	  d[1]="吉利.教育局站.写状态.调节阀定时开关使能";
-	  d[2]="吉利.教育局站.写数据.开启调节阀时间";
-	  d[3]="吉利.教育局站.写数据.关闭调节阀时间";
-	  d[4]="吉利.教育局站.写数据.调节阀最低开度";
-	  d[5]="吉利.教育局站.写数据.阀门开度设定";
-	  d[6]="吉利.教育局站.读数据.调节阀反馈";
-	  d[7]="吉利.教育局站.写状态.调节阀强制";
+	  d[0]="吉利."+hrz+".读状态.调节阀远程就地";
+	  d[1]="吉利."+hrz+".写状态.调节阀定时开关使能";
+	  d[2]="吉利."+hrz+".写数据.开启调节阀时间";
+	  d[3]="吉利."+hrz+".写数据.关闭调节阀时间";
+	  d[4]="吉利."+hrz+".写数据.调节阀最低开度";
+	  d[5]="吉利."+hrz+".写数据.阀门开度设定";
+	  d[6]="吉利."+hrz+".读数据.调节阀反馈";
+	  d[7]="吉利."+hrz+".写状态.调节阀强制";
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
@@ -322,11 +323,12 @@ function showXhb(flag){
 	  
 	  $("#xhbbh").val(flag)
 	  var d=[];
-	  d[0]="吉利.教育局站.读状态.循环泵"+flag+"远程就地";
-	  d[1]="吉利.教育局站.写状态.循环泵"+flag+"强制";
-	  d[2]="吉利.教育局站.写状态.循环泵"+flag+"急停";
-	  d[3]="吉利.教育局站.写数据.循环泵"+flag+"频率设定";
-	  d[4]="吉利.教育局站.读数据.循环泵"+flag+"频率反馈";
+	  var hrz=$("#hrz").val();
+	  d[0]="吉利."+hrz+".读状态.循环泵"+flag+"远程就地";
+	  d[1]="吉利."+hrz+".写状态.循环泵"+flag+"强制";
+	  d[2]="吉利."+hrz+".写状态.循环泵"+flag+"急停";
+	  d[3]="吉利."+hrz+".写数据.循环泵"+flag+"频率设定";
+	  d[4]="吉利."+hrz+".读数据.循环泵"+flag+"频率反馈";
 	 
 	  
 	  $.ajax({
@@ -374,6 +376,8 @@ function showXhb(flag){
 }
 
 function showXyf(){
+	var hrz=$("#hrz").val();
+	
 	layui.form.render();
 	  layer.open({
 		  skin:"alert-skin",  
@@ -385,10 +389,10 @@ function showXyf(){
 	    });
 	  layui.form.render();
 	  var d=[];
-	  d[0]="吉利.教育局站.读状态.泄压阀远程就地";
-	  d[1]="吉利.教育局站.写状态.泄压阀强制";
-	  d[2]="吉利.教育局站.写数据.泄压压力上限";
-	  d[3]="吉利.教育局站.写数据.泄压压力下限";
+	  d[0]="吉利."+hrz+".读状态.泄压阀远程就地";
+	  d[1]="吉利."+hrz+".写状态.泄压阀强制";
+	  d[2]="吉利."+hrz+".写数据.泄压压力上限";
+	  d[3]="吉利."+hrz+".写数据.泄压压力下限";
 	  
 	  
 	  $.ajax({
@@ -420,6 +424,7 @@ function showXyf(){
 }
 
 function showBsf(){
+	var hrz=$("#hrz").val();
 	layui.form.render();
 	  layer.open({
 		  skin:"alert-skin",  
@@ -432,8 +437,8 @@ function showBsf(){
 	  layui.form.render();
 	  
 	  var d=[];
-	  d[0]="吉利.教育局站.读状态.自来水阀远程就地";
-	  d[1]="吉利.教育局站.写状态.自来水阀强制";
+	  d[0]="吉利."+hrz+".读状态.自来水阀远程就地";
+	  d[1]="吉利."+hrz+".写状态.自来水阀强制";
 	  /* d[2]="吉利.教育局站.写数据.泄压压力上限";
 	  d[3]="吉利.教育局站.写数据.泄压压力下限"; */
 	  
@@ -467,6 +472,7 @@ function showBsf(){
 }
 
 function showBsb(flag){
+	var hrz=$("#hrz").val();
 	layui.form.render();
 	  layer.open({
 		  skin:"alert-skin",  
@@ -479,11 +485,11 @@ function showBsb(flag){
 	  layui.form.render();
 	  $('#bsbbh').val(flag)
 	  var d=[];
-	  d[0]="吉利.教育局站.读状态.补水泵"+flag+"远程就地";
-	  d[1]="吉利.教育局站.写状态.补水泵"+flag+"强制";
+	  d[0]="吉利."+hrz+".读状态.补水泵"+flag+"远程就地";
+	  d[1]="吉利."+hrz+".写状态.补水泵"+flag+"强制";
 	  //d[2]="吉利.教育局站.写状态.补水泵"+flag+"急停";
-	  d[2]="吉利.教育局站.写数据.补水泵"+flag+"频率设定";
-	  d[3]="吉利.教育局站.读数据.补水泵"+flag+"频率反馈";
+	  d[2]="吉利."+hrz+".写数据.补水泵"+flag+"频率设定";
+	  d[3]="吉利."+hrz+".读数据.补水泵"+flag+"频率反馈";
 	 
 	  
 	  $.ajax({
@@ -838,9 +844,10 @@ function showBsb(flag){
 <div class="bg">
      <div style="width:50px;height:60px;  position: relative;left: 3%;top: 3%;" >
 	<select id="hrz" name="hrz">
-	                    <option value="一委站">一委站</option>
-						<option value="二委站">二委站</option>
-						<option value="教育局站">教育局站</option>	
+	<option value="教育局站">教育局站</option>
+	<option value="一委站">一委站</option>
+	<option value="二委站">二委站</option>
+							
 	</select>
 	</div>
 	
@@ -1048,55 +1055,59 @@ function showBsb(flag){
 $("#hrz").change(function(){
 	 
 	$("#title").html($("#hrz").val()+"运行界面")
-		
+	hrz();
 	});
 	
-$.ajax({
-	url:"<%=basePath%>OpcCon/xtkzSj.action",
-	async:false,
-	dataType:"json",
-	data:{	
-		"hrz":"吉利.教育局站.读数据.",
-	},
-	success:function(data){
-		var map=data.map;
-		console.log(map)
-		$("#ycgsssll").html(map.一次供水瞬时流量);
-		$("#ycgsssrl").html(map.一次供水瞬时热量);
-		$("#ycgsljll").html(map.一次供水累计流量);
-		$("#ycgsljrl").html(map.一次供水累计热量);
-		$("#ecgsssll").html(map.二次供水瞬时流量);
-		$("#ecgsljll").html(map.二次供水累计流量);
+function hrz(){
+	 var hrz=$("#hrz").val()
+	$.ajax({
+		url:"<%=basePath%>OpcCon/xtkzSj.action",
+		async:false,
+		dataType:"json",
+		data:{	
+			"hrz":"吉利."+hrz+".读数据.",
+		},
+		success:function(data){
+			var map=data.map;
+			console.log(map)
+			$("#ycgsssll").html(map.一次供水瞬时流量);
+			$("#ycgsssrl").html(map.一次供水瞬时热量);
+			$("#ycgsljll").html(map.一次供水累计流量);
+			$("#ycgsljrl").html(map.一次供水累计热量);
+			$("#ecgsssll").html(map.二次供水瞬时流量);
+			$("#ecgsljll").html(map.二次供水累计流量);
+			
+			$("#ycgswd").html(map.一次供水温度);
+			$("#ycgsyl").html(map.一次供水压力);
+			$("#ecgswd").html(map.二次供水温度);
+			$("#ecgsyl").html(map.二次供水压力);
+			
+			$("#ychswd").html(map.一次回水温度);
+			$("#ychsyl").html(map.一次回水压力);
+			$("#echswd").html(map.二次回水温度);
+			$("#echsyl").html(map.二次回水压力);
+			
+			$("#Axdlz").html(map.A相电流值);
+			$("#Bxdlz").html(map.B相电流值);
+			$("#Cxdlz").html(map.C相电流值);
+			$("#Axdyz").html(map.A相电压值);
+			$("#Bxdyz").html(map.B相电压值);
+			$("#Cxdyz").html(map.C相电压值);
+			$("#dlsjz").html(map.电量实际值);
+			
+			$("#zlszbsl").html(map.自来水总补水量);
+			$("#bsssll").html(map.补水瞬时流量);
+			$("#bsljll").html(map.补水累计流量);
+			
+			$("#xhb1plfk").html(map.循环泵1频率反馈);
+			$("#xhb2plfk").html(map.循环泵2频率反馈);
+			$("#bsb1plfk").html(map.补水泵1频率反馈);
+			
+			
+		}
 		
-		$("#ycgswd").html(map.一次供水温度);
-		$("#ycgsyl").html(map.一次供水压力);
-		$("#ecgswd").html(map.二次供水温度);
-		$("#ecgsyl").html(map.二次供水压力);
-		
-		$("#ychswd").html(map.一次回水温度);
-		$("#ychsyl").html(map.一次回水压力);
-		$("#echswd").html(map.二次回水温度);
-		$("#echsyl").html(map.二次回水压力);
-		
-		$("#Axdlz").html(map.A相电流值);
-		$("#Bxdlz").html(map.B相电流值);
-		$("#Cxdlz").html(map.C相电流值);
-		$("#Axdyz").html(map.A相电压值);
-		$("#Bxdyz").html(map.B相电压值);
-		$("#Cxdyz").html(map.C相电压值);
-		$("#dlsjz").html(map.电量实际值);
-		
-		$("#zlszbsl").html(map.自来水总补水量);
-		$("#bsssll").html(map.补水瞬时流量);
-		$("#bsljll").html(map.补水累计流量);
-		
-		$("#xhb1plfk").html(map.循环泵1频率反馈);
-		$("#xhb2plfk").html(map.循环泵2频率反馈);
-		$("#bsb1plfk").html(map.补水泵1频率反馈);
-		
-		
-	}
-	
-});	
+	});	
+}	
+hrz();
 </script>
 </html>

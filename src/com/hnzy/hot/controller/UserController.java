@@ -357,4 +357,9 @@ public class UserController {
     	public String ryjk(){
     		return "xxgl/ryjk";
     	}
+    	
+    	@RequestMapping("qhbc")
+    	public String qhbc(){
+    		return "hrz/qhbc";
+    	}
 }

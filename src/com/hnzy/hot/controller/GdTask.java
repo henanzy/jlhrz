@@ -341,8 +341,8 @@ public class GdTask{
         					   opcService.insertZybb(insMap);
     }  
 	
-	@Scheduled(cron="*/5 * * * * ?")
-	public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+	//@Scheduled(cron="*/5 * * * * ?")
+	/*public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -422,10 +422,10 @@ public class GdTask{
         						
         					}
         					   server.dispose();        			                 			        				          
-        					}
+        					}*/
 	
-	@Scheduled(cron="*/5 * * * * ?")
-	public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+	// @Scheduled(cron="*/5 * * * * ?")
+	/*public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -490,7 +490,7 @@ public class GdTask{
 									}
 	        						
 	        					}server.dispose();
-        					}
+        					}*/
 	
 	 public boolean isNumeric(String value){
          Pattern pattern = Pattern.compile("-?[0-9]+.*[0-9]*");

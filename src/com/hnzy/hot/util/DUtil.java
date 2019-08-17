@@ -133,7 +133,7 @@ public class DUtil {
 	}
 	
 	public static String[] qxsj(String zm){
-		String[] str=new String[]{zm+ecgswd,zm+ecgsyl,zm+echsyl,zm+echswd,zm+ycgswd,zm+ycgsyl,zm+ychsyl,zm+ychswd};
+		String[] str=new String[]{zm+ecgswd,zm+ecgsyl,zm+echsyl,zm+echswd,zm+ycgswd,zm+ycgsyl,zm+ychsyl,zm+ychswd,zm+snwd};
 		return str;
 	}
 		
@@ -158,4 +158,6 @@ public class DUtil {
 		  String[] str=new String[]{zm+ycgswd,zm+ychswd,zm+ycgsssll,zm+ycgsssrl,zm+ycgsljll,zm+ycgsljrl};
 			return str;
 		}
+	
+	
 }

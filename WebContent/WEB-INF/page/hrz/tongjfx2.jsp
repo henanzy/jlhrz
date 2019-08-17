@@ -217,34 +217,26 @@ select{
 
 				</div>
 			</div>
-		
-	       <div class="mws-panel grid_8"
+		<div class="mws-panel grid_8"
 				style="width:96%;min-width: 550px;">
 				<div class="mws-panel-header">
-					<span class="mws-i-24 i-graph">温度曲线图</span>
+					<span class="mws-i-24 i-graph">未来七日天气预报</span>
 				</div>
-				<div class="mws-panel-body">
 				
-				   <div  class="mws-panel-body"  style="width:100%;">
-					<div  style="width:85%; height:380px;float:left;" >
-					<div id="Lcontainer" style="width: 100%; height: 380px;"></div>
-				   </div>
-				   
-				   <div  style="width:15%; height:380px;float:left; " >
-					
-				   </div>
-				
-				    <input type="checkbox" id="LyHyl" checked onclick="LcheckboxOnclick(this,1)">一次回温度
-				    <input type="checkbox" id="LeHyl" checked onclick="LcheckboxOnclick(this,2)">二次回温度
-				    <input type="checkbox" id="qwdHyl" checked onclick="LcheckboxOnclick(this,3)">室外温度
-				   	</div>
+		
+				<div class="mws-panel-body" style="width:96%;min-width: 550px; height:500px" >
+					<div class="mws-panel-content">
+					<div id="Tqcontainer" ></div>
+			
+					</div>
 				</div>
-				<p>
-			</div>
+		</div>
+	       
 			
 		</div>
 	</div>
 <script type="text/javascript">
+
 
 Highcharts.setOptions({
 	global: {
@@ -286,6 +278,8 @@ function FormatDate() {
 			+ date.getMinutes() + ":" + date.getSeconds();
 }
 function csh (){
+	
+	
 	var opt = {
 	        chart: {
 	            type: 'spline',// 指定图表的类型，默认是折线图（line）,
@@ -317,6 +311,7 @@ function csh (){
 	    					setInterval(function () {
 	    						var x =FormatDate() // 当前时间
 	    							          // 随机值
+	    					    
 	    						series0.addPoint([x, map.一次回水压力], true, true);
 	    						series1.addPoint([x, map.一次回水温度], true, true);
 	    						series2.addPoint([x, map.一次供水压力], true, true);
@@ -325,9 +320,9 @@ function csh (){
 	    						series5.addPoint([x, map.二次供水温度], true, true);
 	    						series6.addPoint([x, map.二次回水压力], true, true);
 	    						series7.addPoint([x, map.二次回水温度], true, true); 
-	    						
+	    						chart.redraw();
 	    						 activeLastPointToolip(chart);
-	    					}, 5000);
+	    					}, 2000);
 	    				}
 	    			},
 	        },
@@ -413,7 +408,7 @@ function csh (){
 			             enabled: false,
 			         },		 
 			 });
-	  opt.series.push({
+	  opt.series.push({ 
 		 name:"一次回水温度",
 		 data:data.ychswd,
 		 tooltip : {

@@ -178,7 +178,9 @@ function gwjg(){//
 function ddkz(){// 
     window.open("<%=basePath%>user/ddkz.action", "Conframe");
 } 
-
+function qhbc(){// 
+    window.open("<%=basePath%>user/qhbc.action", "Conframe");
+} 
 function hrzxx(){// 
     window.open("<%=basePath%>OpcCon/hrzxx.action", "Conframe");
 } 
@@ -234,10 +236,10 @@ function ryjk(){//
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
                     	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
                     	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热源监控</a></li>
-                    	        <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li>
+                    	        <!-- <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li> -->
                              	<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能耗分析</a></li>
-                             	<!-- <li><a onclick="" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行数据预警</a></li>
- -->
+                             	<li><a onclick="qhbc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;气候补偿</a></li>
+
                         </ul>
                     </li>
                     

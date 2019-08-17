@@ -303,6 +303,7 @@ public class opcController {
 		hrz = new String(hrz.getBytes("ISO-8859-1"), "utf-8");
 		String names = hrz + name;
 		String[] d = { names };
+		System.out.println(names);
 		Map<String, Object> dmap = new HashMap<String, Object>();
 		Map<String, Item> map = null;
 		Group group = null;
@@ -314,7 +315,7 @@ public class opcController {
 			map = group.addItems(d);
 
 			Map<String, Item> item;
-			item = group.addItems(d);
+			item = group.addItems(d); 
 			for (String s : item.keySet()) {
 				Item it = item.get(s);
 				if (s.contains("时间")) {
@@ -775,6 +776,89 @@ public class opcController {
 
 		hrz = hrz.replace("吉利.", "");
 		hrz = hrz.replace(".读数据.", "");
+		dmap.put("hrz", hrz);
+		json.put("map", dmap);
+		return json;
+	}
+	
+	@RequestMapping("qhbc")
+	@ResponseBody
+	public JSONObject qhbc(String hrz)
+			throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException {
+		JSONObject json = new JSONObject();
+		
+		ConnectionInformation ci = OPCConfiguration.getCLSIDConnectionInfomation();
+		final Server server = new Server(ci, Executors.newSingleThreadScheduledExecutor());
+		//hrz = new String(hrz.getBytes("ISO-8859-1"), "utf-8");
+		
+		String[] d = XUtil.qhbc(hrz);
+
+		Map<String, Object> dmap = new HashMap<String, Object>();
+		Map<String, Item> map = null;
+		Group group = null;
+		try {
+			server.connect();
+			group = server.addGroup("groupyx");
+			group.setActive(true);
+			map = group.addItems(d);
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JIException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (AlreadyConnectedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		for (Entry<String, Item> temp : map.entrySet()) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+				String id = temp.getValue().getId();
+				Object value = temp.getValue().read(true).getValue().getObject();
+				System.out.println("------------value----------" + value);
+				String[] a = id.split("写数据.");
+				String key = a[1];
+				if (key.contains("#")) {
+					key = key.replace("#", "");
+				}
+				if (key.contains("时间")) {
+					value = temp.getValue().read(true).getValue().getObjectAsUnsigned().getValue();
+				}
+				boolean b = isNumeric(String.valueOf(value));
+				System.out.println("------b---" + b);
+				if (b == false) {
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					value = temp.getValue().read(true).getValue().getObject();
+				}
+				// String s=String.format("%.1f",value);
+				dmap.put(key, value);
+			} catch (JIException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		server.dispose();
+
+		hrz = hrz.replace("吉利.", "");
+		hrz = hrz.replace(".写数据.", "");
 		dmap.put("hrz", hrz);
 		json.put("map", dmap);
 		return json;

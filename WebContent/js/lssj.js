@@ -15,13 +15,8 @@ $(document).ready(function() {
           str+='<tr>';
          
           for(let item in chk[i]){
-              //增加\t为了不让表格显示科学计数法或者其他格式
-        	  
-        		  str+=`<td>${ chk[i][item] + '\t'}</td>`;
-        	  
-        		   
-        	  
-                  
+              //增加\t为了不让表格显示科学计数法或者其他格式        	  
+        		  str+=`<td>${ chk[i][item] + '\t'}</td>`;                 
           }
           str+='</tr>';
         	
@@ -108,7 +103,7 @@ $(document).ready(function() {
 				for(var j=0;j<chk_value.length;j++){
 					var str=chk_value[j];
 					
-					arr[j+2]=list[i][str];
+					arr[j+2]=list[i][str];//前面两个固定列
 				}
 			 
 				chk.push(arr);

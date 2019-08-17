@@ -42,6 +42,15 @@ public class XUtil {
 	private static String ycgsylsx="一次供水压力上限";private static String ycgsylxx="一次供水压力下限";
 	private static String ychswdsx="一次回水温度上限";private static String ychswdxx="一次回水温度下限";
 	private static String ychsylsx="一次回水压力上限";private static String ychsylxx="一次回水压力下限";
+	private static String sjdf1="时间段分1";private static String sjdf2="时间段分2";
+	private static String sjdf3="时间段分3";private static String sjdf4="时间段分4";
+	private static String sjds1="时间段时1";private static String sjds2="时间段时2";
+	private static String sjds3="时间段时3";private static String sjds4="时间段时4";
+	
+	private static String swwd1="室外温度1";private static String swwd2="室外温度2";
+	private static String swwd3="室外温度3";private static String swwd4="室外温度4";
+	private static String swwd5="室外温度5";private static String swwd6="室外温度6";
+	private static String swwd7="室外温度7";private static String swwd8="室外温度8";
 	
 	
 	
@@ -61,5 +70,12 @@ public class XUtil {
 			zm+xyylxx,zm+echstjyl,zm+ywxxx,zm+tzgpbsbpl,zm+tzgpbsbsj,zm+tjfzdkd};
 		return str;
 	}
+	
+	public static String[] qhbc(String zm){
+		  String[] str=new String[]{zm+bcwd1,zm+bcwd2,zm+bcwd3,zm+bcwd4,zm+ecgswd1,zm+ecgswd2,zm+ecgswd3,zm+ecgswd4,zm+ecgswd5,zm+ecgswd6,zm+ecgswd7,
+				  zm+ecgswd8,zm+sjdf1,zm+sjdf2,zm+sjdf3,zm+sjdf4,zm+sjds1,zm+sjds2,zm+sjds3,zm+sjds4,zm+swwd1,zm+swwd2,zm+swwd3,zm+swwd4,
+				  zm+swwd5,zm+swwd6,zm+swwd7,zm+swwd8,};
+			return str;
+		}
 	
 }

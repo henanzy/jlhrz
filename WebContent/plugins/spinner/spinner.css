@@ -3,12 +3,13 @@
 .ui-spinner input.ui-spinner-box {  }
 
 .ui-spinner-up, .ui-spinner-down {
-	background:url(../../images/jui/ui-icons.png);
+	 background:url(../../images/jui/ui-icons.png);
 	height:15px;
 	z-index: 100;
 	width:15px;
 	position: absolute; right: -2px;
-	cursor: default; border: none; 
+	cursor: default; border: none;  
+	display:none;
 }
 
 .ui-spinner-up { top:0; background-position: -1px -17px; }
