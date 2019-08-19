@@ -1048,6 +1048,9 @@ function showBsb(flag){
 	补水瞬时流量：&nbsp;<span id="bsssll"></span>&nbsp;m³/h<br/>	
 	补水累计流量：&nbsp;<span id="bsljll"></span>&nbsp;m³<br/>	
 	</div>
+	<div style="width:3%;height:3%;    position: absolute;left:27%;top: 85%" >
+	<span style="font-size:15px;" id="sxyw"></span>
+	</div>
 </div>
 </body>
 
@@ -1102,7 +1105,7 @@ function hrz(){
 			$("#xhb1plfk").html(map.循环泵1频率反馈);
 			$("#xhb2plfk").html(map.循环泵2频率反馈);
 			$("#bsb1plfk").html(map.补水泵1频率反馈);
-			
+			$("#sxyw").html(map.水箱液位);
 			
 		}
 		

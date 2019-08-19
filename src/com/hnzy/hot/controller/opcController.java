@@ -585,7 +585,7 @@ public class opcController {
 		}
 		List<Map<String, Object>> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
-
+        map.put("hrz", hrz);
 		list = opcService.getHrzXx(map);
 		json.put("list", list);
 		return json;
@@ -862,5 +862,24 @@ public class opcController {
 		dmap.put("hrz", hrz);
 		json.put("map", dmap);
 		return json;
+	}
+	
+	@RequestMapping("sdrfx")
+	@ResponseBody
+	public JSONObject sdrfx(HttpServletRequest request, String hrz, String startTime, String endTime)
+			throws UnsupportedEncodingException {
+		JSONObject json = new JSONObject();
+		if (hrz != null) {
+			hrz = new String(hrz.getBytes("ISO-8859-1"), "utf-8");
+		}
+		List<Map<String, Object>> list = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		map.put("hrz", hrz);
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		list = opcService.sdrfx(map);
+		json.put("list", list);
+		return json;
+
 	}
 }

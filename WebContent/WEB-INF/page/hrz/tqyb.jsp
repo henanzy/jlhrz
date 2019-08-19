@@ -1,17 +1,19 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%
+<%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>设备管理</title>
+<title>Insert title here</title>
+
+
+
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="../css/reset.css"
 	media="screen" />
@@ -59,52 +61,9 @@
 
 <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 
-<script type="text/javascript"
-	src="../plugins/jimgareaselect/jquery.imgareaselect.min.js"></script>
-<script type="text/javascript"
-	src="../plugins/jquery.dualListBox-1.3.min.js"></script>
-<script type="text/javascript" src="../plugins/jgrowl/jquery.jgrowl.js"></script>
-<script type="text/javascript" src="../plugins/jquery.filestyle.js"></script>
-<script type="text/javascript"
-	src="../plugins/fullcalendar/fullcalendar.min.js"></script>
-<script type="text/javascript" src="../plugins/jquery.dataTables.js"></script>
-<!--[if lt IE 9]>
-<script type="text/javascript" src="../plugins/flot/excanvas.min.js"></script>
-<![endif]-->
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
 
-<script type="text/javascript" src="../plugins/flot/jquery.flot.min.js"></script>
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
-<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
-<script type="text/javascript"
-	src="../plugins/flot/jquery.flot.pie.min.js"></script>
-<script type="text/javascript"
-	src="../plugins/flot/jquery.flot.stack.min.js"></script>
-<script type="text/javascript"
-	src="../plugins/flot/jquery.flot.resize.min.js"></script>
-<script type="text/javascript"
-	src="../plugins/colorpicker/colorpicker.js"></script>
-<script type="text/javascript" src="../plugins/tipsy/jquery.tipsy.js"></script>
-<script type="text/javascript"
-	src="../plugins/sourcerer/Sourcerer-1.2.js"></script>
-<script type="text/javascript" src="../plugins/jquery.placeholder.js"></script>
-<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
-<script type="text/javascript" src="../plugins/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="../plugins/spinner/ui.spinner.js"></script>
-<script type="text/javascript" src="../js/jquery-ui.js"></script>
-
-<script type="text/javascript" src="../js/mws.js"></script>
-<script type="text/javascript" src="../js/demo.js"></script>
-<script type="text/javascript" src="../js/themer.js"></script>
-
-
-<script type="text/javascript" src="../js/sdrfx.js"></script>
-
-
+<script type="text/javascript" src="../js/echarts-3.5.3/highcharts.js"></script>
+<script type="text/javascript" src="../js/tjfx.js"></script> 
 
 <style>
 
@@ -115,67 +74,59 @@
 	}
 	
 	
-	
-	/* 搜索DIV */
-	.search{
+	/* 电话呼入呼出统计报表，各种状态工单统计表搜索div */
+	.call-search,
+	.word-search{
 		display:block;
 		width:99.8%;
-		height:70px;
+		height:40px;
 		background-color:#ccc;
 		margin:0px auto;
 		font-size:12px;
 	}
 	
-	.search p{
-		height:30px;
+	.call-search p,
+	.word-search p{
+		line-height:40px;
 	}
 	
-	.search p select{
+	.call-search p input,
+	.word-search p input{
+		height:18px;
 		width:120px;
-		height:24px;
 		border:none;
-		border-radius:6px;
+		border-radius:4px;
+		padding-left:4px;
+	}
+	
+	/* 搜索开始结束时间 */
+	.call_time,
+	.word_time{
+		margin-left:20px;
+	}
+	
+	/* 搜索状态 */
+	.call_type,
+	.word_type{
+		margin-left:30px
+	}
+	.call_type select,
+	.word_type select{
+		width:100px;
+		height:18px;
+		border:none;
+		border-radius:4px;
 		padding-left:6px;
 	}
 	
-	.search p span{
-		color:#333;
-		font-size:14px;
-		margin-left:20px; 
-	}
-	.search span input{
-		width:62px;
-	} 
-	/* 搜索按钮 */
-	#search_btn,
-	#dayin,
-	#search_status_btn{
-		margin-top:8px;
-		margin-left:20px;
-		border:none;
-		background-color:rgb(60,61,61);
-		width:60px;
-		height:24px;
-		margin-right:6px;
-		color:#fff;
-		border-radius:4px;
+	/* 搜索导出框 */
+	p ._btn input{
+		width:50px;
+		height:18px;
+		background-color:#fff;
+		margin-left:30px
 	}
 	
-	/* 封盘按钮 */
-	#operation_one_btn,
-	#operation_all_btn{
-		margin-top:8px;
-		margin-left:20px;
-		border:none;
-		background-color:rgb(60,61,61);
-		width:100px;
-		height:24px;
-		margin-right:6px;
-		color:#fff;
-		border-radius:4px;
-	}
-	
-
 	
 	/* thead排序按钮 */
 	.span-up{
@@ -202,9 +153,8 @@
         right: 6px;
     }
 	
-	nav li,
-	select{
-		width:50px;
+select{
+		width:110px;
 		height:24px;
 		line-height:24px;
 		border-radius:4px;
@@ -213,40 +163,34 @@
 		cursor:pointer;
 		text-align:center;
 	}
-	#curpage{
-		width:120px;
-	}
-	
-	/* td悬停样式 */
-	.blue {
-		background: #ccc;
-	}
-	
-	th,td{  
-  
-  white-space: nowrap;
-} 
-
-	@media screen and (max-width:950px){
-		.search{
-			height:140px;
-		}
-		.search p{
-			height:60px;
-		}
-	}
-	
-	
-	
 </style>
- 
 
 </head>
 <body>
 
-	<div id="increasedis" class="clearfix" style="overflow-x: hidden;height:1000px;">
+	<div id="" class="clearfix" style="min-width: 1000px">
+	
 		
-		<div class="mws-panel grid_8 "
+		<div>
+		
+		
+		
+			
+		<div class="mws-panel grid_8"
+				style="width:96%;min-width: 550px;">
+				<div class="mws-panel-header">
+					<span class="mws-i-24 i-graph">未来七日天气预报</span>
+				</div>
+				
+		
+				<div class="mws-panel-body" style="width:96%;min-width: 550px; height:500px" >
+					<div class="mws-panel-content">
+					<div id="Tqcontainer" ></div>
+			
+					</div>
+				</div>
+		</div>
+	    <div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 10px 0px; min-width:650px">
 			<div class="mws-panel-header">
 				<span style="display:inline" class="mws-i-24 i-table-1">水电热分析</span>&nbsp; &nbsp; &nbsp;<span id="xqspan" style="display:inline" ></span>
@@ -275,11 +219,11 @@
 
 					<thead>
 						<tr>
-						     <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用电量(KWh)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用水量(t)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用热总流量(t)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用热总热量(Gj)<span class="span-up"></span> <span class="span-down"></span></th>
+						     <th class="table-th-css">日期<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">天气<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">最高气温<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">最低气温<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">风况<span class="span-up"></span> <span class="span-down"></span></th>
 							
 						</tr>
 					</thead>
@@ -311,41 +255,19 @@
                     </select>
                      
             </ul>
-         </nav>
-		
-
-		
-		
-		
-	</div>
-	 <script type="text/javascript">
- var time = new Date();
-         var day = ("0" + time.getDate()).slice(-2);
-         var month = ("0" + (time.getMonth() + 1)).slice(-2);
-         var today = time.getFullYear() + "-" + (month) + "-" + (day);
-         $('#endTime').val(today);
-
-                 
-                 var month1 = ("0" + (time.getMonth() )).slice(-2);
-                 var today1 = time.getFullYear() + "-" + (month1) + "-" + (day);
-                 $('#startTime').val(today1);
-                 
- $.ajax({
-		url : "<%=basePath%>OpcCon/sdrfx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-		"hrz":$('#hrz').val(),
-		"startTime":$('#startTime').val(),
-		"endTime":$('#endTime').val()
-		},
-		success : function(data) {
+         </nav>   
 			
-			list=data.list;	   
-		}
+		</div>
+	</div>
+<script type="text/javascript">
+function FormatDate() {
+	var date = new Date();
+	return date.getFullYear() + "-" + (date.getMonth() + 1) + "-"
+			+ date.getDate() + " " + date.getHours() + ":"
+			+ date.getMinutes() + ":" + date.getSeconds();
+}
 
-	});
 </script>
-	
+
 </body>
 </html>

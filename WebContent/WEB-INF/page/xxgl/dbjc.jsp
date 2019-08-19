@@ -271,7 +271,7 @@
 			<div id="xincreate_table_body" class="mws-panel-body"
 
 				style="overflow:scroll !important; height: 590px;">
-				<table class="mws-table" style="width:150%;">
+				<table class="mws-table" style="width:100%;">
 
 					<thead>
 						<tr>

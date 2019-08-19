@@ -1,17 +1,15 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>设备管理</title>
+<title>Insert title here</title>
+
+
+
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="../css/reset.css"
 	media="screen" />
@@ -71,15 +69,7 @@
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../plugins/flot/excanvas.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
-
 <script type="text/javascript" src="../plugins/flot/jquery.flot.min.js"></script>
-<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<script type="text/javascript" src="../js/layui/layui.all.js"></script>
-<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
 <script type="text/javascript"
 	src="../plugins/flot/jquery.flot.pie.min.js"></script>
 <script type="text/javascript"
@@ -101,55 +91,45 @@
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
 
-
-<script type="text/javascript" src="../js/sdrfx.js"></script>
-
-
+ <script type="text/javascript" src="../js/lsbj.js"></script>
 
 <style>
-
+		th,td{  
+  
+  white-space: nowrap;
+} 
+	
 	/* 固定表头 */
 	.table-th-css {
 		position: relative !important;
 		top: 0;
 	}
 	
-	
-	
 	/* 搜索DIV */
-	.search{
+	.jk_search{
 		display:block;
 		width:99.8%;
-		height:70px;
+		height:40px;
 		background-color:#ccc;
 		margin:0px auto;
 		font-size:12px;
 	}
 	
-	.search p{
-		height:30px;
+	.jk_search p{
+		height:40px;
 	}
 	
-	.search p select{
+	.jk_search p select{
 		width:120px;
 		height:24px;
 		border:none;
 		border-radius:6px;
+		margin-left:20px;
 		padding-left:6px;
 	}
 	
-	.search p span{
-		color:#333;
-		font-size:14px;
-		margin-left:20px; 
-	}
-	.search span input{
-		width:62px;
-	} 
 	/* 搜索按钮 */
-	#search_btn,
-	#dayin,
-	#search_status_btn{
+	#jk_search_btn{
 		margin-top:8px;
 		margin-left:20px;
 		border:none;
@@ -158,24 +138,9 @@
 		height:24px;
 		margin-right:6px;
 		color:#fff;
-		border-radius:4px;
+		border-radius:6px;
 	}
 	
-	/* 封盘按钮 */
-	#operation_one_btn,
-	#operation_all_btn{
-		margin-top:8px;
-		margin-left:20px;
-		border:none;
-		background-color:rgb(60,61,61);
-		width:100px;
-		height:24px;
-		margin-right:6px;
-		color:#fff;
-		border-radius:4px;
-	}
-	
-
 	
 	/* thead排序按钮 */
 	.span-up{
@@ -201,151 +166,61 @@
         top: 20px;
         right: 6px;
     }
-	
-	nav li,
-	select{
-		width:50px;
-		height:24px;
-		line-height:24px;
-		border-radius:4px;
-		background-color:rgba(43,45,49,0.8);
-		color:#fff;
-		cursor:pointer;
-		text-align:center;
-	}
-	#curpage{
-		width:120px;
-	}
-	
-	/* td悬停样式 */
-	.blue {
-		background: #ccc;
-	}
-	
-	th,td{  
-  
-  white-space: nowrap;
-} 
-
-	@media screen and (max-width:950px){
-		.search{
-			height:140px;
-		}
-		.search p{
-			height:60px;
-		}
-	}
-	
-	
+    
 	
 </style>
- 
-
+ <script type="text/javascript">
+//var xinwordListj = ${xinwordList};
+</script>
 </head>
 <body>
 
-	<div id="increasedis" class="clearfix" style="overflow-x: hidden;height:1000px;">
-		
+	<div id="" class="clearfix" style="overflow-x: hidden;">
+
 		<div class="mws-panel grid_8 "
-			style="width: 98%; padding-left: 12px; margin: 0px 0px 10px 0px; min-width:650px">
+			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
-				<span style="display:inline" class="mws-i-24 i-table-1">水电热分析</span>&nbsp; &nbsp; &nbsp;<span id="xqspan" style="display:inline" ></span>
+				<span class="mws-i-24 i-table-1">报警信息</span>
 			</div>
-			<p>
-			<div class="search">
-			<p>
-				<span style="font-size:14px;margin-left:20px;">换热站：
-					<select id="hrz" style="size:15px">
-                       	<option value="">全部</option>
-                       	<option value="教育局站">教育局站</option>
-                       	<option value="一委站">一委站</option>
-                       	<option value="二委站">二委站</option>
-                    </select>
-                     </span>
-                  <input type="date" id="startTime"  style="width:140px" value="" />-
-                  <input type="date" id="endTime" style="width:140px" value="" />
-					<input id="search_btn" type="submit" style="size: 10px" value="搜索" />
-					<input id="dayin" type="submit" value="导出" />
+			<div class="jk_search">
+				<p>
+					<select id="type">
+						<option value="全部">全部</option>
+						<option value="一委站">一委站</option>
+						<option value="二委站">二委站</option>
+						<option value="教育局站">教育局站</option>
+						
+					</select>
+					
+					<input id="jk_search_btn" type="submit" value="搜索" />
 				</p>
 			</div>
-			<div id="xincreate_table_body" class="mws-panel-body"
-
-				style="overflow:scroll !important; height: 590px;">
-				<table class="mws-table" style="width:100%;">
-
+			<div id="monitword_table_body" class="mws-panel-body"
+				style="overflow: auto !important; height: 300px;">
+				<table class="mws-table">
 					<thead>
 						<tr>
-						     <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
+						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">用电量(KWh)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">用水量(t)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">用热总流量(t)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">用热总热量(Gj)<span class="span-up"></span> <span class="span-down"></span></th>
 							
+							
 						</tr>
 					</thead>
-					<tbody id="xinword_body">
+					<tbody id="jkword_body">
 						
-				
+						
 					</tbody>
 				</table>
 			</div>
-		</div>
-		
-		
-		<nav style="width:100%;">
-            <ul style="width:500px;display:flex;justify-content:space-between;margin:0 auto;" >
-            	
-                <li id="first">首页</li>
-                <li id="last">上一页</li>
-                <li id="next">下一页</li>
-                <li id="end">尾页</li>   
-                <li id="curpage">当前第<span id="currentNum" ></span>页 /共<span id='pages'></span>页</li>
-                <li>共<span id="num"></span></li>
-                
-                    <select name="" id="select" >
-                        <option value="10">10</option>
-                        <option value="15"  selected = "selected">15</option>
-                        <option value="20" >20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                    </select>
-                     
-            </ul>
-         </nav>
-		
-
-		
-		
-		
-	</div>
-	 <script type="text/javascript">
- var time = new Date();
-         var day = ("0" + time.getDate()).slice(-2);
-         var month = ("0" + (time.getMonth() + 1)).slice(-2);
-         var today = time.getFullYear() + "-" + (month) + "-" + (day);
-         $('#endTime').val(today);
-
-                 
-                 var month1 = ("0" + (time.getMonth() )).slice(-2);
-                 var today1 = time.getFullYear() + "-" + (month1) + "-" + (day);
-                 $('#startTime').val(today1);
-                 
- $.ajax({
-		url : "<%=basePath%>OpcCon/sdrfx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-		"hrz":$('#hrz').val(),
-		"startTime":$('#startTime').val(),
-		"endTime":$('#endTime').val()
-		},
-		success : function(data) {
 			
-			list=data.list;	   
-		}
+			
+			
+		</div>
 
-	});
-</script>
-	
+	</div>
+
 </body>
 </html>

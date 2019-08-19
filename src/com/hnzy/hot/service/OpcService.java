@@ -27,7 +27,7 @@ public void Insert(Map<String, Object> map);
 	
 	public void Delete(String id);
 	
-public void InsertBjxx(Map<String, Object> map);
+    public void InsertBjxx(Map<String, Object> map);
 	
 	public void InsertBjdl(Map<String, Object> map);
 	
@@ -44,4 +44,6 @@ public void InsertBjxx(Map<String, Object> map);
 	public List<Map<String, Object>>getlsbjxx (Map<String, Object> map);
 	
 	public List<Map<String, Object>>dbjc (Map<String, Object> map);
+	
+	public List<Map<String, Object>>sdrfx (Map<String, Object> map);
 }

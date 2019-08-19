@@ -92,8 +92,10 @@
 	</select>
 	
 	<select id="getHrzXx" resultMap="Map">
-		select * from hrzXx
-	
+		select * from hrzXx where 1=1
+	<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
 	</select>
 	
 	<insert id="Insert" >
@@ -177,5 +179,21 @@
 		</if>
 		order by h.time desc
 	</select>
-	
+
+
+<select id="sdrfx" resultMap="Map">
+		select hrz, ROUND(MAX(convert(float,ycljgll))-MIN(convert(float,ycljgll)),2)  as ljll,ROUND(MAX(convert(float,ycljgrl))-MIN(convert(float,ycljgrl)),2)  as ljrl
+,ROUND(MAX(convert(float,zlszbsl))-MIN(convert(float,zlszbsl)),2)  as zysl ,ROUND(MAX(convert(float,zdl))-MIN(convert(float,zdl)),2)  as zydl
+from history where 1=1
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			and time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and time &lt;=#{endTime}
+		</if>
+		group by hrz
+	</select>
 </mapper>

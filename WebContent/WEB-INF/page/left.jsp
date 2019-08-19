@@ -138,6 +138,12 @@ function bpxx(){//
 	window.open("<%=basePath%>user/bpxx.action","Conframe");
 } 
 
+function sdrfx(){// 
+	window.open("<%=basePath%>user/sdrfx.action","Conframe");
+} 
+function gryc(){// 
+	window.open("<%=basePath%>user/gryc.action","Conframe");
+} 
 function rcwh(){// 
 	window.open("<%=basePath%>user/rcwh.action","Conframe");
 } 
@@ -164,6 +170,9 @@ function zbb(){//
 function ybb(){// 
 	window.open("<%=basePath%>user/ybb.action","Conframe");
 } 
+function grmx(){// 
+	window.open("<%=basePath%>user/grmx.action","Conframe");
+} 
 
 function sbwhjl(){// 
 	window.open("<%=basePath%>user/sbwhjl.action","Conframe");
@@ -180,6 +189,10 @@ function ddkz(){//
 } 
 function qhbc(){// 
     window.open("<%=basePath%>user/qhbc.action", "Conframe");
+} 
+
+function ygrl(){// 
+    window.open("<%=basePath%>user/ygrl.action", "Conframe");
 } 
 function hrzxx(){// 
     window.open("<%=basePath%>OpcCon/hrzxx.action", "Conframe");
@@ -232,89 +245,62 @@ function ryjk(){//
                     <li class="active">
                     	<a href="#" class="mws-i-24 i-users">运行管理</a>
                           <ul class="ac_kf"> 
-                                <li><a class="first-a" onclick="map()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行总览</a></li>
+                                <li><a class="first-a" onclick="map()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;站点总览</a></li>
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
                     	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
-                    	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热源监控</a></li>
+                    	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热表监控</a></li>
                     	        <!-- <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li> -->
-                             	<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能耗分析</a></li>
-                             	<li><a onclick="qhbc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;气候补偿</a></li>
-
-                        </ul>
-                    </li>
-                    
-                   
-                    <li class="active">
-                    	<a href="#" class="mws-i-24 i-users">监控分析</a>
-                          <ul class="ac_kf"> 
-                                <li><a onclick="lssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;在线数据分析</a></li>
-                               <li> <a onclick="sssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;实时数据</a></li>
-                    	        <li><a onclick="bjxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;报警信息</a></li>
-                        	   	<li><a onclick="rbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日报表</a></li>
-
-                        	   <li><a onclick="zbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;周报表</a></li>
-                        	   <li><a onclick="ybb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;月报表</a></li>
-
-                             	<li><a onclick="canssz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;参数设置</a></li>
                              	
+                             	
+
                         </ul>
                     </li>
-                     <li class="active">
+              <li class="active"><a href="#" class="mws-i-24 i-users">参数设定</a>
+					<ul class="ac_kf">
+						
+
+						<li><a onclick="canssz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;参数设置</a></li>
+                        <li><a onclick="qhbc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;气候补偿</a></li>
+					</ul></li>
+
+				<li class="active"><a href="#" class="mws-i-24 i-users">监控分析</a>
+					<ul class="ac_kf">
+					<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;数据曲线</a></li>
+						
+						<li><a onclick="lssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;历史数据</a></li>
+						<li><a onclick="sssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;实时数据</a></li>
+						<li><a onclick="bjxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;报警信息</a></li>
+						
+
+						
+
+					</ul></li>
+				<li class="active"><a href="#" class="mws-i-24 i-users">能耗分析</a>
+					<ul class="ac_kf">
+					
+						<li><a onclick="sdrfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;水电热分析</a></li>
+						<li><a onclick="ygrl()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;供热分析</a></li>
+						<li><a onclick="grmx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;供热模型</a></li>
+                        <li><a onclick="gryc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;供热预测</a></li>
+						
+
+					</ul></li>	
+				<li class="active">
                     	<a href="#" class="mws-i-24 i-users">基础信息管理</a>
                           <ul class="ac_kf"> 
 
-                                <li><a onclick="zdxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能源设备信息库</a></li>
+                               <!--  <li><a onclick="zdxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;能源设备信息库</a></li> -->
 
                     	        <li><a  onclick="hrzxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;换热站信息</a></li>
                         	   
-                             	<li><a onclick="bpxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;备品备件信息库</a></li>
+                             	<li><a onclick="rbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日报表</a></li>
+
+						<li><a onclick="zbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;周报表</a></li>
+						<li><a onclick="ybb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;月报表</a></li>
                              
                         </ul>
                     </li>
-                    <li class="active">
-                    	<a href="#" class="mws-i-24 i-users">维护管理</a>
-                          <ul class="ac_kf"> 
-                                <!-- <li><a onclick="lssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;在线数据分析</a></li> -->
-                    	        <li><a onclick="rcwh()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日常维护机制</a></li>
-                        	   
-                             	<li><a onclick="qiangxiu()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;抢修/维护流程</a></li>
-                             	<li><a onclick="gaizao()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;改造/保养流程</a></li>
-                             	<li><a onclick="shebwh()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;设备维护方案</a></li>
-                             	<li><a onclick="sbwhjl()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;设备维护记录</a></li>
-                             	
-                        </ul>
-                    </li>
-                    <li class="active tianqi">
-                    	<a href="#" class="mws-i-24 i-users">当日气象</a>
-                    	<table id="tab">
-                    	<tr>
-                    	<th style="font-size:13px;color:white;"> &nbsp;&nbsp;实时温度:</th>
-                    	<th style="font-size:13px;color:white;" id="sswd">&nbsp;&nbsp;33°</th>
-                    	</tr> 
-                    	<tr>
-                    	<th style="font-size:13px;color:white;"> &nbsp;&nbsp;天气:</th>
-                    	<th style="font-size:13px;color:white;">&nbsp;&nbsp;晴天</th>
-                    	</tr>
-                    	
-                    	<tr>
-                    	<th style="font-size:13px;color:white;"> &nbsp;&nbsp;风力:</th>
-                    	<th style="font-size:13px;color:white;">&nbsp;&nbsp;一级</th>
-                    	</tr>
-                    	
-                    	<tr>
-                    	<th style="font-size:13px;color:white;"> &nbsp;&nbsp;风况:</th>
-                    	<th style="font-size:13px;color:white;">&nbsp;&nbsp;微风</th>
-                    	</tr>
-                    	
-                    	<tr>
-                    	<th style="font-size:13px;color:white;"> &nbsp;&nbsp;当日气温:</th>
-                    	<th style="font-size:13px;color:white;">&nbsp;&nbsp;17°~35°</th>
-                    	</tr>
-                    	</table>
-                    </li>
-                    
-                   
-					
+                                                                             					
                 </ul>
                
             </div>

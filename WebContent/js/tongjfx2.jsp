@@ -176,13 +176,7 @@ select{
 		<div class="mws-panel grid_8"
 				style="width:96%;min-width: 550px;">
 				<div class="mws-panel-header">
-				  <span class="mws-i-24 i-graph">能耗曲线图&nbsp;&nbsp;&nbsp;
-				  <select id="hrz" style="size:15px">
-                       
-                       	<option value="教育局站">教育局站</option>
-                       	<option value="一委站">一委站</option>
-                       	<option value="二委站">二委站</option>
-                    </select><input type="date" id="startTime"  style="width:140px" value="" />-
+					<span class="mws-i-24 i-graph">能耗曲线图&nbsp;&nbsp;&nbsp;<input type="date" id="startTime"  style="width:140px" value="" />-
                   <input type="date" id="endTime" style="width:140px" value="" />&nbsp;<input id="search_btn" type="submit" style="size: 10px" value="搜索" /></span>
 					
 				</div>

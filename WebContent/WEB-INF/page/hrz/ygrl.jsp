@@ -102,7 +102,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 
 
-<script type="text/javascript" src="../js/sdrfx.js"></script>
+<script type="text/javascript" src="../js/ygrl.js"></script>
 
 
 
@@ -256,14 +256,13 @@
 			<p>
 				<span style="font-size:14px;margin-left:20px;">换热站：
 					<select id="hrz" style="size:15px">
-                       	<option value="">全部</option>
+                       
                        	<option value="教育局站">教育局站</option>
                        	<option value="一委站">一委站</option>
                        	<option value="二委站">二委站</option>
                     </select>
                      </span>
-                  <input type="date" id="startTime"  style="width:140px" value="" />-
-                  <input type="date" id="endTime" style="width:140px" value="" />
+                 
 					<input id="search_btn" type="submit" style="size: 10px" value="搜索" />
 					<input id="dayin" type="submit" value="导出" />
 				</p>
@@ -276,10 +275,10 @@
 					<thead>
 						<tr>
 						     <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用电量(KWh)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用水量(t)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用热总流量(t)<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">用热总热量(Gj)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">供热面积(万m2)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">瞬时热量(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">K系数<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">应供热量(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
 							
 						</tr>
 					</thead>
@@ -330,21 +329,7 @@
                  var today1 = time.getFullYear() + "-" + (month1) + "-" + (day);
                  $('#startTime').val(today1);
                  
- $.ajax({
-		url : "<%=basePath%>OpcCon/sdrfx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-		"hrz":$('#hrz').val(),
-		"startTime":$('#startTime').val(),
-		"endTime":$('#endTime').val()
-		},
-		success : function(data) {
-			
-			list=data.list;	   
-		}
 
-	});
 </script>
 	
 </body>

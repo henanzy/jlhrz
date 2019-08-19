@@ -362,4 +362,24 @@ public class UserController {
     	public String qhbc(){
     		return "hrz/qhbc";
     	}
+    	
+    	@RequestMapping("sdrfx")
+    	public String sdrfx(){
+    		return "hrz/sdrfx";
+    	}
+    	
+    	@RequestMapping("ygrl")
+    	public String ygrl(){
+    		return "hrz/ygrl";
+    	}
+    	
+    	@RequestMapping("grmx")
+    	public String grmx(){
+    		return "hrz/grmx";
+    	}
+    	
+    	@RequestMapping("gryc")
+    	public String gryc(){
+    		return "hrz/gryc";
+    	}
 }

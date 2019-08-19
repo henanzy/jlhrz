@@ -19,8 +19,6 @@ $(document).ready(function() {
         	  
         		  str+=`<td>${ chk[i][item] + '\t'}</td>`;
         	  
-        		   
-        	  
                   
           }
           str+='</tr>';
