@@ -219,7 +219,7 @@ $(function () {
 				time.push(dataList[i].time);
 				
 			};
-		var data = {name:$("#hrz").val(),ychsyl:ychsyl,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd,snwd:snwd};
+		var data = {name:$("#hrz").val(),ychsyl:ychsyl,ychswd:ychswd,ycgswd:ycgswd,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd,snwd:snwd};
 //		 allwd(options,xqdata,'mws-dashboard-chart-1')
 		onewd(options,data,'Ncontainer',time)
 
@@ -267,7 +267,7 @@ function onewd(options,xqdata,con,time){
 				 name:"一次回水温度",
 				 data:xqdata.ychswd,
 				 tooltip : {
-						valueSuffix : 'Mpa'
+						valueSuffix : '℃'
 					}	,marker: {
 
 			             enabled: false,
@@ -287,7 +287,7 @@ function onewd(options,xqdata,con,time){
 					 name:"一次供水温度",
 					 data:xqdata.ycgswd,
 					 tooltip : {
-							valueSuffix : 'Mpa'
+							valueSuffix : '℃'
 						}	,marker: {
 
 				             enabled: false,

@@ -39,18 +39,18 @@ import net.sf.json.JSONObject;
 
 
 @Component 
-public class GdTask{
+public class wz1Task{
 	
 	@Autowired
 	OpcService opcService;
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
 	
-	@Scheduled(cron="0 0/5 * * * ? ")   //每5执行一次   
+	/*@Scheduled(cron="0 0/5 * * * ? ") */  //每5执行一次   
     public void aTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
-	       String[] d=DUtil.dsj(DUtil.jyjz);
+	       String[] d=DUtil.dsj(DUtil.ywz);
 	       
 	       Map<String,Object> dmap=new HashMap<String, Object>();
 	       Map<String, Item> map = null;
@@ -126,16 +126,16 @@ public class GdTask{
         					   
         					   Map<String, Object> insMap=new HashMap<>();
         					   
-        					   insMap.put("hrz", "教育局站"); 
+        					   insMap.put("hrz", "一委站"); 
         					   insMap.put("ycssgll", dmap.get("一次供水瞬时流量"));insMap.put("ycssgrl", dmap.get("一次供水瞬时热量"));insMap.put("ycljgll", dmap.get("一次供水累计流量"));
         					   insMap.put("ycljgrl", dmap.get("一次供水累计热量"));insMap.put("ycgsyl", dmap.get("一次供水压力"));insMap.put("ycgswd", dmap.get("一次供水温度"));
         					   insMap.put("ychsyl", dmap.get("一次回水压力"));insMap.put("ychswd", dmap.get("一次回水温度"));insMap.put("bbssll", dmap.get("补水瞬时流量"));
         					   insMap.put("bbljll", dmap.get("补水累计流量"));insMap.put("sxyw", dmap.get("水箱液位"));insMap.put("zlszbsl", dmap.get("自来水总补水量"));
         					   insMap.put("zdl", dmap.get("电量实际值"));insMap.put("Ady", dmap.get("A相电压值"));insMap.put("Bdy", dmap.get("B相电压值"));
         					   insMap.put("Cdy", dmap.get("A相电压值"));insMap.put("Adl", dmap.get("A相电流值"));insMap.put("Bdl", dmap.get("B相电流值"));
-        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("一次供水瞬时流量"));insMap.put("ecgljll", dmap.get("一次供水累计流量"));
-        					   insMap.put("ecgsyl", dmap.get("一次供水压力"));insMap.put("ecgswd", dmap.get("一次供水温度"));insMap.put("echsyl", dmap.get("一次回水压力"));
-        					   insMap.put("echswd", dmap.get("一次回水温度"));insMap.put("eccwhyl", dmap.get(""));
+        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("二次供水瞬时流量"));insMap.put("ecgljll", dmap.get("二次供水累计流量"));
+        					   insMap.put("ecgsyl", dmap.get("二次供水压力"));insMap.put("ecgswd", dmap.get("二次供水温度"));insMap.put("echsyl", dmap.get("二次回水压力"));
+        					   insMap.put("echswd", dmap.get("二次回水温度"));insMap.put("eccwhyl", dmap.get(""));
         					   insMap.put("snwd", dmap.get("室内温度"));insMap.put("xhb1fk", dmap.get("循环泵1频率反馈"));insMap.put("xhb2fk", dmap.get("循环泵2频率反馈"));
         					   insMap.put("bsb1fk", dmap.get("补水泵1频率反馈"));insMap.put("bsb2fk", dmap.get(""));insMap.put("tjfkdfk", dmap.get("调节阀反馈"));
         					   Date date = new Date();
@@ -144,11 +144,12 @@ public class GdTask{
         					   opcService.insertHistory(insMap);
     }      
     
-	@Scheduled(cron="0 0 */1  * * ? ")   //每一小时执行一次   
+	//@Scheduled(cron="0 0 */1  * * ? ")    
+	
     public void rbbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
-	       String[] d=DUtil.dsj(DUtil.jyjz);
+	       String[] d=DUtil.dsj(DUtil.ywz);
 	       
 	       Map<String,Object> dmap=new HashMap<String, Object>();
 	       Map<String, Item> map = null;
@@ -224,16 +225,16 @@ public class GdTask{
         					   
         					   Map<String, Object> insMap=new HashMap<>();
         					   
-        					   insMap.put("hrz", "教育局站"); 
+        					   insMap.put("hrz", "一委站"); 
         					   insMap.put("ycssgll", dmap.get("一次供水瞬时流量"));insMap.put("ycssgrl", dmap.get("一次供水瞬时热量"));insMap.put("ycljgll", dmap.get("一次供水累计流量"));
         					   insMap.put("ycljgrl", dmap.get("一次供水累计热量"));insMap.put("ycgsyl", dmap.get("一次供水压力"));insMap.put("ycgswd", dmap.get("一次供水温度"));
         					   insMap.put("ychsyl", dmap.get("一次回水压力"));insMap.put("ychswd", dmap.get("一次回水温度"));insMap.put("bbssll", dmap.get("补水瞬时流量"));
         					   insMap.put("bbljll", dmap.get("补水累计流量"));insMap.put("sxyw", dmap.get("水箱液位"));insMap.put("zlszbsl", dmap.get("自来水总补水量"));
         					   insMap.put("zdl", dmap.get("电量实际值"));insMap.put("Ady", dmap.get("A相电压值"));insMap.put("Bdy", dmap.get("B相电压值"));
         					   insMap.put("Cdy", dmap.get("A相电压值"));insMap.put("Adl", dmap.get("A相电流值"));insMap.put("Bdl", dmap.get("B相电流值"));
-        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("一次供水瞬时流量"));insMap.put("ecgljll", dmap.get("一次供水累计流量"));
-        					   insMap.put("ecgsyl", dmap.get("一次供水压力"));insMap.put("ecgswd", dmap.get("一次供水温度"));insMap.put("echsyl", dmap.get("一次回水压力"));
-        					   insMap.put("echswd", dmap.get("一次回水温度"));insMap.put("eccwhyl", dmap.get(""));
+        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("二次供水瞬时流量"));insMap.put("ecgljll", dmap.get("二次供水累计流量"));
+        					   insMap.put("ecgsyl", dmap.get("二次供水压力"));insMap.put("ecgswd", dmap.get("二次供水温度"));insMap.put("echsyl", dmap.get("二次回水压力"));
+        					   insMap.put("echswd", dmap.get("二次回水温度"));insMap.put("eccwhyl", dmap.get(""));
         					   insMap.put("snwd", dmap.get("室内温度"));insMap.put("xhb1fk", dmap.get("循环泵1频率反馈"));insMap.put("xhb2fk", dmap.get("循环泵2频率反馈"));
         					   insMap.put("bsb1fk", dmap.get("补水泵1频率反馈"));insMap.put("bsb2fk", dmap.get(""));insMap.put("tjfkdfk", dmap.get("调节阀反馈"));
         					   Date date = new Date();
@@ -243,11 +244,11 @@ public class GdTask{
     }  
 	
 	
-	@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
+	//@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
     public void zybbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
-	       String[] d=DUtil.dsj(DUtil.jyjz);
+	       String[] d=DUtil.dsj(DUtil.ywz);
 	       
 	       Map<String,Object> dmap=new HashMap<String, Object>();
 	       Map<String, Item> map = null;
@@ -323,16 +324,16 @@ public class GdTask{
         					   
         					   Map<String, Object> insMap=new HashMap<>();
         					   
-        					   insMap.put("hrz", "教育局站"); 
+        					   insMap.put("hrz", "一委站"); 
         					   insMap.put("ycssgll", dmap.get("一次供水瞬时流量"));insMap.put("ycssgrl", dmap.get("一次供水瞬时热量"));insMap.put("ycljgll", dmap.get("一次供水累计流量"));
         					   insMap.put("ycljgrl", dmap.get("一次供水累计热量"));insMap.put("ycgsyl", dmap.get("一次供水压力"));insMap.put("ycgswd", dmap.get("一次供水温度"));
         					   insMap.put("ychsyl", dmap.get("一次回水压力"));insMap.put("ychswd", dmap.get("一次回水温度"));insMap.put("bbssll", dmap.get("补水瞬时流量"));
         					   insMap.put("bbljll", dmap.get("补水累计流量"));insMap.put("sxyw", dmap.get("水箱液位"));insMap.put("zlszbsl", dmap.get("自来水总补水量"));
         					   insMap.put("zdl", dmap.get("电量实际值"));insMap.put("Ady", dmap.get("A相电压值"));insMap.put("Bdy", dmap.get("B相电压值"));
         					   insMap.put("Cdy", dmap.get("A相电压值"));insMap.put("Adl", dmap.get("A相电流值"));insMap.put("Bdl", dmap.get("B相电流值"));
-        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("一次供水瞬时流量"));insMap.put("ecgljll", dmap.get("一次供水累计流量"));
-        					   insMap.put("ecgsyl", dmap.get("一次供水压力"));insMap.put("ecgswd", dmap.get("一次供水温度"));insMap.put("echsyl", dmap.get("一次回水压力"));
-        					   insMap.put("echswd", dmap.get("一次回水温度"));insMap.put("eccwhyl", dmap.get(""));
+        					   insMap.put("Cdl", dmap.get("C相电流值"));insMap.put("ecgssll", dmap.get("二次供水瞬时流量"));insMap.put("ecgljll", dmap.get("二次供水累计流量"));
+        					   insMap.put("ecgsyl", dmap.get("二次供水压力"));insMap.put("ecgswd", dmap.get("二次供水温度"));insMap.put("echsyl", dmap.get("二次回水压力"));
+        					   insMap.put("echswd", dmap.get("二次回水温度"));insMap.put("eccwhyl", dmap.get(""));
         					   insMap.put("snwd", dmap.get("室内温度"));insMap.put("xhb1fk", dmap.get("循环泵1频率反馈"));insMap.put("xhb2fk", dmap.get("循环泵2频率反馈"));
         					   insMap.put("bsb1fk", dmap.get("补水泵1频率反馈"));insMap.put("bsb2fk", dmap.get(""));insMap.put("tjfkdfk", dmap.get("调节阀反馈"));
         					   Date date = new Date();
@@ -346,8 +347,8 @@ public class GdTask{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
-           String hrz="吉利.教育局站.读数据.";
-	       String[] d=DUtil.bjxx("吉利.教育局站.读状态.");
+           String hrz="吉利.一委站.读数据.";
+	       String[] d=DUtil.bjxx("吉利.一委站.读状态.");
 	     
 	      
 	       Map<String, Item> map = null;
@@ -398,12 +399,12 @@ public class GdTask{
 						            	
 						            	if(val.equals("true")){
 						            		Map<String, Object> pdMap = new HashMap<>();
-						            		pdMap.put("hrz", "教育局站");
+						            		pdMap.put("hrz", "一委站");
 						            		pdMap.put("bjlx", key);
 						            		int count = opcService.pdbj(pdMap);
 						            		if(count==0){
 						            			Map<String, Object> insMap = new HashMap<>();
-						            			insMap.put("hrz", "教育局站");
+						            			insMap.put("hrz", "一委站");
 						            			insMap.put("bjlx", key);
 						            			opcService.InsertBjdl(insMap);
 						            			Date t=temp.getValue().read(true).getTimestamp().getTime();
@@ -432,10 +433,10 @@ public class GdTask{
           
         					   
         					
-        			          List<String> list =opcService.getbjdl("教育局站");
+        			          List<String> list =opcService.getbjdl("一委站");
         			          String[] kStrings = new String[list.size()];
         			          for (int i = 0; i < list.size(); i++) {
-        			        	  kStrings[i]="吉利.教育局站.读状态."+list.get(i);
+        			        	  kStrings[i]="吉利.一委站.读状态."+list.get(i);
 								
 							}
         			          
@@ -477,7 +478,7 @@ public class GdTask{
 							            		Date t=temp.getValue().read(true).getTimestamp().getTime();
 								                String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ").format(t.getTime());
 								                updateMap.put("jcsj", time);
-								                updateMap.put("hrz", "教育局站");
+								                updateMap.put("hrz", "一委站");
 								                updateMap.put("bjlx", key);
 							            		opcService.UpdateBjxx(updateMap);
 							            		opcService.DeleteBjdl(updateMap);

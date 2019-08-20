@@ -147,6 +147,9 @@ function gryc(){//
 function rcwh(){// 
 	window.open("<%=basePath%>user/rcwh.action","Conframe");
 } 
+function tqyb1(){// 
+	window.open("<%=basePath%>user/tqyb1.action","Conframe");
+} 
 
 function qiangxiu(){// 
 	window.open("<%=basePath%>user/qiangxiu.action","Conframe");
@@ -249,7 +252,7 @@ function ryjk(){//
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
                     	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
                     	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热表监控</a></li>
-                    	        <!-- <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li> -->
+                    	         <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li> 
                              	
                              	
 
@@ -266,7 +269,7 @@ function ryjk(){//
 				<li class="active"><a href="#" class="mws-i-24 i-users">监控分析</a>
 					<ul class="ac_kf">
 					<li><a onclick="tjfx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;数据曲线</a></li>
-						
+						<li><a onclick="tqyb1()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;天气预报</a></li>
 						<li><a onclick="lssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;历史数据</a></li>
 						<li><a onclick="sssj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;实时数据</a></li>
 						<li><a onclick="bjxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;报警信息</a></li>

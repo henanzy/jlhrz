@@ -301,7 +301,7 @@ function show(){
 				$("#tjfzdkd").val(map.调节阀最低开度)
 				$("#tjfkdgd").val(map.阀门开度设定)
 				var kd=map.调节阀反馈+"";
-				$("#tjfkdfk").val(kd.slice(0,2))
+				$("#tjfkdfk").val(kd.slice(0,4))
 				
 				
 			}

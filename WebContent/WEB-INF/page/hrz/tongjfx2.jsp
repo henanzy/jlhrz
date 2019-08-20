@@ -279,89 +279,10 @@ function FormatDate() {
 			+ date.getDate() + " " + date.getHours() + ":"
 			+ date.getMinutes() + ":" + date.getSeconds();
 }
+var ints=self.setInterval("csh()",1000);
 function csh (){
-	
-	
-	var opt = {
-	        chart: {
-	            type: 'spline',// 指定图表的类型，默认是折线图（line）,
-	            events: {
-	    				load: function () {
-	    					$.ajax({
-	    						url : getRootPath()+"/OpcCon/qxsj.action", 
-	    						async : false,
-	    						dataType : "json",
-	    						data : {
-	    							"hrz":"吉利.教育局站.读数据.",
-	    						},
-	    						success : function(data) {
-	    							
-	    							map=data.map;
-	    						}
-	    					});
-	    				 var series0 = this.series[0],
-	    					 series1 = this.series[1],
-	    					 series2 = this.series[2],
-	    					 series3 = this.series[3],
-	    					 series4 = this.series[4],
-	    					 series5 = this.series[5],
-	    					 series6 = this.series[6],
-	    					 series7 = this.series[7], 
-	    					 chart = this;
-	    					
-	    					activeLastPointToolip(chart); 
-	    					setInterval(function () {
-	    						var x =FormatDate() // 当前时间
-	    							          // 随机值
-	    					    
-	    						series0.addPoint([x, map.一次回水压力], true, true);
-	    						series1.addPoint([x, map.一次回水温度], true, true);
-	    						series2.addPoint([x, map.一次供水压力], true, true);
-	    						series3.addPoint([x, map.一次供水温度], true, true);
-	    						series4.addPoint([x, map.二次供水压力], true, true);
-	    						series5.addPoint([x, map.二次供水温度], true, true);
-	    						series6.addPoint([x, map.二次回水压力], true, true);
-	    						series7.addPoint([x, map.二次回水温度], true, true); 
-	    						chart.redraw();
-	    						 activeLastPointToolip(chart);
-	    					}, 2000);
-	    				}
-	    			},
-	        },
-	        title:{
-	        	text:null
-	        },
-	        
-	        tooltip: {
-				crosshairs: [{
-					width: 1,
-					color:'#aaaaaa'
-				}],
-				shared: true
-			},
-	        xAxis: {  // x 轴分类
-		       
-	        },
-	        yAxis: {
-	            title: {
-	                text: null
-	                // y 轴标题
-	            }
-	        }
-	    };
-	
-	$.ajax({
-		url : getRootPath()+"/OpcCon/selQx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-			"hrz":$("#hrz").val(),
-		},
-		success : function(data) {
-			
-			dataList=data.list;
-		}
-	});
+	var dataList=[];
+	var snwd=[];
 	 var ychsyl = [];
 	 var ycgsyl = [];
 	 var ychswd = [];
@@ -370,123 +291,166 @@ function csh (){
 	 var ecgswd = [];
 	 var echsyl = [];
 	 var echswd = [];
-	 var time = [];
-	 for (var i = 0 ; i < dataList.length ; i ++) {
-			var arr = [];
-			/*arr1[0] = json[i].id;*/
-			ychsyl.push(parseFloat(dataList[i].ychsyl));
-			ycgsyl.push(parseFloat(dataList[i].ycgsyl));
-			ychswd.push(parseFloat(dataList[i].ychswd));
-			ycgswd.push(parseFloat(dataList[i].ycgswd));
-			ecgsyl.push(parseFloat(dataList[i].ecgsyl));
-			ecgswd.push(parseFloat(dataList[i].ecgswd));
-			echsyl.push(parseFloat(dataList[i].echsyl));
-			echswd.push(parseFloat(dataList[i].echswd));
+	$.ajax({
+		url : getRootPath()+"/OpcCon/qxsj.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			"hrz":"吉利.教育局站.读数据.",
+		},
+		success : function(data) {
 			
-			time.push(dataList[i].time);
+			map=data.map;
+			console.log(map);
+			snwd.push(parseFloat(map.室内温度));
+			ycgsyl.push(parseFloat(map.一次供水压力));
+			ycgswd.push(parseFloat(map.一次供水温度));
+			ychsyl.push(parseFloat(map.一次回水压力));
+			ychswd.push(parseFloat(map.一次回水温度));
+			ecgsyl.push(parseFloat(map.二次供水压力));
+			ecgswd.push(parseFloat(map.二次供水温度));
+			echsyl.push(parseFloat(map.二次回水压力));
+			echswd.push(parseFloat(map.二次回水温度));
 			
-		};
-	var data = {name:$("#hrz").val(),ychsyl:ychsyl,ycgsyl:ycgsyl,ecgsyl:ecgsyl,ecgswd:ecgswd,echsyl:echsyl,echswd:echswd};
+		}
+	});
 	
-	opt.xAxis = {
-			title: {
-				text: '时间'
-			},
-			categories: time,
-			tickInterval: 10,
-			labels: {
-			   
-			  }
-		};
-	opt.series = [];
 	
-	opt.series.push({
-				 name:"一次回水压力",
-				 data:data.ychsyl,
-				 tooltip : {
-						valueSuffix : 'Mpa'
-					}	,marker: {
 
-			             enabled: false,
-			         },		 
-			 });
-	  opt.series.push({ 
-		 name:"一次回水温度",
-		 data:data.ychswd,
-		 tooltip : {
-				valueSuffix : 'Mpa'
-			}	,marker: {
+	
+	var chart = Highcharts.chart('container',{
+	 	chart: {
+	 		type: 'column'
+	 	},
+	 	title: {
+	 		text: '实时数据柱状图'
+	 	},
+	 	subtitle: {
+	 		text: ''
+	 	},
+	 	xAxis: {
 
-	             enabled: false,
-	         },		 
+	 		//categories: ['室内温度','一次供水压力','一次供水温度','一次回水压力','一次回水温度','二次供水压力','二次供水温度','二次回水压力','二次回水温度' ],
+	 		crosshair: true
+	 	},
+	 	yAxis: [{
+	 		min: 0,
+	 		title: {
+	 			text: '温度'
+	 		},opposite: true
+	 	},{
+	 		min: 0,
+	 		title: {
+	 			text: '压力'
+	 		}
+	 	}],
+	 	tooltip: {
+	 		// head + 每个 point + footer 拼接成完整的 table
+	 		headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	 		pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	 		'<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+	 		footerFormat: '</table>',
+	 		shared: true,
+	 		useHTML: true
+	 	},
+
+	 	plotOptions: {
+			column: {
+				// 关于柱状图数据标签的详细配置参考：https://api.hcharts.cn/highcharts#plotOptions.column.dataLabels
+				dataLabels: {
+					enabled: true,
+					// verticalAlign: 'top', // 竖直对齐方式，默认是 center
+					inside: true
+				}
+			}
+		},
+
+	 	series:  [{
+	 		name: '室内温度',
+	 		data: snwd,
+	 		animation: false,
+	 		 yAxis : 0,
+    		 tooltip : {
+    				valueSuffix : '℃'
+    			}	,
+	 	},
+	 	{
+	 		name: '一次供水温度',
+	 		data: ycgswd,
+	 		animation: false,
+	 		 yAxis : 0,
+    		 tooltip : {
+    				valueSuffix : '℃'
+    			}	,
+	 	},
+	 	{
+	 		name: '一次回水温度',
+	 		data: ychswd,
+	 		animation: false,
+	 		 yAxis : 0,
+    		 tooltip : {
+    				valueSuffix : '℃'
+    			}	,
+	 	},
+	 	{
+	 		name: '一次供水压力',
+	 		data: ycgsyl,
+	 		animation: false,
+	 		 yAxis : 1,
+    		 tooltip : {
+    				valueSuffix : 'Mpa'
+    			}	,
+	 	}
+	 	,
+	 	{
+	 		name: '一次回水压力',
+	 		data: ychsyl,
+	 		animation: false,
+	 		 yAxis : 1,
+    		 tooltip : {
+    				valueSuffix : 'Mpa'
+    			}	,
+	 	},
+	 	{
+	 		name: '二次供水温度',
+	 		data: ecgswd,
+	 		animation: false,
+	 		 yAxis : 0,
+    		 tooltip : {
+    				valueSuffix : '℃'
+    			}	,
+	 	},
+	 	{
+	 		name: '二次回水温度',
+	 		data: echswd,
+	 		animation: false,
+	 		 yAxis : 0,
+    		 tooltip : {
+    				valueSuffix : '℃'
+    			}	,
+	 	},
+	 	{
+	 		name: '二次供水压力',
+	 		data: ecgsyl,
+	 		animation: false,
+	 		 yAxis : 1,
+    		 tooltip : {
+    				valueSuffix : 'Mpa'
+    			}	,
+	 	}
+	 	,
+	 	{
+	 		name: '二次回水压力',
+	 		data: echsyl,
+	 		animation: false,
+	 		 yAxis : 1,
+    		 tooltip : {
+    				valueSuffix : 'Mpa'
+    			}	,
+	 	}]
 	 });
-	opt.series.push({                       
-				 name:"一次供水压力",
-				 data:data.ycgsyl,
-				 tooltip : {
-						valueSuffix : 'Mpa'
-					}	,marker: {
-
-			             enabled: false,
-			         },		 
-			 });
-	  opt.series.push({                       
-			 name:"一次供水温度",
-			 data:data.ycgswd,
-			 tooltip : {
-					valueSuffix : 'Mpa'
-				}	,marker: {
-
-		             enabled: false,
-		         },		 
-		 });
-	opt.series.push({
-				 name:"二次供水压力",
-				 data:data.ecgsyl,
-				 tooltip : {
-						valueSuffix : 'Mpa'
-					}	,marker: {
-
-			             enabled: false,
-			         },		 
-			 });
-			 
-	opt.series.push({
-				 name:"二次供水温度",
-				 data:data.ecgswd,
-				 tooltip : {
-						valueSuffix : '℃'
-					}	,marker: {
-
-			             enabled: false,
-			         },		 
-			 });
-
-	opt.series.push({
-				 name:"二次回水压力",
-				 data:data.echsyl,
-				 tooltip : {
-						valueSuffix : 'Mpa'
-					}	,marker: {
-
-			             enabled: false,
-			         },		 
-			 });
-			 
-	opt.series.push({
-				 name:"二次回水温度",
-				 data:data.echswd,
-				 tooltip : {
-						valueSuffix : '℃'
-					}	,marker: {
-
-			             enabled: false,
-			         },		 
-			 }); 
-	// 图表初始化函数
-	var chart = Highcharts.chart("container", opt);
 }
-//csh();
+csh();
 </script>
 
 </body>

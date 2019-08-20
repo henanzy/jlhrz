@@ -55,7 +55,7 @@ $(document).ready(function() {
 			}
 			
 		});	
-	 var ygrl=kxs*(18-wd)*grmj/25*24;
+	 var ygrl=(kxs*(18-wd)*grmj/25*24).toFixed(2);
 	
 		var xincreatetableCont = $('#xincreate_table_body table tr th'); //获取th
 		var xincreatetableScroll = $('#xincreate_table_body'); //获取滚动条同级

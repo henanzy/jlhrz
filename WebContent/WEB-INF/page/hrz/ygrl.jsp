@@ -249,7 +249,7 @@
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 10px 0px; min-width:650px">
 			<div class="mws-panel-header">
-				<span style="display:inline" class="mws-i-24 i-table-1">水电热分析</span>&nbsp; &nbsp; &nbsp;<span id="xqspan" style="display:inline" ></span>
+				<span style="display:inline" class="mws-i-24 i-table-1">供热分析</span>&nbsp; &nbsp; &nbsp;<span id="xqspan" style="display:inline" ></span>
 			</div>
 			<p>
 			<div class="search">
@@ -278,7 +278,7 @@
 							<th class="table-th-css">供热面积(万m2)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">瞬时热量(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">K系数<span class="span-up"></span> <span class="span-down"></span></th>
-							<th class="table-th-css">应供热量(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
+							<th class="table-th-css">应供热量(GJ)<span class="span-up"></span> <span class="span-down"></span></th>
 							
 						</tr>
 					</thead>

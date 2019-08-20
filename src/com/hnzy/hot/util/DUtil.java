@@ -2,7 +2,8 @@ package com.hnzy.hot.util;
 
 public class DUtil {
 	public static final String jyjz="吉利.教育局站.读数据.";
-	
+	public static final String ywz="吉利.一委站.读数据.";
+	public static final String ewz="吉利.二委站.读数据.";
 	private static String Axdlz="A相电流值";
 	private static String Axdyz="A相电压值";
 	private static String Bxdlz="B相电流值";

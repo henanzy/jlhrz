@@ -382,4 +382,9 @@ public class UserController {
     	public String gryc(){
     		return "hrz/gryc";
     	}
+    	
+    	@RequestMapping("tqyb1")
+    	public String tqyb1(){
+    		return "hrz/tqyb1";
+    	}
 }
