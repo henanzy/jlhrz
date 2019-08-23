@@ -274,7 +274,7 @@
 
 					<thead>
 						<tr>
-						     <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
+						    <th class="table-th-css">换热站<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">供热面积(万m2)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">瞬时热量(GJ/h)<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">K系数<span class="span-up"></span> <span class="span-down"></span></th>

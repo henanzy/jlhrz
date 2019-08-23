@@ -145,6 +145,30 @@ $(document).ready(function() {
 					
 				}
 			});
+			var h=$('#hrz').val();
+			$.ajax({
+				url : getRootPath()+"/OpcCon/xtkzSj.action", 
+				async : false,
+				dataType : "json",
+				data : {
+				"hrz":"吉利."+h+".读数据.",
+				
+				},
+				success : function(data) {
+					var map=data.map;
+						$('#gswd1').val(map.一次供水温度);
+						$('#gswd2').val(map.一次供水温度);
+						$('#hswd1').val(map.一次回水温度);
+						$('#hswd2').val(map.一次回水温度);
+						
+						$('#ssll1').val(map.一次供水瞬时流量);
+						$('#ssll2').val(map.一次供水瞬时流量);
+						
+						
+					
+					
+				}
+			});
 		}
 		
 	});

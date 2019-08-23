@@ -855,9 +855,9 @@ function showBsb(flag){
 	<div style="width:350px;height:60px;  position: absolute;left: 50%;top: 3%;">
 	<h1 id="title">一委站运行界面</h1>
 	</div>
-	<div  id="bsfgif" style="position: absolute;left: 17%;top: 85%;">
+	<!-- <div  id="bsfgif" style="position: absolute;left: 17%;top: 85%;">
 	<img src="../images/background/Arrow-Right.gif" width="80" height="80" />
-	</div>
+	</div> -->
 	<div style="width:3%;height:9%;  position: absolute;left: 56%;top: 30%" onclick="showXhb('1')">
 	
 	</div>
@@ -959,9 +959,9 @@ function showBsb(flag){
 	
 	</div>
 	
-	<div id="xyfgif" style="position: absolute;left: 44%;top: 70%;" >
+	<!-- <div id="xyfgif" style="position: absolute;left: 44%;top: 70%;" >
 	<img src="../images/background/Arrow-Right.gif" width="80" height="80" />
-	</div>
+	</div> -->
 	<div style="width:3%;height:9%;  position: absolute;left: 18%;top: 80%;" onclick="showBsf()">
 	
 	</div>
@@ -979,20 +979,20 @@ function showBsb(flag){
 	二次供水累计流量：&nbsp;<span id="ecgsljll"></span>&nbsp;m³<br/>	
 	</div>
 	
-	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 29%" >
+	<div style="width:12%;height:4%;  position: absolute;left:53%;top: 32%" >
 	<span style="font-size:15px;" id="xhb1plfk"></span>HZ
 	</div>
 	
-	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 43%" >
+	<div style="width:12%;height:4%;  position: absolute;left:53%;top: 46%" >
 	<span style="font-size:15px;" id="xhb2plfk"></span>HZ
 	</div>
 	
-	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 73%" >
+	<div style="width:12%;height:4%;  position: absolute;left:53%;top: 76%" >
 	<span style="font-size:15px;" id="bsb1plfk"></span>HZ
 	</div>
 	
-	<div style="width:12%;height:4%;  position: absolute;left:50%;top: 84%" >
-	<span style="font-size:15px;" id="bsb2plfk"></span>HZ
+	<div style="width:12%;height:4%;  position: absolute;left:53%;top: 87%" >
+	<span style="font-size:15px;" id="bsb2plfk">0.0</span>HZ
 	</div>
 	
 	<div style="width:250px;height:105px;font-size:15px;  position: absolute;left: 15%;top: 45%;" >
@@ -1111,6 +1111,7 @@ function hrz(){
 		
 	});	
 }	
+var ints=self.setInterval("hrz()",5000);
 hrz();
 </script>
 </html>

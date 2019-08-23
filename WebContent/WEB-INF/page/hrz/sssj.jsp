@@ -209,7 +209,7 @@
 			</div>
 			<div class="jk_search">
 				<p>
-					<select>
+					<select id="hrz">
 						<option value="">全部</option>
 						<option value="一委站">一委站</option>
 						<option value="二委站">二委站</option>
@@ -257,6 +257,7 @@
 				<table class="mws-table">
 					<thead>
 						<tr>
+						<th class="table-th-css">换热站名称<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">总电量<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">A项电压<span class="span-up"></span> <span class="span-down"></span></th>
 							<th class="table-th-css">B项电压<span class="span-up"></span> <span class="span-down"></span></th>
@@ -293,6 +294,38 @@ $.ajax({
 	dataType:"json",
 	data:{	
 		"hrz":"吉利.教育局站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		list.push(map);
+		
+		
+	}
+	
+});	
+
+$.ajax({
+	url:"<%=basePath%>OpcCon/xtkzSj.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.一委站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		list.push(map);
+		
+		
+	}
+	
+});	
+
+$.ajax({
+	url:"<%=basePath%>OpcCon/xtkzSj.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.二委站.读数据.",
 	},
 	success:function(data){
 		var map=data.map;

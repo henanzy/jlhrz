@@ -113,7 +113,7 @@ public class opcController {
 					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				String s = String.format("%.1f", value);
+				String s = String.format("%.2f", value);
 				dmap.put(key, s);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block
@@ -138,7 +138,7 @@ public class opcController {
 		ConnectionInformation ci = OPCConfiguration.getCLSIDConnectionInfomation();
 		final Server server = new Server(ci, Executors.newSingleThreadScheduledExecutor());
 		hrz = new String(hrz.getBytes("ISO-8859-1"), "utf-8");
-		System.out.println(hrz);
+		
 		String[] d = XUtil.csxs(hrz);
 
 		Map<String, Object> dmap = new HashMap<String, Object>();
@@ -195,7 +195,7 @@ public class opcController {
 
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				// String s=String.format("%.1f",value);
+				/* String s=String.format("%.2f",value);*/
 				dmap.put(key, value);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block
@@ -274,7 +274,7 @@ public class opcController {
 					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				String s = String.format("%.1f", value);
+				String s = String.format("%.2f", value);
 				dmap.put(key, s);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block
@@ -346,7 +346,7 @@ public class opcController {
 						}
 						value = it.read(true).getValue().getObjectAsUnsigned().getValue();
 
-						value = String.format("%.1f", value);
+						value = String.format("%.2f", value);
 					}
 
 				} else {
@@ -559,7 +559,7 @@ public class opcController {
 					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				String s = String.format("%.1f", value);
+				String s = String.format("%.2f", value);
 				dmap.put(key, s);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block
@@ -764,7 +764,7 @@ public class opcController {
 					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				String s = String.format("%.1f", value);
+				String s = String.format("%.2f", value);
 				dmap.put(key, s);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block
@@ -847,7 +847,7 @@ public class opcController {
 
 					value = temp.getValue().read(true).getValue().getObject();
 				}
-				// String s=String.format("%.1f",value);
+				// String s=String.format("%.2f",value);
 				dmap.put(key, value);
 			} catch (JIException e) {
 				// TODO Auto-generated catch block

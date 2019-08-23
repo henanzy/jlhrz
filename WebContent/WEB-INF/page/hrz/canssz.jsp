@@ -173,17 +173,17 @@ th {
 </script>
 <body>
 
-	<div id="" class="clearfix" style="overflow-x: hidden;min-width:1350px;height:900px;">
+	<div id="" class="clearfix" style="overflow-x: hidden;min-width:1650px;height:900px;">
 
 
 		<p class="mws-report" href="#"
 			style="font-size: 14px; border-color: #c5d52b; background: url(../images/core/mws-header-bg.png) repeat-x;">
 			<span class="mws-report-icon mws-ic ic-building"></span> <span
 				class="mws-report-content" style="margin-top: 10px; color: #C5D52B;">
-				报警参数设置  &nbsp;<select style="display:inline" class="csinput">
-					<option value="0" selected="selected" >一委站</option>
-					<option value="1">二委站</option>
-					<option value="吉利.教育局站.读状态." selected="selected">教育局站</option>
+				报警参数设置  &nbsp;<select style="display:inline" id="hrz" class="csinput">
+					<option value="一委站">一委站</option>
+					<option value="二委站">二委站</option>
+					<option value="教育局站" selected="selected">教育局站</option>
 				</select></span>
 				
 		</p>
@@ -262,11 +262,11 @@ th {
 						<span class="span-down"></span></th>
 					<th class="table-th-css"><input id="ychsylbjsx" class="csinput"
 						width="120px"><input type="button" 
-						 class="mws-button black" value="修改" onclick="szcs('一次供水压力上限','ychsylbjsx')" /><span class="span-up"></span> <span
+						 class="mws-button black" value="修改" onclick="szcs('一次回水压力上限','ychsylbjsx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css"><input id="ychsylbjxx" class="csinput"
 						width="120px"><input type="button" 
-						 class="mws-button black" value="修改" onclick="szcs('一次供水压力下限','ychsylbjxx')" /><span class="span-up"></span> <span
+						 class="mws-button black" value="修改" onclick="szcs('一次回水压力下限','ychsylbjxx')" /><span class="span-up"></span> <span
 						class="span-down"></span></th>
 					<th class="table-th-css">电压报警界限值（V）<span class="span-up"></span>
 						<span class="span-down"></span></th>
@@ -372,10 +372,7 @@ th {
 			style="font-size: 14px; border-color: #c5d52b; background: url(../images/core/mws-header-bg.png) repeat-x;">
 			<span class="mws-report-icon mws-ic ic-building"></span> <span
 				class="mws-report-content" style="margin-top: 10px; color: #C5D52B;">
-				运行参数设置  &nbsp;<select style="display:inline" class="csinput">
-					<option value="0" selected="selected" >一委站</option>
-					<option value="1">二委站</option>
-					<option value="2">教育局站</option></select></span>
+				运行参数设置  &nbsp;</span>
 		</p>
 		<table>
 			<thead>
@@ -539,70 +536,74 @@ th {
 
 
 <script type="text/javascript">
-
+var ints=self.setInterval("csh()",15000);
+function csh(){
+	 var hrz=$("#hrz").val();
+	$.ajax({
+		url:"<%=basePath%>OpcCon/csxs.action",
+		async:false,
+		dataType:"json",
+		data:{	
+			"hrz":"吉利."+hrz+".写数据.",
+		},
+		success:function(data){
+			var map=data.map;
+			
+			$("#ycgsylbjsx").val(map.一次供水压力上限);
+			$("#ycgsylbjxx").val(map.一次供水压力下限);
+			$("#ycgswdbjsx").val(map.一次供水温度上限);
+			$("#ycgswdbjxx").val(map.一次供水温度下限);
+			
+			$("#ychsylbjxx").val(map.一次回水压力下限);
+			$("#ychsylbjsx").val(map.一次回水压力上限);
+			$("#ychswdbjsx").val(map.一次回水温度上限);
+			$("#ychswdbjxx").val(map.一次回水温度下限);
+			
+			
+			$("#ecgsylbjsx").val(map.二次供水压力上限);
+			$("#ecgsylbjxx").val(map.二次供水压力下限);
+			$("#ecgswdbjsx").val(map.二次供水温度上限);
+			$("#ecgswdbjxx").val(map.二次供水温度下限);
+			
+			$("#echsylbjxx").val(map.二次回水压力下限);
+			$("#echsylbjsx").val(map.二次回水压力上限);
+			$("#echswdbjsx").val(map.二次回水温度上限);
+			$("#echswdbjxx").val(map.二次回水温度下限);
+			$("#ywsx").val(map.液位上限);
+			$("#ywxx").val(map.液位下限);
+			$("#dyjbjxz").val(map.欠压报警界限值);
+			$("#dyjbjcz").val(map.电压报警解除值);
+			$("#echswd").val(map.二次回水温度设定值);
+			$("#ecgsyl").val(map.二次供水压力设定值);
+			$("#echsyl").val(map.二次回水压力设定值);
+			$("#echsbssx").val(map.二次回水补水压力上限);
+			$("#echsbsxx").val(map.二次回水补水压力下限);
+			$("#kqtjfsj").val(map.开启调节阀时间);
+			$("#gbtjfsj").val(map.关闭调节阀时间);
+			
+			$("#bbgpqdpl").val(map.启动工频补水泵频率);
+			$("#bbgptzpl").val(map.停止工频补水泵频率);
+			$("#qdgpbsbsj").val(map.启动工频补水泵时间);
+			$("#tzgpbsbsj").val(map.停止工频补水泵时间);
+			$("#xyfkqsx").val(map.泄压压力上限);
+			$("#xyfgbxx").val(map.泄压压力下限);
+			$("#sxzdywxz").val(map.液位下下限);
+			$("#echstjyl").val(map.二次回水停机压力);
+			$("#tjfzdkd").val(map.调节阀最低开度);
+			
+			
+		}
+		
+	});	
+}
 	
-$.ajax({
-	url:"<%=basePath%>OpcCon/csxs.action",
-	async:false,
-	dataType:"json",
-	data:{	
-		"hrz":"吉利.教育局站.写数据.",
-	},
-	success:function(data){
-		var map=data.map;
-		
-		$("#ycgsylbjsx").val(map.一次供水压力上限);
-		$("#ycgsylbjxx").val(map.一次供水压力下限);
-		$("#ycgswdbjsx").val(map.一次供水温度上限);
-		$("#ycgswdbjxx").val(map.一次供水温度下限);
-		
-		$("#ychsylbjxx").val(map.一次回水压力下限);
-		$("#ychsylbjsx").val(map.一次供水压力上限);
-		$("#ychswdbjsx").val(map.一次回水温度上限);
-		$("#ychswdbjxx").val(map.一次回水温度下限);
-		
-		
-		$("#ecgsylbjsx").val(map.二次供水压力上限);
-		$("#ecgsylbjxx").val(map.二次供水压力下限);
-		$("#ecgswdbjsx").val(map.二次供水温度上限);
-		$("#ecgswdbjxx").val(map.二次供水温度下限);
-		
-		$("#echsylbjxx").val(map.二次回水压力下限);
-		$("#echsylbjsx").val(map.二次回水压力上限);
-		$("#echswdbjsx").val(map.二次回水温度上限);
-		$("#echswdbjxx").val(map.二次回水温度下限);
-		$("#ywsx").val(map.液位上限);
-		$("#ywxx").val(map.液位下限);
-		$("#dyjbjxz").val(map.欠压报警界限值);
-		$("#dyjbjcz").val(map.电压报警解除值);
-		$("#echswd").val(map.二次回水温度设定值);
-		$("#ecgsyl").val(map.二次供水压力设定值);
-		$("#echsyl").val(map.二次回水压力设定值);
-		$("#echsbssx").val(map.二次回水补水压力上限);
-		$("#echsbsxx").val(map.二次回水补水压力下限);
-		$("#kqtjfsj").val(map.开启调节阀时间);
-		$("#gbtjfsj").val(map.关闭调节阀时间);
-		
-		$("#bbgpqdpl").val(map.启动工频补水泵频率);
-		$("#bbgptzpl").val(map.停止工频补水泵频率);
-		$("#qdgpbsbsj").val(map.启动工频补水泵时间);
-		$("#tzgpbsbsj").val(map.停止工频补水泵时间);
-		$("#xyfkqsx").val(map.泄压压力上限);
-		$("#xyfgbxx").val(map.泄压压力下限);
-		$("#sxzdywxz").val(map.液位下下限);
-		$("#echstjyl").val(map.二次回水停机压力);
-		$("#tjfzdkd").val(map.调节阀最低开度);
-		
-		
-	}
-	
-});	
+csh();
 
 function szcs(name,id){
 	 
 		 
 		  var val = $("#"+id).val();
-		  console.log(val)
+		  var hrz=$("#hrz").val();
 		
 			$.ajax({
 				url : "<%=basePath%>OpcCon/cssz.action",
@@ -612,7 +613,7 @@ function szcs(name,id){
 					"name" : name,
 					"id" : id,
 					"val":val,
-					"hrz":"吉利.教育局站.写数据."
+					"hrz":"吉利."+hrz+".写数据."
 				},
 				success : function(data) {
 					

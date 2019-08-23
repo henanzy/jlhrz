@@ -182,7 +182,7 @@ body .alert-skin{background: rgba(255,255,255,0.6); }
 
 
 
-//var ints=self.setInterval("clock()",1000);
+var ints=self.setInterval("clock()",5000);
 
 function clock()
 {

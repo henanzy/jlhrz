@@ -301,7 +301,7 @@ select{
 			<div id="user_search_body"
 			style="width: 50%; margin-top: 20px;">
 
-			<div class="mws-panel grid_4 user_inform" style="min-width: 30px">
+			<div class="mws-panel grid_4 user_inform" style="min-width: 400px">
 				<div class="mws-panel-header">
 					<span class="mws-i-24 i-pencil">当日天气</span>
 				</div>

@@ -46,7 +46,7 @@ public class JyjTask{
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
 	
-	@Scheduled(cron="0 0/5 * * * ? ")   //每5执行一次   
+	//@Scheduled(cron="0 0/5 * * * ? ")   //每5执行一次   
     public void aTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -144,7 +144,7 @@ public class JyjTask{
         					   opcService.insertHistory(insMap);
     }      
     
-	@Scheduled(cron="0 0 */1  * * ? ")   //每一小时执行一次   
+    //@Scheduled(cron="0 0 */1  * * ? ")   //每一小时执行一次   
     public void rbbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -243,7 +243,7 @@ public class JyjTask{
     }  
 	
 	
-	@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
+    //@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
     public void zybbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -341,8 +341,8 @@ public class JyjTask{
         					   opcService.insertZybb(insMap);
     }  
 	
-	//@Scheduled(cron="*/5 * * * * ?")
-	/*public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+    //@Scheduled(cron="*/5 * * * * ?")
+	public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -422,10 +422,10 @@ public class JyjTask{
         						
         					}
         					   server.dispose();        			                 			        				          
-        					}*/
+        					}
 	
 	// @Scheduled(cron="*/5 * * * * ?")
-	/*public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+	public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -490,7 +490,7 @@ public class JyjTask{
 									}
 	        						
 	        					}server.dispose();
-        					}*/
+        					}
 	
 	 public boolean isNumeric(String value){
          Pattern pattern = Pattern.compile("-?[0-9]+.*[0-9]*");

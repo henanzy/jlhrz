@@ -236,7 +236,7 @@
 
 
 
-		<div class="mws-panel grid_2 indoor_inform">
+		<div class="mws-panel grid_2 indoor_inform" style="min-width: 400px">
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-pencil">应供热量计算</span>
 			</div>
@@ -332,7 +332,7 @@
 			</div>
 		</div>
 		
-		<div class="mws-panel grid_2 indoor_inform">
+		<div class="mws-panel grid_2 indoor_inform" style="min-width: 400px">
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-pencil">一次侧参数计算</span>
 			</div>
@@ -398,7 +398,7 @@
 			</div>
 		</div>
 		
-		<div class="mws-panel grid_2 indoor_inform">
+		<div class="mws-panel grid_2 indoor_inform" style="min-width: 400px">
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-pencil">二次侧参数计算</span>
 			</div>

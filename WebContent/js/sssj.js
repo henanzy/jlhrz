@@ -7,7 +7,7 @@
 	    	let str = '<tr><th>换热站</th><th>一次供水瞬时流量</th><th>一次供水瞬时热量</th><th>一次供水累计流量</th>'+
 	    	'<th>一次供水累计热量</th><th>一次供水压力</th><th>一次供水温度</th><th>一次回水压力</th><th>一次回水温度</th>'+
 	    	'<th>二次供水瞬时流量</th><th>二次供水累计流量</th><th>二次供水压力</th><th>二次供水温度</th><th>二次回水压力</th>'+
-	    	'<th>二次回水温度</th><th>电量实际值</th><th>A相电压值</th><th>B相电压值</th><th>C相电压值</th>'+
+	    	'<th>二次回水温度</th><th>换热站</th><th>电量实际值</th><th>A相电压值</th><th>B相电压值</th><th>C相电压值</th>'+
 	    	'<th>A相电流值</th><th>B相电流值</th><th>C相电流值</th><th>补水瞬时流量</th><th>补水累计流量</th>'+
 	    	'<th>水箱液位</th><th>自来水总补水量</th><th>室内温度</th><th>循环泵1频率反馈</th><th>循环泵2频率反馈</th>'+
 	    	'<th>补水泵1频率反馈</th><th>调节阀反馈</th>';
@@ -67,23 +67,23 @@
 			arr1[14] = json[i].二次回水温度;
 			shuakaList.push(arr1);
 			var arr2 = [];
-			
-			arr2[0] = json[i].电量实际值;
-			arr2[1] = json[i].A相电压值;
-			arr2[2] = json[i].B相电压值;
-			arr2[3] = json[i].C相电压值;
-			arr2[4] = json[i].A相电流值;
-			arr2[5] = json[i].B相电流值;
-			arr2[6] = json[i].C相电流值;
-			arr2[7] = json[i].补水瞬时流量;
-			arr2[8] = json[i].补水累计流量;
-			arr2[9] = json[i].水箱液位;
-			arr2[10] = json[i].自来水总补水量;
-			arr2[11] = json[i].室内温度;
-			arr2[12] = json[i].循环泵1频率反馈;
-			arr2[13] = json[i].循环泵2频率反馈;
-			arr2[14] = json[i].补水泵1频率反馈;
-			arr2[15] = json[i].调节阀反馈;
+			arr2[0] = json[i].hrz;
+			arr2[1] = json[i].电量实际值;
+			arr2[2] = json[i].A相电压值;
+			arr2[3] = json[i].B相电压值;
+			arr2[4] = json[i].C相电压值;
+			arr2[5] = json[i].A相电流值;
+			arr2[6] = json[i].B相电流值;
+			arr2[7] = json[i].C相电流值;
+			arr2[8] = json[i].补水瞬时流量;
+			arr2[9] = json[i].补水累计流量;
+			arr2[10] = json[i].水箱液位;
+			arr2[11] = json[i].自来水总补水量;
+			arr2[12] = json[i].室内温度;
+			arr2[13] = json[i].循环泵1频率反馈;
+			arr2[14] = json[i].循环泵2频率反馈;
+			arr2[15] = json[i].补水泵1频率反馈;
+			arr2[16] = json[i].调节阀反馈;
 			shuakaList1.push(arr2);
 			var arr3=arr1.concat(arr2);
 			dclist.push(arr3);

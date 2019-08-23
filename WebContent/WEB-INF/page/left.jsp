@@ -250,7 +250,7 @@ function ryjk(){//
                           <ul class="ac_kf"> 
                                 <li><a class="first-a" onclick="map()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;站点总览</a></li>
                     	        <li><a onclick="xtkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;运行设备</a></li>
-                    	        <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li>
+                    	      <!--   <li><a onclick="dbjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;大表集抄</a></li> -->
                     	        <li><a onclick="ryjk()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;热表监控</a></li>
                     	         <li><a onclick="ddkz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;调度控制</a></li> 
                              	
@@ -288,6 +288,20 @@ function ryjk(){//
 						
 
 					</ul></li>	
+					<li class="active">
+                    	<a href="#" class="mws-i-24 i-users">报表管理</a>
+                          <ul class="ac_kf"> 
+
+                              
+                        	   
+                          <li><a onclick="rbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日报表</a></li>
+
+						<li><a onclick="zbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;周报表</a></li>
+						<li><a onclick="ybb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;月报表</a></li>
+                             
+                        </ul>
+                    </li>
+					
 				<li class="active">
                     	<a href="#" class="mws-i-24 i-users">基础信息管理</a>
                           <ul class="ac_kf"> 
@@ -296,10 +310,7 @@ function ryjk(){//
 
                     	        <li><a  onclick="hrzxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;换热站信息</a></li>
                         	   
-                             	<li><a onclick="rbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日报表</a></li>
-
-						<li><a onclick="zbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;周报表</a></li>
-						<li><a onclick="ybb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;月报表</a></li>
+                     
                              
                         </ul>
                     </li>

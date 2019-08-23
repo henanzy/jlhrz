@@ -72,6 +72,10 @@ $(document).ready(function() {
 		var xinwordList = [];
 		
 		function jsArrChange(json){
+			var hjdl=0;
+			var hjsl=0;
+			var hjll=0;
+			var hjrl=0;
 			for (var i = 0 ; i < json.length ; i ++) {
 				var arr1 = [];
 				arr1[0] = json[i].hrz;
@@ -79,9 +83,14 @@ $(document).ready(function() {
 				arr1[2] = json[i].zysl;
 				arr1[3] = json[i].ljll;
 				arr1[4] = json[i].ljrl;
-				
+				hjdl=hjdl+json[i].zydl;;
+				hjsl=hjsl+json[i].zysl;
+				hjll=hjll+json[i].ljll;
+				hjrl=hjrl+json[i].ljrl;
 				xinwordList.push(arr1);
 			};
+			var arr=["合计",hjdl,hjsl,hjll,hjrl];
+			xinwordList.push(arr);
 		}
 		jsArrChange(list);
 		
