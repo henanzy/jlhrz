@@ -40,8 +40,10 @@ $(document).ready(function() {
 			},
 			success:function(data){
 				ssrl=data.map.一次供水瞬时热量;
-			}
-			
+			},
+			error: function (response, ajaxOptions, thrownError) {
+				ssrl=0;
+				}
 		});	
 	 $.ajax({
 			url:'https://www.tianqiapi.com/api/',
@@ -358,9 +360,7 @@ function compareWord(compareWordList){
 			url:'https://www.tianqiapi.com/api/',
 			async:false,
 			dataType:"json",
-			data:{	
-				
-			},
+			data: 'version=v1&city=洛阳&appid=66763293&appsecret=2PrEpjgN',
 			success:function(res){
 				wd=res.data[0].tem.replace("℃","");
 			}

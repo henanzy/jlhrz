@@ -437,7 +437,7 @@ var Tqoptions = {
 $.ajax({
     type: 'GET',
     url: 'https://www.tianqiapi.com/api/',
-    data: 'version=v1&city=洛阳',
+    data: 'version=v1&city=洛阳&appid=66763293&appsecret=2PrEpjgN',
     dataType: 'JSON',
     error: function () {
         alert('网络错误');

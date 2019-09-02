@@ -300,7 +300,11 @@ $.ajax({
 		list.push(map);
 		
 		
-	}
+	},
+	error: function (response, ajaxOptions, thrownError) {
+		var map={"hrz":"教育局站"}
+		list.push(map);
+		}
 	
 });	
 
@@ -316,8 +320,11 @@ $.ajax({
 		list.push(map);
 		
 		
-	}
-	
+	},
+	error: function (response, ajaxOptions, thrownError) {
+		var map={"hrz":"一委站"}
+		list.push(map);
+		}
 });	
 
 $.ajax({
