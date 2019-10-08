@@ -210,7 +210,7 @@
 			</div>
 			<div class="jk_search">
 				<p>
-					<select>
+					<!-- <select>
 						<option value="">全部</option>
 						<option value="吉利.一委站.读数据.">一委站</option>
 						<option value="吉利.二委站.读数据.">二委站</option>
@@ -218,7 +218,7 @@
 						
 					</select>
 					
-					<input id="jk_search_btn" type="submit" value="搜索" />
+					<input id="jk_search_btn" type="submit" value="搜索" /> -->
 					<input id="dayin" type="submit" value="导出" />
 				</p>
 			</div>
@@ -256,6 +256,38 @@ $.ajax({
 	dataType:"json",
 	data:{	
 		"hrz":"吉利.教育局站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		list.push(map);
+		
+		
+	}
+	
+});	
+
+$.ajax({
+	url:"<%=basePath%>OpcCon/ryjk.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.二委站.读数据.",
+	},
+	success:function(data){
+		var map=data.map;
+		list.push(map);
+		
+		
+	}
+	
+});	
+
+$.ajax({
+	url:"<%=basePath%>OpcCon/ryjk.action",
+	async:false,
+	dataType:"json",
+	data:{	
+		"hrz":"吉利.一委站.读数据.",
 	},
 	success:function(data){
 		var map=data.map;

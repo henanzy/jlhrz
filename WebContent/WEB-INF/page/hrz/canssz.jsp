@@ -536,7 +536,7 @@ th {
 
 
 <script type="text/javascript">
-var ints=self.setInterval("csh()",15000);
+var ints=self.setInterval("csh()",60000);
 function csh(){
 	 var hrz=$("#hrz").val();
 	$.ajax({
@@ -598,7 +598,9 @@ function csh(){
 }
 	
 csh();
-
+$("#hrz").change(function(){
+	 csh();
+	});
 function szcs(name,id){
 	 
 		 

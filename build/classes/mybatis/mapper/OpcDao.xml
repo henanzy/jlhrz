@@ -82,7 +82,7 @@
 	</select>
 	
 	<select id="selQx" resultMap="Map">
-		select * from ( select top 20 * from history a where 1=1 
+		select * from ( select top 20 * from rbb a where 1=1 
 		<if test="hrz!=null and hrz!=''">
 			and a.hrz =#{hrz}
 		</if>

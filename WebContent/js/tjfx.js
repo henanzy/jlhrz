@@ -8,6 +8,11 @@ function getRootPath(){
 } 
 
 $(function () {
+	var date = new Date();
+	$("#endTime").val(date.format('yyyy-MM-dd'));
+	date.setTime(date .getTime() - 1000*60*60*24*7);
+
+	$("#startTime").val(date.format('yyyy-MM-dd'));
 	lsqx();
 	gryc();
 	$("#search_btn").click(function(){
@@ -84,7 +89,7 @@ $(function () {
 		$.ajax({
 		    type: 'GET',
 		    url: 'https://www.tianqiapi.com/api/',
-		    data: 'version=v1&city=洛阳',
+		    data: 'version=v1&city=洛阳&appid=66763293&appsecret=2PrEpjgN',
 		    dataType: 'JSON',
 		    error: function () {
 		        alert('网络错误');

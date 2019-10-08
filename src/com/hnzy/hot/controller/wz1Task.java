@@ -46,7 +46,7 @@ public class wz1Task{
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
 	
-	/*@Scheduled(cron="0 0/5 * * * ? ") */  //每5执行一次   
+	@Scheduled(cron="0 0/10 * * * ? ")  //每5执行一次   
     public void aTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -105,13 +105,7 @@ public class wz1Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -144,7 +138,7 @@ public class wz1Task{
         					   opcService.insertHistory(insMap);
     }      
     
-	//@Scheduled(cron="0 0 */1  * * ? ")    
+	@Scheduled(cron="0 0 */1  * * ? ")    
 	
     public void rbbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
@@ -204,13 +198,7 @@ public class wz1Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -244,7 +232,7 @@ public class wz1Task{
     }  
 	
 	
-	//@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
+	@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
     public void zybbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -303,13 +291,7 @@ public class wz1Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -342,8 +324,8 @@ public class wz1Task{
         					   opcService.insertZybb(insMap);
     }  
 	
-	//@Scheduled(cron="*/5 * * * * ?")
-	/*public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+	@Scheduled(cron="0 0/10 * * * ? ")
+	public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -423,10 +405,10 @@ public class wz1Task{
         						
         					}
         					   server.dispose();        			                 			        				          
-        					}*/
+        					}
 	
-	// @Scheduled(cron="*/5 * * * * ?")
-	/*public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+	@Scheduled(cron="0 0/10 * * * ? ")
+	public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -491,7 +473,7 @@ public class wz1Task{
 									}
 	        						
 	        					}server.dispose();
-        					}*/
+        					}
 	
 	 public boolean isNumeric(String value){
          Pattern pattern = Pattern.compile("-?[0-9]+.*[0-9]*");

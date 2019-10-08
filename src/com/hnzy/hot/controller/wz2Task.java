@@ -1,8 +1,10 @@
 package com.hnzy.hot.controller;
+import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Executors;
@@ -19,6 +21,7 @@ import org.openscada.opc.lib.da.Group;
 import org.openscada.opc.lib.da.Item;
 import org.openscada.opc.lib.da.Server;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.hnzy.hot.service.OpcService;
@@ -34,7 +37,7 @@ public class wz2Task{
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
 	
-	//@Scheduled(cron="0 0/5 * * * ? ")   //每5执行一次   
+	@Scheduled(cron="0 0/10 * * * ? ")  //每5执行一次   
     public void aTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -93,13 +96,7 @@ public class wz2Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -132,7 +129,7 @@ public class wz2Task{
         					   opcService.insertHistory(insMap);
     }      
     
-	//@Scheduled(cron="0 0 */1  * * ? ")   //每一小时执行一次   
+	@Scheduled(cron="0 0 */1  * * ? ")   //每一小时执行一次   
     public void rbbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -191,13 +188,7 @@ public class wz2Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -231,7 +222,7 @@ public class wz2Task{
     }  
 	
 	
-	//@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
+	@Scheduled(cron="0 0 12 * * ? ")   //每天12点执行一次  
     public void zybbTask(){      
 		 ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
 	       final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -290,13 +281,7 @@ public class wz2Task{
 						            	boolean b=isNumeric(String.valueOf(value));
 						            	System.out.println("------b---"+b);
 						            	if(b==false){
-						            		try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-						            		 value = temp.getValue().read(true).getValue().getObject();
+						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
 						                  String s=String.format("%.1f",value);
 						                  dmap.put(key, s);
@@ -329,8 +314,8 @@ public class wz2Task{
         					   opcService.insertZybb(insMap);
     }  
 	
-	//@Scheduled(cron="*/5 * * * * ?")
-	/*public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+    @Scheduled(cron="0 0/10 * * * ? ")
+	public void  bjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -410,10 +395,10 @@ public class wz2Task{
         						
         					}
         					   server.dispose();        			                 			        				          
-        					}*/
+        					}
 	
-	// @Scheduled(cron="*/5 * * * * ?")
-	/*public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
+    @Scheduled(cron="0 0/5 * * * ? ")
+	public void  updatebjxx() throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException, JIException, IllegalArgumentException, UnknownHostException, AlreadyConnectedException{
 		
        ConnectionInformation ci=OPCConfiguration.getCLSIDConnectionInfomation();
        final Server server = new Server ( ci, Executors.newSingleThreadScheduledExecutor () );
@@ -478,7 +463,7 @@ public class wz2Task{
 									}
 	        						
 	        					}server.dispose();
-        					}*/
+        					}
 	
 	 public boolean isNumeric(String value){
          Pattern pattern = Pattern.compile("-?[0-9]+.*[0-9]*");

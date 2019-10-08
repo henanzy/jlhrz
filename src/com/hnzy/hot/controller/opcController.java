@@ -105,12 +105,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				String s = String.format("%.2f", value);
@@ -186,13 +180,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				/* String s=String.format("%.2f",value);*/
@@ -266,12 +253,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				String s = String.format("%.2f", value);
@@ -323,12 +304,12 @@ public class opcController {
 
 					final JIVariant values = new JIVariant(i);
 					it.write(values);
-					Thread.sleep(500);
+					
 				} else {
 
 					final JIVariant values = new JIVariant(val);
 					it.write(values);
-					Thread.sleep(500);
+					
 				}
 				// 循环写
 
@@ -339,11 +320,6 @@ public class opcController {
 					boolean b = isNumeric(String.valueOf(value));
 
 					if (b == false) {
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 						value = it.read(true).getValue().getObjectAsUnsigned().getValue();
 
 						value = String.format("%.2f", value);
@@ -364,7 +340,7 @@ public class opcController {
 
 	@RequestMapping("sbxs")
 	@ResponseBody
-	public JSONObject sbxs(String d[])
+	public JSONObject sbxs(String d[],String hrz)
 			throws NotConnectedException, DuplicateGroupException, AddFailedException, UnsupportedEncodingException {
 		JSONObject json = new JSONObject();
 		System.out.println(d[1]);
@@ -409,7 +385,7 @@ public class opcController {
 				Object value = temp.getValue().read(true).getValue().getObject();
 				System.out.println("------------value----------" + value);
 
-				String string = id.replace("吉利.教育局站.", "").replace("写数据.", "").replace("读数据.", "").replace("写状态.", "")
+				String string = id.replace("吉利.教育局站.", "").replace("吉利.一委站.", "").replace("吉利.二委站.", "").replace("写数据.", "").replace("读数据.", "").replace("写状态.", "")
 						.replace("读状态.", "");
 
 				if (string.contains("#")) {
@@ -421,13 +397,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 
@@ -471,7 +440,7 @@ public class opcController {
 
 				final JIVariant values = new JIVariant(val);
 				it.write(values);
-				Thread.sleep(500);
+				
 
 			}
 		} catch (Exception e) {
@@ -551,12 +520,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				String s = String.format("%.2f", value);
@@ -756,12 +719,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				String s = String.format("%.2f", value);
@@ -838,13 +795,6 @@ public class opcController {
 				boolean b = isNumeric(String.valueOf(value));
 				System.out.println("------b---" + b);
 				if (b == false) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
 					value = temp.getValue().read(true).getValue().getObject();
 				}
 				// String s=String.format("%.2f",value);

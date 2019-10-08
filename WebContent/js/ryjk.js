@@ -103,6 +103,11 @@ function tbodydis(oldlist,newlist){
 	}	
 	pageInit(1, 15);
 }
-
+/*function compareWordTime(wordType,WordListTime,compareWordList,jkwordList,j){
+	if(wordType == "全部"){
+		compareWordList.push(jkwordList[j]);
+	}
+	
+}	*/
 
 

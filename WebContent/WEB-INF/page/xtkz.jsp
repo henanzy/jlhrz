@@ -197,7 +197,7 @@ display:inline!important;
 function sbkz (name,val){
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbkz.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"name":"吉利."+$("#hrz").val()+"."+name,
@@ -271,10 +271,11 @@ function show(){
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"d":d,
+				"hrz":hrz,
 			},
 			traditional: true,
 			success:function(data){
@@ -333,7 +334,7 @@ function showXhb(flag){
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"d":d,
@@ -397,7 +398,7 @@ function showXyf(){
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"d":d,
@@ -445,7 +446,7 @@ function showBsf(){
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"d":d,
@@ -494,7 +495,7 @@ function showBsb(flag){
 	  
 	  $.ajax({
 			url:"<%=basePath%>OpcCon/sbxs.action",
-			async:false,
+			//async:false,
 			dataType:"json",
 			data:{	
 				"d":d,
@@ -853,7 +854,7 @@ function showBsb(flag){
 	
 	 
 	<div style="width:350px;height:60px;  position: absolute;left: 50%;top: 3%;">
-	<h1 id="title">一委站运行界面</h1>
+	<h1 id="title">教育局站运行界面</h1>
 	</div>
 	<!-- <div  id="bsfgif" style="position: absolute;left: 17%;top: 85%;">
 	<img src="../images/background/Arrow-Right.gif" width="80" height="80" />
@@ -1065,7 +1066,7 @@ function hrz(){
 	 var hrz=$("#hrz").val()
 	$.ajax({
 		url:"<%=basePath%>OpcCon/xtkzSj.action",
-		async:false,
+		//async:false,
 		dataType:"json",
 		data:{	
 			"hrz":"吉利."+hrz+".读数据.",

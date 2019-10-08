@@ -1,3 +1,22 @@
+
+Date.prototype.format = function foramate(fmt)   
+	{ //author: meizz   
+	  var o = {   
+	    "M+" : this.getMonth()+1,                 //月份   
+	    "d+" : this.getDate(),                    //日   
+	    "h+" : this.getHours(),                   //小时   
+	    "m+" : this.getMinutes(),                 //分   
+	    "s+" : this.getSeconds(),                 //秒   
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+	    "S"  : this.getMilliseconds()             //毫秒   
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o)   
+	    if(new RegExp("("+ k +")").test(fmt))   
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	  return fmt;   
+	}
 $(document).ready(function() {
 	function tableToExcel(){
         //要导出的json数据
@@ -73,7 +92,13 @@ $(document).ready(function() {
 	var chk_value =[];
 	var chk=[];
 	var chkName=[];
+	
 	$("#word_change_btn").click(function(){
+		dateStr = $("#startTime").val()
+		   dateStr = dateStr.replace(/-/g,'/');
+		   var timeTamp = new Date(dateStr).getTime();
+		   var date = new Date();
+		   date.setTime(timeTamp.getTime() + 1000*60*60*24);
 		$.ajax({
 			url:"selrbb.action",
 			async:false,
@@ -81,7 +106,7 @@ $(document).ready(function() {
 			data:{	
 				"hrz":$("#type").val(),
 				"startTime":$("#startTime").val(),
-				"endTime":$("#endTime").val(),
+				"endTime":date.format('yyyy-MM-dd'),
 			},
 			success:function(data){
 				list=data.list;
@@ -278,6 +303,12 @@ function compareWordTime(){
 	var chk_value =[];
 	var chk=[];
 	var chkName=[];
+	dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	   console.log(timeTamp);
+	   date.setTime(timeTamp.getTime() + 1000*60*60*24);
 	$.ajax({
 		url:"selrbb.action",
 		async:false,
@@ -285,7 +316,7 @@ function compareWordTime(){
 		data:{	
 			"hrz":$("#type").val(),
 			"startTime":$("#startTime").val(),
-			"endTime":$("#endTime").val(),
+			"endTime":date.format('yyyy-MM-dd'),
 		},
 		success:function(data){
 			list=data.list;

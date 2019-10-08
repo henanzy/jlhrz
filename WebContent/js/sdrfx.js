@@ -442,7 +442,10 @@ function compareWord(compareWordList){
 			}
 
 		});
-	
+	 var hjdl=0;
+		var hjsl=0;
+		var hjll=0;
+		var hjrl=0;
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
 		arr1[0] = json[i].hrz;
@@ -450,8 +453,15 @@ function compareWord(compareWordList){
 		arr1[2] = json[i].zysl;
 		arr1[3] = json[i].ljll;
 		arr1[4] = json[i].ljrl;
+		
 		compareWordList.push(arr1);
+		hjdl=hjdl+json[i].zydl;;
+		hjsl=hjsl+json[i].zysl;
+		hjll=hjll+json[i].ljll;
+		hjrl=hjrl+json[i].ljrl;
 	};
+	var arr=["合计",hjdl,hjsl,hjll,hjrl];
+	xinwordList.push(arr);
 }	
 
 //表格写入函数

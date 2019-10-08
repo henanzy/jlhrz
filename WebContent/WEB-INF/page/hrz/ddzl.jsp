@@ -408,6 +408,7 @@ display:inline!important;
 			dataType:"json",
 			data:{	
 				"d":d,
+				"hrz":hrz,
 			},
 			traditional: true,
 			success:function(data){
@@ -420,14 +421,18 @@ display:inline!important;
 				
 				if(map.调节阀强制==true){
 					$("#tjfqz").addClass("xuanzhong");
+					$("#tjffqz").removeClass("xuanzhong");
 				}else{
 					$("#tjffqz").addClass("xuanzhong");
+					$("#tjfqz").removeClass("xuanzhong");
 				}
 				
 				if(map.调节阀定时开关使能==true){
 					$("#tjfdsqy").addClass("xuanzhong");
+					$("#tjfdsjy").removeClass("xuanzhong");
 				}else{
 					$("#tjfdsjy").addClass("xuanzhong");
+					$("#tjfdsjy").removeClass("xuanzhong");
 				}
 				$("#tjfdskqsj").val(map.开启调节阀时间)
 				$("#tjfdsgbsj").val(map.关闭调节阀时间)

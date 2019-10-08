@@ -197,13 +197,15 @@ input:focus{
 <script type="text/javascript">
 
 $(function(){	
- 	 /* setInterval(function() {  */
  	
+	 function csh(){
     var hrzname = $("#hrzname").val();
+    
 	$.ajax({
 		url :"<%=basePath%>OpcCon/qhbc.action",
 		type : "post",
 		dataType : "json",
+		async:false,
 		data : {
 			"hrz":"吉利."+hrzname+".写数据.",
 		},
@@ -216,17 +218,14 @@ $(function(){
 		    $("#s1").val(map.时间段时1); $("#s2").val(map.时间段时2); $("#s3").val(map.时间段时3); $("#s4").val(map.时间段时4);
 		    $("#f1").val(map.时间段分1); $("#f2").val(map.时间段分2); $("#f3").val(map.时间段分3); $("#f4").val(map.时间段分4);
 		    $("#bcwd1").val(map.补偿温度1);$("#bcwd2").val(map.补偿温度2);$("#bcwd3").val(map.补偿温度3);$("#bcwd4").val(map.补偿温度4); 
-			 /* var flag=d.d气候补偿;
-			if(flag){
-				 $("#img").attr("src","../images/switch/open.png");
-				
-			}else{
-				$("#img").attr("src","../images/switch/close.png");
 			
-			}  */
 		}
      });	
-	 /* },5000);  */
+	 }
+	 csh();
+	 $("#hrzname").change(function(){
+		 csh();
+		});
 });
 </script>
 <script type="text/javascript">
@@ -268,6 +267,8 @@ layui.form.render();
 
  &nbsp;   &nbsp;   &nbsp;   <select id="hrzname" class="csinput" >
 	    <option value="教育局站">教育局站</option>
+	    <option value="一委站">一委站</option>
+	    <option value="二委站">二委站</option>
 	    </select>
 	   
 		<p class="mws-report" 
